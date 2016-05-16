@@ -1,9 +1,13 @@
 # coding=utf-8
+import os
+
 __author__ = 'dengjing'
 bind = '0.0.0.0:8888'  # 绑定的端口
 workers = 4  # worker数量
 backlog = 2048
 debug = True
 proc_name = 'gunicorn.pid'
-pidfile = '/var/log/gunicorn/debug.log'
+path = os.path.abspath(os.path.join(__file__, os.path.pardir))
+pidfile = '%s/gunicorn.log' % path
+# print pidfile
 loglevel = 'debug'
