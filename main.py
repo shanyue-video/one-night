@@ -163,7 +163,7 @@ def feed_back():
 
 
 @app.route('/api/index', methods=['GET'])
-def feed_back():
+def index():
     return jsonify(task23)
 
 
