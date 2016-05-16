@@ -2,7 +2,7 @@
 from conf import INNER_IP, port
 from flask import Flask, jsonify, request
 from test_res import task1, task2, task3, task4, task5, task6, task7, task8, task9, task10, task11, task12, task13, \
-    task14, task15, task16, task17, task18, task19, task20, task21, task22
+    task14, task15, task16, task17, task18, task19, task20, task21, task22, task23
 
 __author__ = 'dengjing'
 
@@ -161,6 +161,10 @@ def feed_back():
     content = request.args.get('content', '')
     return jsonify(task22)
 
+
+@app.route('/api/index', methods=['GET'])
+def feed_back():
+    return jsonify(task23)
 
 
 if __name__ == '__main__':

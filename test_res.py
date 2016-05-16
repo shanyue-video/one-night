@@ -428,3 +428,126 @@ task22 = {
     "status": 1,  # 状态标识 1表示成功，0表示失败
     "info": "正常", 	# 状态说明
 }
+
+port = '8888'
+task23 = {
+    "status": 1,  # 状态标识 1表示成功，0表示失败
+    "info": "正常",  # 状态说明
+    "data": [
+        {
+            'api': 'api.oforever.net:%s/api/carousel' % port,
+            'type': 'GET',
+            'args': ''
+        },
+        {
+            'api': 'api.oforever.net:%s/api/search' % port,
+            'type': 'POST',
+            'args': 'label, keyword, title, lecturer'
+        },
+        {
+            'api': 'api.oforever.net:%s/api/classification' % port,
+            'type': 'GET',
+            'args': ''
+        },
+        {
+            'api': 'api.oforever.net:%s/api/courseList' % port,
+            'type': 'GET',
+            'args': 'label, keyword, title, lecturer'
+        },
+        {
+            'api': 'api.oforever.net:%s/api/collection' % port,
+            'type': 'POST',
+            'args': 'label, keyword, title, lecturer'
+        },
+        {
+            'api': 'api.oforever.net:%s/api/chapter' % port,
+            'type': 'POST',
+            'args': 'courseId'
+        },
+        {
+            'api': 'api.oforever.net:%s/api/download' % port,
+            'type': 'POST',
+            'args': 'id'
+        },
+        {
+            'api': 'api.oforever.net:%s/api/search' % port,
+            'type': 'POST',
+            'args': 'label, keyword, title, lecturer'
+        },
+        {
+            'api': 'api.oforever.net:%s/api/comment' % port,
+            'type': 'POST',
+            'args': 'courseId, userId'
+        },
+        {
+            'api': 'api.oforever.net:%s/api/question' % port,
+            'type': 'POST',
+            'args': ''
+        },
+        {
+            'api': 'api.oforever.net:%s/api/PostNew' % port,
+            'type': 'POST',
+            'args': 'userid, label, postImg, postVoice'
+        },
+        {
+            'api': 'api.oforever.net:%s/api/searchQuestion' % port,
+            'type': 'POST',
+            'args': 'label, keyword, title, postName'
+        },
+        {
+            'api': 'api.oforever.net:%s/api/addlookNum' % port,
+            'type': 'POST',
+            'args': 'postId, userId'
+        },
+        {
+            'api': 'api.oforever.net:%s/api/addLike' % port,
+            'type': 'POST',
+            'args': 'postId, userId'
+        },
+        {
+            'api': 'api.oforever.net:%s/api/QuestionDetail' % port,
+            'type': 'POST',
+            'args': 'postId'
+        },
+        {
+            'api': 'api.oforever.net:%s/api/Addcomment' % port,
+            'type': 'POST',
+            'args': 'postId, userid, label, commentContent, commentImg, commentVoice'
+        },
+        {
+            'api': 'api.oforever.net:%s/api/Userinfo' % port,
+            'type': 'POST',
+            'args': 'userid'
+        },
+        {
+            'api': 'api.oforever.net:%s/api/Saveuserinfo' % port,
+            'type': 'POST',
+            'args': 'userid, userName, platfromName, nickName, usid, iconUrl, accessToken'
+        },
+        {
+            'api': 'api.oforever.net:%s/api/Getranking' % port,
+            'type': 'POST',
+            'args': 'userid'
+        },
+        {
+            'api': 'api.oforever.net:%s/api/GetPerDetail' % port,
+            'type': 'POST',
+            'args': 'userid'
+        },
+        {
+            'api': 'api.oforever.net:%s/api/myQuestion' % port,
+            'type': 'POST',
+            'args': 'userid'
+        },
+        {
+            'api': 'api.oforever.net:%s/api/delPost' % port,
+            'type': 'POST',
+            'args': 'userid, postId'
+        },
+        {
+            'api': 'api.oforever.net:%s/api/Feedback' % port,
+            'type': 'POST',
+            'args': 'userid, content'
+        },
+    ]
+}
