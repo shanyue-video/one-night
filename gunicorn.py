@@ -8,6 +8,5 @@ backlog = 2048
 debug = True
 proc_name = 'gunicorn.pid'
 path = os.path.abspath(os.path.join(__file__, os.path.pardir))
-pidfile = '%s/gunicorn.log' % path
-# print pidfile
+pidfile = '%s/logs/gunicorn.log' % path
 loglevel = 'debug'
