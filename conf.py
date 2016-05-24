@@ -19,6 +19,7 @@ DBS = {
     },
     'MONGODB_SETTINGS_TEST': {
         'host': 'mongodb://one:123456@oforever.net:27017/one_night_test'
+        # 'host': 'mongodb://one:123456@oforever.net:27017/one_night'
     }
 }
 
@@ -28,5 +29,5 @@ FLASK_MONGO_ENGINE_CONF = {
 }
 
 if DEBUG:
-    FLASK_MONGO_ENGINE_CONF['MONGODB_SETTINGS'].update({'MONGODB_SETTINGS': DBS['MONGODB_SETTINGS_TEST']})
+    FLASK_MONGO_ENGINE_CONF.update({'MONGODB_SETTINGS': DBS['MONGODB_SETTINGS_TEST']})
     # print 'a'

@@ -3,14 +3,21 @@ from conf import INNER_IP, port, FLASK_MONGO_ENGINE_CONF
 from flask import Flask, jsonify, request
 from test_res import task1, task2, task3, task4, task5, task6, task7, task8, task9, task10, task11, task12, task13, \
     task14, task15, task16, task17, task18, task19, task20, task21, task22, task23
+from utils.models import Test, engine
 
 
 app = Flask(__name__)
 app.config.update(FLASK_MONGO_ENGINE_CONF)
+engine.init_app(app)
 
 
 @app.route('/api/carousel', methods=['GET'])
 def carousel():
+    t = Test()
+    t.email = 'haha'
+    t.first_name = 'lala'
+    t.last_name = 'hehe'
+    t.save()
     return jsonify(task1)
 
 
