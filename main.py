@@ -1,6 +1,7 @@
 # coding=utf-8
 from conf import INNER_IP, port, FLASK_MONGO_ENGINE_CONF
 from flask import Flask, jsonify, request
+from handlers import user
 from test_res import task1, task2, task3, task4, task5, task6, task7, task8, task9, task10, task11, task12, task13, \
     task14, task15, task16, task17, task18, task19, task20, task21, task22, task23
 from utils.models import Test, engine
@@ -118,12 +119,6 @@ def add_comment():
     return jsonify(task15)
 
 
-@app.route('/api/Userinfo', methods=['POST'])
-def user_info():
-    userid = request.args.get('userid', '')
-    return jsonify(task16)
-
-
 @app.route('/api/Saveuserinfo', methods=['POST'])
 def save_user_info():
     userid = request.args.get('userid', '')
@@ -174,4 +169,6 @@ def index():
 
 
 if __name__ == '__main__':
+    # __import__('handlers.admin')
+    app.register_blueprint(user, url_prefix='/user')
     app.run(debug=True, host=INNER_IP, port=port)
