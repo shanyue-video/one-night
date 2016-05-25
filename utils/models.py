@@ -13,7 +13,7 @@ class Test(engine.Document):
 
 class User(engine.Document):
     username = engine.StringField(required=True, max_length=20, unique=True,
-                                  verbose_name=u'用户名', help_text=u'员工邮箱前缀')
+                                  verbose_name=u'用户名', help_text=u'用户名')
     password_hash = engine.StringField(max_length=255, required=True,
                                        verbose_name=u'密码', help_text=u'用户密码')
     role = engine.StringField(required=True, default='user',

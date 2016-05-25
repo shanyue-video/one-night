@@ -1,9 +1,23 @@
-<form method="POST" action="/login/validate">
-    <div>
-        {{ form.username.label }}: {{ form.username() }}
-    </div>
-    <div>
-        {{ form.password_hash.label }}: {{ form.password_hash() }}
-    </div>
-    <button type="submit">登录</button>
-</form>
+{% extends "bootstrap/base.html"  %}
+{% block content %}
+{% import "bootstrap/wtf.html" as wtf %}
+<div class="container">
+    <form class="form-horizontal" method="POST" action="/login/validate">
+        <fieldset>
+            <div id="legend" class="">
+                <legend class="">登录</legend>
+            </div>
+
+            <div class="control-group">
+                <div>
+                    {{ wtf.quick_form(form, id="login", form_type="horizontal", horizontal_columns=('sm', 3, 3)) }}
+                </div>
+                <div class="controls text-right">
+                    <button class="btn" type="submit">登录</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+{% endblock %}
+

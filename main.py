@@ -1,6 +1,7 @@
 # coding=utf-8
 from conf import INNER_IP, port, FLASK_MONGO_ENGINE_CONF
 from flask import Flask
+from flask.ext.bootstrap import Bootstrap
 from handlers import user, other, api, view
 from utils.models import engine
 
@@ -8,6 +9,8 @@ from utils.models import engine
 app = Flask(__name__)
 app.config.update(FLASK_MONGO_ENGINE_CONF)
 engine.init_app(app)
+bootstrap = Bootstrap(app)
+
 app.use_api = True
 # app.use_api = False
 
