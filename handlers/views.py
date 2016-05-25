@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import hashlib
-from flask import jsonify, request, render_template, session
+from flask import request, render_template, session
 import flask
 from handlers import view
 from mongoengine import DoesNotExist
-from utils.models import UserForm, User
+from utils.models import UserForm, User, UploadForm
 from utils.util import acquire_admin
 
 
@@ -19,6 +19,7 @@ def login_validate():
     m = hashlib.md5()
     user = User()
     form = UserForm(request.form, obj=user)
+    # print form.validate_on_submit()
     form.populate_obj(user)
     m.update(user.password_hash)
     c_password = m.hexdigest()
@@ -40,5 +41,6 @@ def upload():
     except DoesNotExist:
         flask.abort(403)
     print('xxx', user)
+    form = UploadForm()
     # session.pop('role')
-    return jsonify({"aa": "bb"})
+    return render_template('upload.html', form=form)
