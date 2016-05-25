@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 from flask import jsonify, request
-import flask
 from handlers import api
-from main import app
+from handlers.users import user_info
 from test_res import task1, task2, task3, task4, task5, task6, task7, task8, task9, task10, task11, task12, task13, \
     task14, task15, task16, task17, task18, task19, task20, task21, task22, task23
-from utils.base import use_api
 from utils.models import Test
+from utils.util import use_api
 
 
 @api.route('/api/carousel', methods=['GET'])
@@ -117,10 +116,8 @@ def add_comment():
 
 
 @api.route('/api/Userinfo', methods=['POST', 'GET'])
-@use_api('user.user_info')
+@use_api(user_info)
 def user_info():
-    # if app.use_api:
-    #     return flask.redirect(flask.url_for('user.user_info'), code=307)
     userid = request.args.get('userid', '')
     return jsonify(task16)
 
