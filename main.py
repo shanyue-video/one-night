@@ -9,6 +9,7 @@ app = Flask(__name__)
 app.config.update(FLASK_MONGO_ENGINE_CONF)
 engine.init_app(app)
 app.use_api = True
+# app.use_api = False
 
 
 if __name__ == '__main__':
