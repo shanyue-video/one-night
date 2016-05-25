@@ -11,6 +11,14 @@ def login():
     return render_template('login.html', form=form)
 
 
+@view.route('/login/validate', methods=['POST'])
+def login_validate():
+    form = UserForm(request.form)
+    print dir(form.username), dir(form.password_hash)
+    return
+    # return render_template('login.html', form=form)
+
+
 @view.route('/upload')
 @acquire_admin
 def upload():

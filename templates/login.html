@@ -1,31 +1,9 @@
-{% extends "base.html" %}
-{% block main_content %}
-<div class="breadcrumbs" id="breadcrumbs">
-    <script type="text/javascript">
-        try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
-    </script>
-    <ul class="breadcrumb">
-        <li>
-            <i class="ace-icon fa fa-home home-icon"></i>
-            <a href="#">Home</a>
-        </li>
-        <li>
-            <a href="/task/list">任务管理</a>
-        </li>
-        <li class="active">批量添加任务</li>
-    </ul><!-- /.breadcrumb -->
-</div>
-<div class="page-content">
-    {% include 'ace-settings.html' %}
-    <form method="POST" action="/login">
-        <div>
-            {{ form.username.label }}: {{ form.username() }}
-        </div>
-        <div>
-            {{ form.password_hash.label }}: {{ form.password_hash() }}
-        </div>
-    </form>
-</div><!-- /.page-content -->
-{% endblock %}
-{% block page_script %}
-{% endblock %}
+<form method="POST" action="/login/validate">
+    <div>
+        {{ form.username.label }}: {{ form.username() }}
+    </div>
+    <div>
+        {{ form.password_hash.label }}: {{ form.password_hash() }}
+    </div>
+    <button type="submit">登录</button>
+</form>
