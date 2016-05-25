@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{% extends "bootstrap/base.html"  %}
+{% block content %}
+{% import "bootstrap/wtf.html" as wtf %}
+<div class="container">
+    <form class="form-horizontal" method="POST" action="/login/validate">
+        <fieldset>
+            <div id="legend" class="">
+                <legend class="">登录</legend>
+            </div>
 
-</body>
-</html>
+            <div class="control-group">
+                <div>
+                    {{ wtf.quick_form(form, id="login", form_type="horizontal", horizontal_columns=('sm', 4, 3)) }}
+                </div>
+                <div class="controls text-center">
+                    <button class="btn" type="submit">登录</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+{% endblock %}
