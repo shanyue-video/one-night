@@ -1,4 +1,6 @@
 {% extends "bootstrap/base.html"  %}
 {% block content %}
-<button type="button" class="btn btn-success"><a href="upload.html"></a>成功添加下一条</button>
+<form action="/upload">
+    <button type="submit" class="btn btn-success">成功添加下一条</button>
+</form>
 {% endblock %}

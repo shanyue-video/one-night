@@ -66,15 +66,17 @@ def upload_validate():
 
     upload_obj.user = user
 
+    _file['video'].save(os.path.join(UPLOAD_FOLDER, 'video-' + upload_obj.class_name + '.' +
+                                     _file['video'].filename.encode('utf-8').split('.')[-1]))
+    _file['img'].save(os.path.join(UPLOAD_FOLDER, 'img-' + upload_obj.class_name) + '.' +
+                      _file['img'].filename.encode('utf-8').split('.')[-1])
+
     try:
         upload_obj.save()
     except NotUniqueError as e:
         print e.message
         return flask.abort(501)
 
-    _file['video'].save(os.path.join(UPLOAD_FOLDER, upload_obj.class_name))
-    _file['img'].save(os.path.join(UPLOAD_FOLDER, upload_obj.class_name))
-
     if not form.validate_on_submit():
         return flask.abort(403)
-    return flask.redirect(flask.url_for('view.upload.success'))
+    return flask.redirect(flask.url_for('view.upload_success'))
