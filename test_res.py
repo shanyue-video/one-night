@@ -1,5 +1,5 @@
 # coding=utf-8
-from conf import port
+from utils.conf import port
 
 __author__ = "dengjing"
 

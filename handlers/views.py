@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import hashlib
-import os
 import time
-from conf import UPLOAD_FOLDER
+
+import os
+from utils.conf import UPLOAD_FOLDER
 from flask import request, render_template, session
 import flask
 from handlers import view
@@ -65,11 +66,12 @@ def upload_validate():
     upload_obj.picture = _file['img'].filename + '-' + str(time.time())
 
     upload_obj.user = user
+    upload_obj.class_summary = request.form['class_summary'].encode('utf-8')
 
     _file['video'].save(os.path.join(UPLOAD_FOLDER, 'video-' + upload_obj.class_name + '.' +
-                                     _file['video'].filename.encode('utf-8').split('.')[-1]))
+                        _file['video'].filename.encode('utf-8').split('.')[-1]) + '_tmp')
     _file['img'].save(os.path.join(UPLOAD_FOLDER, 'img-' + upload_obj.class_name) + '.' +
-                      _file['img'].filename.encode('utf-8').split('.')[-1])
+                      _file['img'].filename.encode('utf-8').split('.')[-1] + '_tmp')
 
     try:
         upload_obj.save()

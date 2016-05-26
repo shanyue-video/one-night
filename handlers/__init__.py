@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from conf import FLASK_MONGO_ENGINE_CONF
+from utils.conf import FLASK_MONGO_ENGINE_CONF
 from flask import Blueprint
 from flask import Flask
 from flask.ext.bootstrap import Bootstrap
