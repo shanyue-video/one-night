@@ -66,7 +66,7 @@ def upload_validate():
     upload_obj.picture = _file['img'].filename + '-' + str(time.time())
 
     upload_obj.user = user
-    upload_obj.class_summary = request.form['class_summary'].encode('utf-8')
+    upload_obj.class_summary = request.form['summary'].encode('utf-8')
 
     _file['video'].save(os.path.join(UPLOAD_FOLDER, 'video-' + upload_obj.class_name + '.' +
                         _file['video'].filename.encode('utf-8').split('.')[-1]) + '_tmp')

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import time
 import boto3
 import os
 from utils.conf import UPLOAD_FOLDER
@@ -19,6 +20,7 @@ def loop():
                 s3_client = boto3.client('s3')
                 s3_client.upload_file(f_path_new, Bucket, f[:-4])
                 print 'end handle %s' % f[:-4]
+                print time.strftime("%Y/%y/%d %H:%M:%S", time.localtime(time.time()))
 
 
 if __name__ == '__main__':

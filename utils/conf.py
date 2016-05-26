@@ -13,7 +13,7 @@ except TypeError:
 else:
     DEBUG = True
 
-UPLOAD_FOLDER = os.path.abspath(os.path.join(os.path.abspath(__file__), os.path.pardir+'/../logs/'))
+UPLOAD_FOLDER = os.path.abspath(os.path.join(os.path.abspath(__file__), os.path.pardir+'/../media/'))
 
 DBS = {
     'MONGODB_SETTINGS': {
