@@ -32,7 +32,7 @@ class Upload(engine.Document):
                                     help_text=u'不超过20个字符串，且唯一，建议按照一定格式填写，例如"课件名称-课程名称-1"')
     teacher_name = engine.StringField(max_length=20, required=False, verbose_name=u'老师名称',
                                       help_text=u'不超过20个字符串')
-    class_summary = engine.StringField(required=False, max_length=20, verbose_name=u'课程简介',
+    class_summary = engine.StringField(required=False, max_length=2000, verbose_name=u'课程简介',
                                        help_text=u'不超过2000个字符串')
     class_time = engine.StringField(required=False, max_length=20, verbose_name=u'课程时长',
                                     help_text=u'视频长度，非精确，单位为秒，如写做"3:20"')
@@ -44,5 +44,4 @@ class Upload(engine.Document):
 
 
 UserForm = model_form(User, exclude=('role',))
-# UploadForm = model_form(Upload, exclude=('user', 'picture', 'video'))
-UploadForm = model_form(Upload, exclude=('user',))
+UploadForm = model_form(Upload, exclude=('user', 'picture', 'video', 'class_summary'))
