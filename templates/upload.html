@@ -2,34 +2,37 @@
 {% block content %}
 {% import "bootstrap/wtf.html" as wtf %}
 <div class="container">
-    <form class="form-horizontal" method="POST" action="/upload/validate">
+    <form class="form-horizontal" method="POST" action="/upload/validate" enctype="multipart/form-data">
         <fieldset>
+
             <div id="legend" class="">
                 <legend class="">数据录入</legend>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label  col-sm-4">上传图片</label>
+                <div class="col-sm-3">
+                    <input class="input-file"  id="img" type="file">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label  col-sm-4">上传视频</label>
+                <div class="col-sm-3">
+                    <input class="input-file" id="video" type="file">
+                </div>
             </div>
 
             <div class="control-group">
                 <div>
                     {{ wtf.quick_form(form, id="upload", form_type="horizontal", horizontal_columns=('sm', 4, 3)) }}
                 </div>
-
-                <div class="form-group">
-                    <label class="control-label  col-sm-4">上传图片</label>
-                    <div class="col-sm-3">
-                        <input class="input-file" enctype="multipart/form-data" id="img" type="file">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label  col-sm-4">上传视频</label>
-                    <div class="col-sm-3">
-                        <input class="input-file" enctype="multipart/form-data" id="video" type="file">
-                    </div>
-                </div>
-
-                <div class="controls text-center">
-                    <button class="btn" type="submit">提交</button>
-                </div>
             </div>
+
+            <div class="controls text-center">
+                <button class="btn" type="submit">提交</button>
+            </div>
+
         </fieldset>
     </form>
 </div>

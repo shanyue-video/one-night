@@ -4,7 +4,7 @@ from flask import request, render_template, session
 import flask
 from handlers import view
 from mongoengine import DoesNotExist
-from utils.models import UserForm, User, UploadForm
+from utils.models import UserForm, User, UploadForm, Upload
 from utils.util import acquire_admin
 
 
@@ -44,3 +44,19 @@ def upload():
     form = UploadForm()
     # session.pop('role')
     return render_template('upload.html', form=form)
+
+
+@view.route('/upload/validate', methods=['POST'])
+def upload_validate():
+    _file = request.files
+    upload_obj = Upload()
+    try:
+        user = User.objects.get(username=session['user'])
+    except DoesNotExist:
+        flask.abort(403)
+    form = UploadForm(request.form, obj=upload_obj)
+    form.populate_obj(upload_obj)
+    # print upload_obj.video.data
+    if not form.validate_on_submit():
+        return flask.abort(403)
+    return flask.redirect(flask.url_for('view.upload'))
