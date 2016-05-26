@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 import hashlib
+import os
+import time
+from conf import UPLOAD_FOLDER
 from flask import request, render_template, session
 import flask
 from handlers import view
@@ -36,12 +39,12 @@ def login_validate():
 @view.route('/upload')
 @acquire_admin
 def upload():
-    try:
-        user = User.objects.get(username=session['user'])
-    except DoesNotExist:
-        flask.abort(403)
-    print('xxx', user)
-    form = UploadForm()
+    # try:
+    #     user = User.objects.get(username=session['user'])
+    # except DoesNotExist:
+    #     flask.abort(403)
+    # print('xxx', user)
+    form = UploadForm(request.form)
     # session.pop('role')
     return render_template('upload.html', form=form)
 
@@ -50,13 +53,22 @@ def upload():
 def upload_validate():
     _file = request.files
     upload_obj = Upload()
+
     try:
         user = User.objects.get(username=session['user'])
     except DoesNotExist:
         flask.abort(403)
     form = UploadForm(request.form, obj=upload_obj)
     form.populate_obj(upload_obj)
-    # print upload_obj.video.data
+
+    upload_obj.video = _file['video'].filename + '-' + str(time.time())
+    _file['video'].save(os.path.join(UPLOAD_FOLDER, upload_obj.class_name))
+    upload_obj.picture = _file['img'].filename + '-' + str(time.time())
+    _file['img'].save(os.path.join(UPLOAD_FOLDER, upload_obj.class_name))
+
+    upload_obj.user = user
+
     if not form.validate_on_submit():
         return flask.abort(403)
+    upload_obj.save()
     return flask.redirect(flask.url_for('view.upload'))

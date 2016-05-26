@@ -13,6 +13,8 @@ except TypeError:
 else:
     DEBUG = True
 
+UPLOAD_FOLDER = os.path.abspath(os.path.join(os.path.abspath(__file__), os.path.pardir+'/logs/'))
+
 DBS = {
     'MONGODB_SETTINGS': {
         'host': 'mongodb://one:123456@oforever.net:27017/one_night'

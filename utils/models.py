@@ -24,8 +24,8 @@ class User(engine.Document):
 
 
 class Upload(engine.Document):
-    picture = engine.FileField(verbose_name=u'课程截图', help_text=u'视频截图，显示在当前课程首页的')
-    video = engine.FileField(verbose_name=u'课程视频', help_text=u'视频文件')
+    picture = engine.StringField(verbose_name=u'课程截图', help_text=u'视频截图，显示在当前课程首页的')
+    video = engine.StringField(verbose_name=u'课程视频', help_text=u'视频文件')
     course_name = engine.StringField(required=True, max_length=20, unique=False, verbose_name=u'课件名称',
                                      help_text=u'不超过20个字符串')
     class_name = engine.StringField(required=True, max_length=20, unique=True, verbose_name=u'课程名称',
