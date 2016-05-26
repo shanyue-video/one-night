@@ -20,7 +20,10 @@ user = Blueprint('user', __name__)
 other = Blueprint('other', __name__)
 view = Blueprint('view', __name__)
 
-
+import users
+import others
+import apis
+import views
 
 
 app.register_blueprint(api)
@@ -28,9 +31,3 @@ app.register_blueprint(user, url_prefix='/user')
 app.register_blueprint(other, url_prefix='/other')
 # 后面非API
 app.register_blueprint(view)
-
-
-import users
-import others
-import apis
-import views
