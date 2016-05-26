@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask.ext.mongoengine import MongoEngine
 from flask.ext.mongoengine.wtf import model_form
-# from flask_wtf.file import FileField
 
 engine = MongoEngine()
 
@@ -10,6 +9,11 @@ class Test(engine.Document):
     email = engine.StringField(required=True)
     first_name = engine.StringField(max_length=50)
     last_name = engine.StringField(max_length=50)
+
+class TestEverything(engine.Document):
+    t1 = engine.StringField()
+    t2 = engine.StringField()
+    t3 = engine.StringField()
 
 
 class User(engine.Document):
