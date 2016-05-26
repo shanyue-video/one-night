@@ -1,9 +1,7 @@
 # coding=utf-8
 from conf import INNER_IP, port
-from handlers import user, other, api, view, app
+from handlers import app
 
 
 if __name__ == '__main__':
-
-
     app.run(debug=True, host=INNER_IP, port=port)

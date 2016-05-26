@@ -6,7 +6,7 @@ from flask.ext.bootstrap import Bootstrap
 from utils.models import engine
 
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='../templates')
 app.config.update(FLASK_MONGO_ENGINE_CONF)
 engine.init_app(app)
 bootstrap = Bootstrap(app)
