@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint
+from flask import Flask
 
+
+app = Flask(__name__)
 
 api = Blueprint('api', __name__)
 user = Blueprint('user', __name__)

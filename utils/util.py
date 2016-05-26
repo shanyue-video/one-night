@@ -3,7 +3,7 @@ import functools
 import time
 from flask import session
 import flask
-from main import app
+from handlers import app
 from utils.models import TestEverything
 
 
