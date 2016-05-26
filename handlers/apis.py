@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import jsonify, request
 from handlers import api
+from handlers.others import get_carousel
 from handlers.users import user_info, save_user_info
 from test_res import task1, task2, task3, task4, task5, task6, task7, task8, task9, task10, task11, task12, task13, \
     task14, task15, task16, task17, task18, task19, task20, task21, task22, task23
@@ -9,6 +10,7 @@ from utils.util import use_api
 
 
 @api.route('/api/carousel', methods=['GET'])
+@use_api(get_carousel)
 def carousel():
     t = Test()
     t.email = 'haha'

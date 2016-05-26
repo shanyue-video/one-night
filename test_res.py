@@ -10,7 +10,7 @@ task1 = {
     "courseName": "场景设计",  # 课程名称
     "courseImg": "",  # 课程图片
     # "courseImg": "",                # 课程讲师
-    "courseType": "",  # 课程类型
+    "courseType": 1,  # 课程类型
 }
 
 task2 = {
