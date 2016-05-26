@@ -6,7 +6,7 @@ from conf import UPLOAD_FOLDER
 from flask import request, render_template, session
 import flask
 from handlers import view
-from mongoengine import DoesNotExist
+from mongoengine import DoesNotExist, NotUniqueError
 from utils.models import UserForm, User, UploadForm, Upload
 from utils.util import acquire_admin
 
@@ -39,14 +39,14 @@ def login_validate():
 @view.route('/upload')
 @acquire_admin
 def upload():
-    # try:
-    #     user = User.objects.get(username=session['user'])
-    # except DoesNotExist:
-    #     flask.abort(403)
-    # print('xxx', user)
     form = UploadForm(request.form)
-    # session.pop('role')
     return render_template('upload.html', form=form)
+
+
+@view.route('/upload/success')
+@acquire_admin
+def upload_success():
+    return render_template('upload_success.html')
 
 
 @view.route('/upload/validate', methods=['POST'])
@@ -62,13 +62,19 @@ def upload_validate():
     form.populate_obj(upload_obj)
 
     upload_obj.video = _file['video'].filename + '-' + str(time.time())
-    _file['video'].save(os.path.join(UPLOAD_FOLDER, upload_obj.class_name))
     upload_obj.picture = _file['img'].filename + '-' + str(time.time())
-    _file['img'].save(os.path.join(UPLOAD_FOLDER, upload_obj.class_name))
 
     upload_obj.user = user
 
+    try:
+        upload_obj.save()
+    except NotUniqueError as e:
+        print e.message
+        return flask.abort(501)
+
+    _file['video'].save(os.path.join(UPLOAD_FOLDER, upload_obj.class_name))
+    _file['img'].save(os.path.join(UPLOAD_FOLDER, upload_obj.class_name))
+
     if not form.validate_on_submit():
         return flask.abort(403)
-    upload_obj.save()
-    return flask.redirect(flask.url_for('view.upload'))
+    return flask.redirect(flask.url_for('view.upload.success'))
