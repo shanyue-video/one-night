@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask.ext.mongoengine import MongoEngine
 from flask.ext.mongoengine.wtf import model_form
-from utils.obj2dict import obj2dict
 
 engine = MongoEngine()
 
@@ -10,6 +9,7 @@ class Test(engine.Document):
     email = engine.StringField(required=True)
     first_name = engine.StringField(max_length=50)
     last_name = engine.StringField(max_length=50)
+
 
 class TestEverything(engine.Document):
     t1 = engine.StringField()
@@ -45,7 +45,7 @@ class Upload(engine.Document):
     user = engine.ReferenceField(User)
 
     def __unicode__(self):
-        return self.course_name
+        return self.class_name
 
 
 UserForm = model_form(User, exclude=('role',))
@@ -53,6 +53,6 @@ UploadForm = model_form(Upload, exclude=('user', 'picture', 'video', 'class_summ
 
 
 if __name__ == '__main__':
+    from utils.obj2dict import obj2dict
     u = Upload()
-    # print dir(u)
     print obj2dict(u, include=('class_name',))

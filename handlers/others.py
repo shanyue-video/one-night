@@ -38,7 +38,10 @@ def search_course():
     title = request.args.get('title', '')
     lecturer = request.args.get('lecturer', '')
     q = label or key_word or title or lecturer
-    obs = Upload.objects(Q(class_summary__contains=q))
+    if q == '':
+        obs = Upload.objects(Q(class_summary__contains=q))
+    else:
+        obs = []
     ret_dicts = []
     for o in obs:
         ret_dic = obj2dict(o, include=('picture', 'video', 'course_name', 'class_name',
