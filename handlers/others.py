@@ -52,7 +52,7 @@ def search_course():
     return jsonify(task1)
 
 
-@other.route('/classification_course', method=['POST', 'GET'])
+@other.route('/classification_course', methods=['POST', 'GET'])
 def classification_course():
     obs = Upload.objects
     ret_dicts = []
