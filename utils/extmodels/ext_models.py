@@ -50,4 +50,24 @@ class Post(engine.Document):  # 对应question
     c_time = engine.DateTimeField(default=datetime.now, verbose_name=u'创建时间')
 
     def __unicode__(self):
-        return self.comment
+        return self.post
+
+
+class Feedback(engine.Document):
+    user = engine.ReferenceField(User)
+    content = engine.StringField(required=False, max_length=20, verbose_name=u'帖子内容', help_text=u'帖子内容')
+    c_time = engine.DateTimeField(default=datetime.now, verbose_name=u'创建时间')
+
+    def __unicode__(self):
+        return self.content
+
+
+class LearningHistory(engine.Document):
+    user = engine.ReferenceField(User)
+    # ranking = engine.StringField(required=False, max_length=20, verbose_name=u'排名', help_text=u'排名')
+    study_time = engine.StringField(required=False, max_length=20, verbose_name=u'学习时长', help_text=u'学习时长')
+    c_time = engine.DateTimeField(default=datetime.now, verbose_name=u'创建时间')
+
+    def __unicode__(self):
+        return self.content
+
