@@ -16,7 +16,5 @@ def obj2dict(obj, obj2=None, include=None):
     for i in base_dir:
         if i in include_tuple:
             ret_dict[i] = getattr(obj, i)
-        else:
-            print 'not' + i
 
     return ret_dict

@@ -6,7 +6,7 @@ __author__ = "dengjing"
 '''
 task1 = {
     "status": 1,  # 状态标识
-    "info": "正常",  # 状态说明
+    "info": u"正常",  # 状态说明
     "courseId": "12",  # 课程id
     "courseName": "场景设计",  # 课程名称
     "courseImg": "",  # 课程图片
@@ -17,13 +17,13 @@ task1 = {
 
 task1 = {
     "status": 1,  # 状态标识
-    "info": "正常",  # 状态说明
+    "info": u"正常",  # 状态说明
     "courses": "场景设计",  # 课程名称
 }
 
 task2 = {
     "status": 1,  # 状态标识
-    "info": "正常",  # 状态说明
+    "info": u"正常",  # 状态说明
     "data": [
         {
             "courseId": "12",  # 课程id
@@ -48,14 +48,14 @@ task2 = {
 
 task3 = {
     "status": 1,  # 状态标识
-    "info": "正常",  # 状态说明
+    "info": u"正常",  # 状态说明
     "classId": "12",  # 分类id
     "className": "场景设计",  # 分类名称
 }
 
 task4 = {
     "status": 1,  # 状态标识
-    "info": "正常",  # 状态说明
+    "info": u"正常",  # 状态说明
     "data": [
         {
             "courseId": "12",  # 课程id
@@ -67,12 +67,12 @@ task4 = {
 
 task5 = {
     "status": 1,  # 状态标识
-    "info": "正常",  # 状态说明
+    "info": u"正常",  # 状态说明
 }
 
 task6 = {
     "status": 1,  # 状态标识
-    "info": "正常",  # 状态说明
+    "info": u"正常",  # 状态说明
     "courseId": "12",  # 课程id
     "courseName": "场景设计",  # 课程名称
     "courseImg": "",  # 课程图片
@@ -116,7 +116,7 @@ task6 = {
 
 task7 = {
     "status": 1,  # 状态标识
-    "info": "正常",  # 状态说明
+    "info": u"正常",  # 状态说明
     "chapter": {
         "chapterId": "12",  # 章节id
         "chapterName": "场景设计",  # 章节名称
@@ -126,12 +126,12 @@ task7 = {
 
 task8 = {
     "status": 1,  # 状态标识 1表示成功，0表示失败
-    "info": "正常",  # 状态说明
+    "info": u"正常",  # 状态说明
 }
 
 task9 = {
     "status": 1,  # 状态标识 1表示成功，0表示失败
-    "info": "正常",  # 状态说明
+    "info": u"正常",  # 状态说明
     "data": [
         {
             "postId": "",  # 帖子id
@@ -164,7 +164,7 @@ task9 = {
 
 task10 = {
     "status": 1,  # 状态标识 1表示成功，0表示失败
-    "info": "正常",  # 状态说明
+    "info": u"正常",  # 状态说明
     "data": [
         {
             "postId": "",  # 发帖人id
@@ -182,7 +182,7 @@ task10 = {
 
 task11 = {
     "status": 1,  # 状态标识 1表示成功，0表示失败
-    "info": "正常",  # 状态说明
+    "info": u"正常",  # 状态说明
     "data": [
         {
             "postId": "",  # 帖子id
@@ -215,12 +215,12 @@ task11 = {
 
 task12 = {
     "status": 1,  # 状态标识 1表示成功，0表示失败
-    "info": "正常",  # 状态说明
+    "info": u"正常",  # 状态说明
 }
 
 task13 = {
     "status": 1,  # 状态标识 1表示成功，0表示失败
-    "info": "正常",  # 状态说明
+    "info": u"正常",  # 状态说明
     "post": {
         "postId": "",  # 帖子id
         "userId": "",  # 发帖人id
@@ -260,7 +260,7 @@ task13 = {
 
 task14 = {
     "status": 1,  # 状态标识 1表示成功，0表示失败
-    "info": "正常",  # 状态说明
+    "info": u"正常",  # 状态说明
     "post": {
         "postId": "",  # 帖子id
         "userId": "",  # 发帖人id
@@ -300,12 +300,12 @@ task14 = {
 
 task15 = {
     "status": 1,  # 状态标识 1表示成功，0表示失败
-    "info": "正常",  # 状态说明
+    "info": u"正常",  # 状态说明
 }
 
 task16 = {
     "status": 1,  # 状态标识 1表示成功，0表示失败
-    "info": "正常",  # 状态说明
+    "info": u"正常",  # 状态说明
     " userId": "",  # 用户id
     "userName": "",  # 发帖人name
     "userType": "",  # 用户类型
@@ -322,12 +322,12 @@ task16 = {
 
 task17 = {
     "status": 1,  # 状态标识 1表示成功，0表示失败
-    "info": "正常",  # 状态说明
+    "info": u"正常",  # 状态说明
 }
 
 task18 = {
     "status": 1,  # 状态标识 1表示成功，0表示失败
-    "info": "正常",  # 状态说明
+    "info": u"正常",  # 状态说明
     "data": [
         {
             "userid": "",  # 用户id
@@ -349,7 +349,7 @@ task18 = {
 
 task19 = {
     "status": 1,  # 状态标识 1表示成功，0表示失败
-    "info": "正常",  # 状态说明
+    "info": u"正常",  # 状态说明
     "userid": "",  # 用户id
     "ranking": "",  # 名次
     "iconUrl": "",  # 头像
@@ -370,7 +370,7 @@ task19 = {
 
 task20 = {
     "status": 1,  # 状态标识 1表示成功，0表示失败
-    "info": "正常",  # 状态说明
+    "info": u"正常",  # 状态说明
     "data": [
         {
             "postId": "",  # 帖子id
@@ -403,7 +403,7 @@ task20 = {
 
 task21 = {
     "status": 1,  # 状态标识 1表示成功，0表示失败
-    "info": "正常",  # 状态说明
+    "info": u"正常",  # 状态说明
     "data": [
         {
             "  postId": "",  # 帖子id
@@ -436,13 +436,13 @@ task21 = {
 
 task22 = {
     "status": 1,  # 状态标识 1表示成功，0表示失败
-    "info": "正常", 	# 状态说明
+    "info": u"正常", 	# 状态说明
 }
 
 # port = '8888'
 task23 = {
     "status": 1,  # 状态标识 1表示成功，0表示失败
-    "info": "正常",  # 状态说明
+    "info": u"正常",  # 状态说明
     "data": [
         {
             'api': 'http://api.oforever.net:%s/api/carousel' % port,
