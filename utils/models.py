@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask.ext.mongoengine import MongoEngine
 from flask.ext.mongoengine.wtf import model_form
+from utils.obj2dict import obj2dict
 
 engine = MongoEngine()
 
@@ -49,3 +50,9 @@ class Upload(engine.Document):
 
 UserForm = model_form(User, exclude=('role',))
 UploadForm = model_form(Upload, exclude=('user', 'picture', 'video', 'class_summary'))
+
+
+if __name__ == '__main__':
+    u = Upload()
+    # print dir(u)
+    print obj2dict(u, include=('class_name',))

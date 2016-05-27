@@ -3,6 +3,7 @@ from utils.conf import port
 
 __author__ = "dengjing"
 
+'''
 task1 = {
     "status": 1,  # 状态标识
     "info": "正常",  # 状态说明
@@ -11,6 +12,13 @@ task1 = {
     "courseImg": "",  # 课程图片
     # "courseImg": "",                # 课程讲师
     "courseType": 1,  # 课程类型
+}
+'''
+
+task1 = {
+    "status": 1,  # 状态标识
+    "info": "正常",  # 状态说明
+    "courses": "场景设计",  # 课程名称
 }
 
 task2 = {
