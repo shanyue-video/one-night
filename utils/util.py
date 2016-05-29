@@ -35,7 +35,7 @@ def test_api(request):
         test_everything.t3 = time.strftime("%Y/%y/%d %H:%M:%S", time.localtime(time.time()))
     elif request.method == 'POST':
         test_everything.t1 = 'POST' + request.base_url
-        test_everything.t2 = request.data
+        test_everything.t2 = request.data or str(request.form)
         test_everything.t3 = time.strftime("%Y/%y/%d %H:%M:%S", time.localtime(time.time()))
     else:
         test_everything.t1 = 'unknown method'
