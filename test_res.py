@@ -3,17 +3,6 @@ from utils.conf import port
 
 __author__ = "dengjing"
 
-'''
-task1 = {
-    "status": 1,  # 状态标识
-    "info": u"正常",  # 状态说明
-    "courseId": "12",  # 课程id
-    "courseName": "场景设计",  # 课程名称
-    "courseImg": "",  # 课程图片
-    # "courseImg": "",                # 课程讲师
-    "courseType": 1,  # 课程类型
-}
-'''
 
 task1 = {
     "status": 1,  # 状态标识
@@ -29,7 +18,6 @@ task2 = {
             "courseId": "12",  # 课程id
             "courseName": "场景设计",  # 课程名称
             "courseImg": "",  # 课程图片
-            # "courseImg": "",  #课程讲师
             "browse": "",  # 浏览量
             "downNum": "",  # 下载量
             "courseType": "",  # 课程类型
@@ -38,7 +26,6 @@ task2 = {
             "courseId": "12",  # 课程id
             "courseName": "场景设计",  # 课程名称
             "courseImg": "",  # 课程图片
-            # "courseImg": "",  #课程讲师
             "browse": "",  # 浏览量
             "downNum": "",  # 下载量
             "courseType": "",  # 课程类型
@@ -479,11 +466,6 @@ task23 = {
             'type': 'POST',
             'args': u'classId  和上一个接口的chapter一样'
         },
-        # {
-        #     'api': 'http://api.oforever.net:%s/api/search' % port,
-        #     'type': 'POST',
-        #     'args': 'label, keyword, title, lecturer'
-        # },
         {
             'api': 'http://api.oforever.net:%s/api/comment' % port,
             'type': 'POST',
@@ -561,3 +543,7 @@ task23 = {
         },
     ]
 }
+
+
+if __name__ == '__main__':
+    print len(task23['data'])

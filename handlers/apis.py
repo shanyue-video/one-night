@@ -60,7 +60,7 @@ def comment():
     return jsonify(task8)
 
 
-@api.route('/api/question', methods=['POST', 'GET'])
+@api.route('/api/ListQuestion', methods=['POST', 'GET'])
 def question():
     return jsonify(task9)
 
