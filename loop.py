@@ -43,7 +43,7 @@ def loop_qiniu():
                 key = f[:-4]
                 q = Auth(access_key, secret_key)
                 token = q.upload_token(Bucket, key, 3600)
-                local_file = os.path.join(UPLOAD_FOLDER, key)
+                local_file = f_path
                 ret, _ = put_file(token, key, local_file)
                 assert ret['key'] == key
                 os.rename(f_path, f_path_new)
