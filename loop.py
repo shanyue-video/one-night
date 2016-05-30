@@ -6,11 +6,15 @@ from utils.conf import UPLOAD_FOLDER
 
 Bucket = 'one-night'
 
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 
 def loop():
     while True:
         for f in os.listdir(UPLOAD_FOLDER):
-            f = f.encode('utf-8')
+            f = f.decode('').encode('utf-8')
             if not 'tmp' == f.split('_')[-1]:
                 continue
             else:
