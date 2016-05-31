@@ -4,9 +4,10 @@ from handlers import other
 # from s3.get_url import get_url
 from mongoengine.queryset import Q
 from s3.get_url import get_url_qiniu
-from test_res import task22, task1
+from test_res import task22, task1, task2
 from utils.models import Upload
 from utils.obj2dict import obj2dict
+from utils.util import test_api, handle_request_post_arguments
 
 
 @other.route('/feed_back', methods=['POST', 'GET'])
@@ -34,11 +35,13 @@ def get_carousel():
 
 @other.route('/search_course', methods=['POST', 'GET'])
 def search_course():
-    label = request.args.get('label', '')
-    key_word = request.args.get('keyword', '')
-    title = request.args.get('title', '')
-    lecturer = request.args.get('lecturer', '')
-    q = label or key_word or title or lecturer
+    test_api(request)
+
+    args_list = ['keyword']
+    args = handle_request_post_arguments(request, args_list)
+    ret_dict = task2
+
+    q = args['key_word']
     if q == '':
         obs = Upload.objects(Q(class_summary__contains=q))
     else:
@@ -53,7 +56,8 @@ def search_course():
         ret_dic['video_url'] = get_url_qiniu(video_key)
         ret_dicts.append(ret_dic)
     task1['course'] = ret_dicts
-    return jsonify(task1)
+
+    return jsonify(ret_dict)
 
 
 @other.route('/classification_course', methods=['POST', 'GET'])
