@@ -14,7 +14,7 @@ def carousel():
     return jsonify(task1)
 
 
-@api.route('/api/search', methods=['POST', 'GET'])
+@api.route('/api/search', methods=['POST'])
 @use_api(search_course)
 def search():
     label = request.args.get('label', '')
@@ -36,36 +36,36 @@ def course_list():
     return jsonify(task4)
 
 
-@api.route('/api/collection', methods=['POST', 'GET'])
+@api.route('/api/collection', methods=['POST'])
 def collection():
     return jsonify(task5)
 
 
-@api.route('/api/chapter', methods=['POST', 'GET'])
+@api.route('/api/chapter', methods=['POST'])
 def chapter():
     courseId = request.args.get('courseId', '')
     return jsonify(task6)
 
 
-@api.route('/api/download', methods=['POST', 'GET'])
+@api.route('/api/download', methods=['POST'])
 def download():
     id = request.args.get('id', '')
     return jsonify(task7)
 
 
-@api.route('/api/comment', methods=['POST', 'GET'])
+@api.route('/api/comment', methods=['POST'])
 def comment():
     courseId = request.args.get('courseId', '')
     userId = request.args.get('userId', '')
     return jsonify(task8)
 
 
-@api.route('/api/ListQuestion', methods=['POST', 'GET'])
+@api.route('/api/ListQuestion', methods=['POST'])
 def question():
     return jsonify(task9)
 
 
-@api.route('/api/PostNew', methods=['POST', 'GET'])
+@api.route('/api/PostNew', methods=['POST'])
 def post_new():
     userid = request.args.get('userid', '')
     label = request.args.get('label', '')
@@ -74,7 +74,7 @@ def post_new():
     return jsonify(task10)
 
 
-@api.route('/api/searchQuestion', methods=['POST', 'GET'])
+@api.route('/api/searchQuestion', methods=['POST'])
 def search_question():
     label = request.args.get('labeld', '')
     keyword = request.args.get('keyword', '')
@@ -83,27 +83,27 @@ def search_question():
     return jsonify(task11)
 
 
-@api.route('/api/addlookNum', methods=['POST', 'GET'])
+@api.route('/api/addlookNum', methods=['POST'])
 def add_look_num():
     postId = request.args.get('postId', '')
     userId = request.args.get('userId', '')
     return jsonify(task12)
 
 
-@api.route('/api/addLike', methods=['POST', 'GET'])
+@api.route('/api/addLike', methods=['POST'])
 def add_like():
     postId = request.args.get('postId', '')
     userId = request.args.get('userId', '')
     return jsonify(task13)
 
 
-@api.route('/api/QuestionDetail', methods=['POST', 'GET'])
+@api.route('/api/QuestionDetail', methods=['POST'])
 def question_detail():
     postId = request.args.get('postId', '')
     return jsonify(task14)
 
 
-@api.route('/api/Addcomment', methods=['POST', 'GET'])
+@api.route('/api/Addcomment', methods=['POST'])
 def add_comment():
     postId = request.args.get('postId', '')
     userid = request.args.get('userid', '')
@@ -114,14 +114,14 @@ def add_comment():
     return jsonify(task15)
 
 
-@api.route('/api/Userinfo', methods=['POST', 'GET'])
+@api.route('/api/Userinfo', methods=['POST'])
 @use_api(user_info)
 def user_info():
     userid = request.args.get('userid', '')
     return jsonify(task16)
 
 
-@api.route('/api/Saveuserinfo', methods=['POST', 'GET'])
+@api.route('/api/Saveuserinfo', methods=['POST'])
 @use_api(save_user_info)
 def save_user_info():
     userid = request.args.get('userid', '')
@@ -134,32 +134,32 @@ def save_user_info():
     return jsonify(task17)
 
 
-@api.route('/api/Getranking', methods=['POST', 'GET'])
+@api.route('/api/Getranking', methods=['POST'])
 def get_ranking():
     userid = request.args.get('userid', '')
     return jsonify(task18)
 
 
-@api.route('/api/GetPerDetail', methods=['POST', 'GET'])
+@api.route('/api/GetPerDetail', methods=['POST'])
 def get_per_detail():
     userid = request.args.get('userid', '')
     return jsonify(task19)
 
 
-@api.route('/api/myQuestion', methods=['POST', 'GET'])
+@api.route('/api/myQuestion', methods=['POST'])
 def my_question():
     userid = request.args.get('userid', '')
     return jsonify(task20)
 
 
-@api.route('/api/delPost', methods=['POST', 'GET'])
+@api.route('/api/delPost', methods=['POST'])
 def del_post():
     userid = request.args.get('userid', '')
     postId = request.args.get('postId', '')
     return jsonify(task21)
 
 
-@api.route('/api/Feedback', methods=['POST', 'GET'])
+@api.route('/api/Feedback', methods=['POST'])
 def feed_back():
     userid = request.args.get('userid', '')
     content = request.args.get('content', '')

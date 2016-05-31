@@ -433,112 +433,112 @@ task23 = {
     "data": [
         {
             'api': 'http://api.oforever.net:%s/api/carousel' % port,
-            'type': 'GET',
+            '1type': 'GET',
             'args': ''
         },
         {
             'api': 'http://api.oforever.net:%s/api/search' % port,
-            'type': 'POST',
+            '2type': 'POST',
             'args': 'keyword'
         },
         {
             'api': 'http://api.oforever.net:%s/api/classification' % port,
-            'type': 'GET',
+            '3type': 'GET',
             'args': ''
         },
         {
             'api': 'http://api.oforever.net:%s/api/courseList' % port,
-            'type': 'GET',
+            '4type': 'GET',
             'args': 'keyword'
         },
         {
             'api': 'http://api.oforever.net:%s/api/collection' % port,
-            'type': 'POST',
+            '5type': 'POST',
             'args': 'courseId, userId'
         },
         {
             'api': 'http://api.oforever.net:%s/api/chapter' % port,
-            'type': 'POST',
+            '6type': 'POST',
             'args': 'courseId'
         },
         {
             'api': 'http://api.oforever.net:%s/api/download' % port,
-            'type': 'POST',
+            '7type': 'POST',
             'args': u'classId  和上一个接口的chapter一样'
         },
         {
             'api': 'http://api.oforever.net:%s/api/comment' % port,
-            'type': 'POST',
+            '8type': 'POST',
             'args': 'courseId, userId'
         },
         {
             'api': 'http://api.oforever.net:%s/api/ListQuestion' % port,
-            'type': 'POST',
+            '9type': 'POST',
             'args': ''
         },
         {
             'api': 'http://api.oforever.net:%s/api/PostNew' % port,
-            'type': 'POST',
+            '10type': 'POST',
             'args': 'userid, content, label, postImgs, postVoice   #多图片参数 需要再对'
         },
         {
             'api': 'http://api.oforever.net:%s/api/searchQuestion' % port,
-            'type': 'POST',
+            '11type': 'POST',
             'args': 'keyword'
         },
         {
             'api': 'http://api.oforever.net:%s/api/addlookNum' % port,
-            'type': 'POST',
+            '12type': 'POST',
             'args': 'postId, userId'
         },
         {
             'api': 'http://api.oforever.net:%s/api/addLike' % port,
-            'type': 'POST',
+            '13type': 'POST',
             'args': 'postId, userId, cancel'
         },
         {
             'api': 'http://api.oforever.net:%s/api/QuestionDetail' % port,
-            'type': 'POST',
+            '14type': 'POST',
             'args': 'postId'
         },
         {
             'api': 'http://api.oforever.net:%s/api/Addcomment' % port,
-            'type': 'POST',
+            '15type': 'POST',
             'args': 'postId, userid, commentContent, commentImg, commentVoice, commentVideo'
         },
         {
             'api': 'http://api.oforever.net:%s/api/Userinfo' % port,
-            'type': 'POST',
+            '16type': 'POST',
             'args': 'userid'
         },
         {
             'api': 'http://api.oforever.net:%s/api/Saveuserinfo' % port,
-            'type': 'POST',
-            'args': 'userid, userName, platfromName, nickName, iconUrl, accessToken'
+            '17type': 'POST',
+            'args': 'user_id, user_name, platform_name, nick_name, icon_url, access_token'
         },
         {
             'api': 'http://api.oforever.net:%s/api/Getranking' % port,
-            'type': 'POST',
+            '18type': 'POST',
             'args': 'userid   # 上传时长的接口还未设计'
         },
         {
             'api': 'http://api.oforever.net:%s/api/GetPerDetail' % port,
-            'type': 'POST',
+            '19type': 'POST',
             'args': 'userid   # 上传时长的接口还未设计'
         },
         {
             'api': 'http://api.oforever.net:%s/api/myQuestion' % port,
-            'type': 'POST',
+            '20type': 'POST',
             'args': 'userid'
         },
         {
             'api': 'http://api.oforever.net:%s/api/delPost' % port,
-            'type': 'POST',
+            '21type': 'POST',
             'args': 'userid, postId'
         },
         {
             'api': 'http://api.oforever.net:%s/api/Feedback' % port,
-            'type': 'POST',
+            '22type': 'POST',
             'args': 'userid, content'
         },
     ]

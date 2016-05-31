@@ -3,6 +3,27 @@ from datetime import datetime
 from utils.models import engine, Upload, User
 
 
+class OauthUser(engine.Document):
+    user_id = engine.StringField(required=True, max_length=20, unique=False, verbose_name=u'第三方id',
+                                 help_text=u'第三方用户id, 必须的')
+    user_name = engine.StringField(required=True, max_length=20, unique=False, verbose_name=u'课程名称',
+                                   help_text=u'第三方用户名,必填')
+    platform_name = engine.StringField(required=True, max_length=20, verbose_name=u'平台名称',
+                                       help_text=u'平台名称中文,必填')
+    nick_name = engine.StringField(required=False, max_length=20, verbose_name=u'昵称',
+                                   help_text=u'昵称可空')
+    icon_url = engine.URLField(required=False, max_length=40, verbose_name=u'头像url',
+                               help_text=u'头像url， 具体什么类型存')
+    access_token = engine.URLField(required=True, max_length=200, verbose_name=u'oauth的值',
+                                   help_text=u'oauth值，必填')
+    role = engine.StringField(required=True, default='user',
+                              choices=(('user', u'普通用户'), ('admin', u'管理员')),
+                              verbose_name=u'角色')
+
+    def __unicode__(self):
+        return self.access_token
+
+
 class Course(engine.Document):
     base_info = engine.ReferenceField(Upload)  # 应该是一一对应关系吧
     class_uuid = engine.StringField(required=True, max_length=20, unique=True, verbose_name=u'课程名称',

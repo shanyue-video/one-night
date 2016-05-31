@@ -42,3 +42,7 @@ def test_api(request):
         test_everything.t2 = 'unknown method'
         test_everything.t3 = time.strftime("%Y/%y/%d %H:%M:%S", time.localtime(time.time()))
     test_everything.save()
+
+
+def handle_request_arguments(request):
+    pass
