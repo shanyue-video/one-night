@@ -19,18 +19,23 @@ def feed_back():
 
 @other.route('/get_carousel', methods=['POST', 'GET'])
 def get_carousel():
+    test_api(request)
+
+    ret_dict = task1
+
     obs = Upload.objects
-    ret_dicts = []
+    course_list = []
     for o in obs:
-        ret_dic = obj2dict(o, include=('picture', 'video', 'course_name', 'class_name',
-                                       'teacher_name', 'class_summary', 'class_time', 'is_over'))
-        img_key = 'img-' + ret_dic['class_name'] + '.' + ret_dic['picture'][:-14].split('.')[-1]
-        video_key = 'video-' + ret_dic['class_name'] + '.' + ret_dic['video'][:-14].split('.')[-1]
-        ret_dic['picture_url'] = get_url_qiniu(img_key)
-        ret_dic['video_url'] = get_url_qiniu(video_key)
-        ret_dicts.append(ret_dic)
-    task1['course'] = ret_dicts
-    return jsonify(task1)
+        obj_dict = obj2dict(o, include=('picture', 'video', 'course_name', 'class_name',
+                                        'teacher_name', 'class_summary', 'class_time', 'is_over'))
+        img_key = 'img-' + obj_dict['class_name'] + '.' + obj_dict['picture'][:-14].split('.')[-1]
+        video_key = 'video-' + obj_dict['class_name'] + '.' + obj_dict['video'][:-14].split('.')[-1]
+        obj_dict['picture_url'] = get_url_qiniu(img_key)
+        obj_dict['video_url'] = get_url_qiniu(video_key)
+        course_list.append(obj_dict)
+    ret_dict['course'] = course_list
+
+    return jsonify(ret_dict)
 
 
 @other.route('/search_course', methods=['POST', 'GET'])
@@ -47,6 +52,7 @@ def search_course():
     else:
         obs = []
     ret_dicts = []
+
     for o in obs:
         ret_dic = obj2dict(o, include=('picture', 'video', 'course_name', 'class_name',
                                        'teacher_name', 'class_summary', 'class_time', 'is_over'))
@@ -55,7 +61,7 @@ def search_course():
         ret_dic['picture_url'] = get_url_qiniu(img_key)
         ret_dic['video_url'] = get_url_qiniu(video_key)
         ret_dicts.append(ret_dic)
-    task1['course'] = ret_dicts
+    ret_dict['course'] = ret_dicts
 
     return jsonify(ret_dict)
 
