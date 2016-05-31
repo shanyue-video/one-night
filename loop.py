@@ -35,7 +35,7 @@ def loop_qiniu():
     while True:
         for f in os.listdir(UPLOAD_FOLDER):
             if not 'tmp' == f.split('_')[-1]:
-                continue
+                print 'pass this time ', time.strftime("%Y/%y/%d %H:%M:%S", time.localtime(time.time()))
             else:
                 print 'start handle %s' % f
                 f_path = os.path.join(UPLOAD_FOLDER, f)
