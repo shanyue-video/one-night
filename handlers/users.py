@@ -18,21 +18,15 @@ def save_user_info():
     test_api(request)
     args_list = ['user_id', 'user_name', 'platform_name', 'nick_name', 'icon_url', 'access_token']
     args = handle_request_post_arguments(request, args_list)
+    ret_dict = task17
 
     o_user = OauthUser()
-    # o_user.user_id = args['user_id']
-    # o_user.user_name = args['user_name']
-    # o_user.platform_name = args['platform_name']
-    # o_user.nick_name = args['nick_name']
-    # o_user.icon_url = args['icon_url']
-    # o_user.access_token = args['access_token']
     for k in args.keys():
         setattr(o_user, k, args[k])
-
     try:
         o_user.save()
-    except ValidationError:
-        task17['status'] = 0
-        task17['info'] = 'argument is not enough'
+    except ValidationError as e:
+        ret_dict['status'] = 0
+        ret_dict['info'] = 'argument is not enough' + e.message
 
-    return jsonify(task17)
+    return jsonify(ret_dict)

@@ -14,8 +14,8 @@ class OauthUser(engine.Document):
                                    help_text=u'昵称可空')
     icon_url = engine.URLField(required=False, max_length=40, verbose_name=u'头像url',
                                help_text=u'头像url， 具体什么类型存')
-    access_token = engine.URLField(required=True, max_length=200, verbose_name=u'oauth的值',
-                                   help_text=u'oauth值，必填')
+    access_token = engine.StringField(required=True, max_length=200, verbose_name=u'oauth的值',
+                                      help_text=u'oauth值，必填')
     role = engine.StringField(required=True, default='user',
                               choices=(('user', u'普通用户'), ('admin', u'管理员')),
                               verbose_name=u'角色')
