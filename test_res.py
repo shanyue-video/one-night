@@ -509,7 +509,7 @@ task23 = {
         {
             'api': 'http://api.oforever.net:%s/api/Userinfo' % port,
             '16type': 'POST',
-            'args': 'userid'
+            'args': 'user_id'
         },
         {
             'api': 'http://api.oforever.net:%s/api/Saveuserinfo' % port,
