@@ -75,8 +75,8 @@ class Comment(engine.Document):
 
 
 class Feedback(engine.Document):
-    user = engine.ReferenceField(OauthUser)
-    content = engine.StringField(required=False, max_length=20, verbose_name=u'帖子内容', help_text=u'帖子内容')
+    user = engine.ReferenceField(OauthUser, required=True)
+    content = engine.StringField(required=True, max_length=2000, verbose_name=u'帖子内容', help_text=u'帖子内容')
     c_time = engine.DateTimeField(default=datetime.now, verbose_name=u'创建时间')
 
     def __unicode__(self):

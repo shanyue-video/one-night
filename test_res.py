@@ -557,7 +557,7 @@ task23 = {
         {
             'api': 'http://api.oforever.net:%s/api/Feedback' % port,
             '22type': 'POST',
-            'args': 'userid, content'
+            'args': 'user_id, content'
         },
     ]
 }

@@ -20,11 +20,11 @@ def user_info():
         o_user = OauthUser.objects.get(user_id=args['user_id'])
     except DoesNotExist as e:
         ret_dict['status'] = 0
-        ret_dict['info'] = 'argument is not enough' + e.message
+        ret_dict['info'] = 'argument is DoesNotExist ' + e.message
 
     if ret_dict['status'] == 1:
-        ret_dict = obj2dict(o_user, include=('user_id', 'user_name', 'platform_name',
-                                             'nick_name', 'icon_url', 'access_token', 'role'))
+        ret_dict['data'] = obj2dict(o_user, include=('user_id', 'user_name', 'platform_name',
+                                                     'nick_name', 'icon_url', 'access_token', 'role'))
 
     return jsonify(ret_dict)
 
@@ -45,6 +45,6 @@ def save_user_info():
         ret_dict['id'] = o_user.id
     except ValidationError as e:
         ret_dict['status'] = 0
-        ret_dict['info'] = 'argument is not enough' + e.message
+        ret_dict['info'] = 'argument is ValidationError ' + e.message
 
     return jsonify(ret_dict)

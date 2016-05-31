@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 from flask import request, jsonify
 from handlers import other
-# from s3.get_url import get_url
+from mongoengine import ValidationError, DoesNotExist
 from mongoengine.queryset import Q
 from s3.get_url import get_url_qiniu
 from test_res import task22, task1, task2
+from utils.extmodels.ext_models import Feedback, OauthUser
 from utils.models import Upload
 from utils.obj2dict import obj2dict
 from utils.util import test_api, handle_request_post_arguments
@@ -12,9 +13,31 @@ from utils.util import test_api, handle_request_post_arguments
 
 @other.route('/feed_back', methods=['POST', 'GET'])
 def feed_back():
-    userid = request.args.get('userid', '')
-    content = request.args.get('content', '')
-    return jsonify(task22)
+    test_api(request)
+
+    args_list = ['user_id', 'content']
+    args = handle_request_post_arguments(request, args_list)
+    ret_dict = task22
+
+    # update the last args
+    user_id = args.pop('user_id')
+    try:
+        args['user'] = OauthUser.objects.get(user_id=user_id)
+    except DoesNotExist as e:
+        ret_dict['status'] = 0
+        ret_dict['info'] = 'argument is DoesNotExist ' + e.message
+        return jsonify(ret_dict)
+
+    o_feed_back = Feedback()
+    for k in args.keys():
+        setattr(o_feed_back, k, args[k])
+    try:
+        o_feed_back.save()
+    except ValidationError as e:
+        ret_dict['status'] = 0
+        ret_dict['info'] = 'argument ValidationError ' + e.message
+
+    return jsonify(ret_dict)
 
 
 @other.route('/get_carousel', methods=['POST', 'GET'])
