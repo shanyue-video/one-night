@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
-from utils.models import engine, Upload, User
+from utils.models import engine, Upload
 
 
 class OauthUser(engine.Document):
@@ -41,27 +41,16 @@ class Course(engine.Document):
 
 class Collection(engine.Document):
     course = engine.ReferenceField(Course)  # 应该是1v多
-    user = engine.ReferenceField(User)
+    user = engine.ReferenceField(OauthUser)
     c_time = engine.DateTimeField(default=datetime.now, verbose_name=u'创建时间')
 
     def __unicode__(self):
         return self.course
 
 
-class Comment(engine.Document):
-    course = engine.ReferenceField(Course)  # 应该是1v多
-    user = engine.ReferenceField(User)
-    post = engine.ReferenceField(Post)
-    comment = engine.StringField(required=False, max_length=20, verbose_name=u'评论内容', help_text=u'评论内容')
-    c_time = engine.DateTimeField(default=datetime.now, verbose_name=u'创建时间')
-
-    def __unicode__(self):
-        return self.comment
-
-
 class Post(engine.Document):  # 对应question
     course = engine.ReferenceField(Course)  # 应该是1v多
-    user = engine.ReferenceField(User)
+    user = engine.ReferenceField(OauthUser)
     post = engine.StringField(required=False, max_length=20, verbose_name=u'帖子内容', help_text=u'帖子内容')
     post_id = engine.StringField(required=False, max_length=20, verbose_name=u'帖子id', help_text=u'帖子id')
     post_img = engine.StringField(required=False, max_length=20, verbose_name=u'帖子图片', help_text=u'帖子图片')
@@ -74,8 +63,19 @@ class Post(engine.Document):  # 对应question
         return self.post
 
 
+class Comment(engine.Document):
+    course = engine.ReferenceField(Course)  # 应该是1v多
+    user = engine.ReferenceField(OauthUser)
+    post = engine.ReferenceField(Post)
+    comment = engine.StringField(required=False, max_length=20, verbose_name=u'评论内容', help_text=u'评论内容')
+    c_time = engine.DateTimeField(default=datetime.now, verbose_name=u'创建时间')
+
+    def __unicode__(self):
+        return self.comment
+
+
 class Feedback(engine.Document):
-    user = engine.ReferenceField(User)
+    user = engine.ReferenceField(OauthUser)
     content = engine.StringField(required=False, max_length=20, verbose_name=u'帖子内容', help_text=u'帖子内容')
     c_time = engine.DateTimeField(default=datetime.now, verbose_name=u'创建时间')
 
@@ -84,7 +84,7 @@ class Feedback(engine.Document):
 
 
 class LearningHistory(engine.Document):
-    user = engine.ReferenceField(User)
+    user = engine.ReferenceField(OauthUser)
     # ranking = engine.StringField(required=False, max_length=20, verbose_name=u'排名', help_text=u'排名')
     study_time = engine.StringField(required=False, max_length=20, verbose_name=u'学习时长', help_text=u'学习时长')
     c_time = engine.DateTimeField(default=datetime.now, verbose_name=u'创建时间')

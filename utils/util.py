@@ -44,5 +44,12 @@ def test_api(request):
     test_everything.save()
 
 
-def handle_request_arguments(request):
-    pass
+def handle_request_post_arguments(request, args_list):
+    if request.method == 'POST':
+        base_form = request.form
+        base_dict = base_form.to_dict()
+        ret = {}
+        for arg in args_list:
+            if base_dict.get(arg):
+                ret[arg] = base_dict[arg]
+        return ret
