@@ -32,15 +32,15 @@ def test_api(request):
     if request.method == 'GET':
         test_everything.t1 = 'GET' + request.base_url
         test_everything.t2 = str(request.args)
-        test_everything.t3 = time.strftime("%Y/%y/%d %H:%M:%S", time.localtime(time.time()))
+        test_everything.t3 = time.strftime("%Y/%m/%d %H:%M:%S", time.localtime(time.time()))
     elif request.method == 'POST':
         test_everything.t1 = 'POST' + request.base_url
         test_everything.t2 = request.data or str(request.form)
-        test_everything.t3 = time.strftime("%Y/%y/%d %H:%M:%S", time.localtime(time.time()))
+        test_everything.t3 = time.strftime("%Y/%m/%d %H:%M:%S", time.localtime(time.time()))
     else:
         test_everything.t1 = 'unknown method'
         test_everything.t2 = 'unknown method'
-        test_everything.t3 = time.strftime("%Y/%y/%d %H:%M:%S", time.localtime(time.time()))
+        test_everything.t3 = time.strftime("%Y/%m/%d %H:%M:%S", time.localtime(time.time()))
     test_everything.save()
 
 
@@ -53,3 +53,7 @@ def handle_request_post_arguments(request, args_list):
             if base_dict.get(arg):
                 ret[arg] = base_dict[arg]
         return ret
+
+
+if __name__ == '__main__':
+    print time.strftime("%Y/%m/%d %H:%M:%S", time.localtime(time.time()))
