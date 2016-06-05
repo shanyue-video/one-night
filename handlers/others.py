@@ -4,7 +4,7 @@ from handlers import other
 from mongoengine import ValidationError, DoesNotExist
 from mongoengine.queryset import Q
 from s3.get_url import get_url_qiniu
-from test_res import task22, task1, task2
+from test_res import task22, task1, task2, task3
 from utils.extmodels.ext_models import Feedback, OauthUser
 from utils.models import Upload
 from utils.obj2dict import obj2dict
@@ -56,7 +56,7 @@ def get_carousel():
         obj_dict['picture_url'] = get_url_qiniu(img_key)
         obj_dict['video_url'] = get_url_qiniu(video_key)
         course_list.append(obj_dict)
-    ret_dict['course'] = course_list
+    ret_dict['data'] = course_list
 
     return jsonify(ret_dict)
 
@@ -93,16 +93,21 @@ def search_course():
 
 @other.route('/classification_course', methods=['POST', 'GET'])
 def classification_course():
+    test_api(request)
+
+    ret_dict = task3
+
     obs = Upload.objects
-    ret_dicts = []
+    course_list = []
     for o in obs:
-        ret_dic = obj2dict(o, include=('picture', 'video', 'course_name', 'class_name',
-                                       'teacher_name', 'class_summary', 'class_time', 'is_over'))
-        img_key = 'img-' + ret_dic['class_name'] + '.' + ret_dic['picture'][:-14].split('.')[-1]
-        video_key = 'video-' + ret_dic['class_name'] + '.' + ret_dic['video'][:-14].split('.')[-1]
-        ret_dic['picture_url'] = get_url_qiniu(img_key)
-        ret_dic['video_url'] = get_url_qiniu(video_key)
-        ret_dicts.append(ret_dic)
-    task1['course'] = ret_dicts
-    return jsonify(task1)
+        obj_dict = obj2dict(o, include=('picture', 'video', 'course_name', 'class_name',
+                                        'teacher_name', 'class_summary', 'class_time', 'is_over'))
+        img_key = 'img-' + obj_dict['class_name'] + '.' + obj_dict['picture'][:-14].split('.')[-1]
+        video_key = 'video-' + obj_dict['class_name'] + '.' + obj_dict['video'][:-14].split('.')[-1]
+        obj_dict['picture_url'] = get_url_qiniu(img_key)
+        obj_dict['video_url'] = get_url_qiniu(video_key)
+        course_list.append(obj_dict)
+    ret_dict['data'] = course_list
+
+    return jsonify(ret_dict)
 
