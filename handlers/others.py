@@ -69,11 +69,13 @@ def search_course():
     args = handle_request_post_arguments(request, args_list)
     ret_dict = task2
 
-    q = args['key_word']
-    if q == '':
-        obs = Upload.objects(Q(class_summary__contains=q))
+    q = args.get('keyword', '')
+    if not q == '':
+        obs = Upload.objects(
+            Q(class_summary__icontains=q) | Q(class_name__icontains=q) | Q(course_name__icontains=q) | Q(
+                teacher_name__icontains=q))
     else:
-        obs = []
+        obs = Upload.objects()
     ret_dicts = []
 
     for o in obs:
@@ -84,7 +86,7 @@ def search_course():
         ret_dic['picture_url'] = get_url_qiniu(img_key)
         ret_dic['video_url'] = get_url_qiniu(video_key)
         ret_dicts.append(ret_dic)
-    ret_dict['course'] = ret_dicts
+    ret_dict['data'] = ret_dicts
 
     return jsonify(ret_dict)
 
