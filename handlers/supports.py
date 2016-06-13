@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
+import uuid
 from flask import request, jsonify
 from handlers import support
 from mongoengine import DoesNotExist
 from s3.get_url import get_url_qiniu
-from test_res import task5, task6, task7, task8, task9
+from test_res import task5, task6, task7, task8, task9, task10
 from utils.extmodels.ext_models import Course, OauthUser, Collection, Comment, Post
 from utils.obj2dict import obj2dict
 from utils.util import test_api, handle_request_post_arguments
@@ -125,5 +126,26 @@ def list_question():
                                         'c_time'))
         course_list.append(obj_dict)
     ret_dict['data'] = course_list
+
+    return jsonify(ret_dict)
+
+
+@support.route('/post_new', methods=['POST', 'GET'])
+def post_new():
+    test_api(request)
+
+    args_list = ['userId', 'content', 'label', 'postImgs', 'postVoice']
+    args = handle_request_post_arguments(request, args_list)
+    ret_dict = task10
+
+    try:
+        o_user = OauthUser.objects.get(user_id=args['userId'])
+    except DoesNotExist as e:
+        ret_dict['status'] = 0
+        ret_dict['info'] = 'argument is DoesNotExist ' + e.message
+
+    if ret_dict['status'] == 1:
+        Post(user=o_user, post=args['content'], post_id=str(uuid.uuid1()), post_img=args['postImgs'],
+             post_voice=args['postVoice']).save()
 
     return jsonify(ret_dict)

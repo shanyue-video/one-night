@@ -149,17 +149,6 @@ task10 = {
     "status": 1,  # 状态标识 1表示成功，0表示失败
     "info": u"正常",  # 状态说明
     "data": [
-        {
-            "postId": "",  # 发帖人id
-            "postName": "",  # 发帖人name
-            # "postImg": "",  # 发帖人头像
-            "postTime": "",  # 发帖时间
-            "postContent": "",  # 发帖内容
-            "postImg": "",  # 发帖图片多张图片以分号分隔
-            "likeNum": "12",  # 点赞数
-            "browseNum": "16",  # 浏览量
-            "commentNum": "20",  # 评论数
-        }
     ]
 }
 

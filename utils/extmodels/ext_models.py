@@ -52,8 +52,9 @@ class Post(engine.Document):  # 对应question
     course = engine.ReferenceField(Course)  # 应该是1v多
     user = engine.ReferenceField(OauthUser)
     post = engine.StringField(required=False, max_length=20, verbose_name=u'帖子内容', help_text=u'帖子内容')
-    post_id = engine.StringField(required=False, max_length=20, verbose_name=u'帖子id', help_text=u'帖子id')
+    post_id = engine.StringField(required=False, max_length=200, verbose_name=u'帖子id', help_text=u'帖子id')
     post_img = engine.StringField(required=False, max_length=20, verbose_name=u'帖子图片', help_text=u'帖子图片')
+    post_voice = engine.StringField(required=False, max_length=20, verbose_name=u'帖子图片', help_text=u'帖子图片')
     like_count = engine.StringField(required=False, max_length=20, verbose_name=u'帖子点赞数', help_text=u'帖子点赞数')
     browse_count = engine.StringField(required=False, max_length=20, verbose_name=u'帖子浏览量', help_text=u'帖子浏览量')
     comment_count = engine.StringField(required=False, max_length=20, verbose_name=u'帖子评论量', help_text=u'帖子评论量')
