@@ -3,8 +3,8 @@ from flask import request, jsonify
 from handlers import support
 from mongoengine import DoesNotExist
 from s3.get_url import get_url_qiniu
-from test_res import task5, task6
-from utils.extmodels.ext_models import Course, OauthUser, Collection
+from test_res import task5, task6, task7, task8
+from utils.extmodels.ext_models import Course, OauthUser, Collection, Comment
 from utils.obj2dict import obj2dict
 from utils.util import test_api, handle_request_post_arguments
 
@@ -65,7 +65,7 @@ def download():
 
     args_list = ['courseId']
     args = handle_request_post_arguments(request, args_list)
-    ret_dict = task6
+    ret_dict = task7
 
     try:
         o_course = Course.objects.get(class_uuid=args['courseId'])
@@ -84,5 +84,26 @@ def download():
         ret_dic['picture_url'] = get_url_qiniu(img_key)
         ret_dic['video_url'] = get_url_qiniu(video_key)
         ret_dict['data'] = ret_dic
+
+    return jsonify(ret_dict)
+
+
+@support.route('/comment', methods=['POST', 'GET'])
+def comment():
+    test_api(request)
+
+    args_list = ['courseId', 'userId', 'comment_content']
+    args = handle_request_post_arguments(request, args_list)
+    ret_dict = task8
+
+    try:
+        o_course = Course.objects.get(class_uuid=args['courseId'])
+        o_user = OauthUser.objects.get(user_id=args['userId'])
+    except DoesNotExist as e:
+        ret_dict['status'] = 0
+        ret_dict['info'] = 'argument is DoesNotExist ' + e.message
+
+    if ret_dict['status'] == 1:
+        Comment(course=o_course, user=o_user, comment=args['comment_content']).save()
 
     return jsonify(ret_dict)
