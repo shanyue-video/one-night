@@ -482,7 +482,7 @@ task23 = {
         {
             'api': 'http://api.oforever.net:%s/api/download' % port,
             '7type': 'POST',
-            'args': u'classId  和上一个接口的chapter一样'
+            'args': u'courseId  和上一个接口的chapter一样'
         },
         {
             'api': 'http://api.oforever.net:%s/api/comment' % port,
