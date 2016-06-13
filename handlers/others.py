@@ -5,7 +5,7 @@ from mongoengine import ValidationError, DoesNotExist
 from mongoengine.queryset import Q
 from s3.get_url import get_url_qiniu
 from test_res import task22, task1, task2, task3
-from utils.extmodels.ext_models import Feedback, OauthUser
+from utils.extmodels.ext_models import Feedback, OauthUser, Course
 from utils.models import Upload
 from utils.obj2dict import obj2dict
 from utils.util import test_api, handle_request_post_arguments
@@ -46,11 +46,13 @@ def get_carousel():
 
     ret_dict = task1
 
-    obs = Upload.objects
+    cobs = Course.objects
     course_list = []
-    for o in obs:
-        obj_dict = obj2dict(o, include=('picture', 'video', 'course_name', 'class_name',
-                                        'teacher_name', 'class_summary', 'class_time', 'is_over'))
+    for o in cobs:
+        uo = o['base_info']
+        obj_dict = obj2dict(o, uo, include=('picture', 'video', 'course_name', 'class_name', 'class_uuid',
+                                            'browse_count', 'download_count', 'course_type',
+                                            'teacher_name', 'class_summary', 'class_time', 'is_over'))
         img_key = 'img-' + obj_dict['class_name'] + '.' + obj_dict['picture'][:-14].split('.')[-1]
         video_key = 'video-' + obj_dict['class_name'] + '.' + obj_dict['video'][:-14].split('.')[-1]
         obj_dict['picture_url'] = get_url_qiniu(img_key)

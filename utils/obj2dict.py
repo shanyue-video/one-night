@@ -15,6 +15,9 @@ def obj2dict(obj, obj2=None, include=None):
 
     for i in base_dir:
         if i in include_tuple:
-            ret_dict[i] = getattr(obj, i)
+            if i in dir(obj):
+                ret_dict[i] = getattr(obj, i)
+            if i in dir(obj2):
+                ret_dict[i] = getattr(obj2, i)
 
     return ret_dict

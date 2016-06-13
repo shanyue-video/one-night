@@ -26,8 +26,8 @@ class OauthUser(engine.Document):
 
 class Course(engine.Document):
     base_info = engine.ReferenceField(Upload)  # 应该是一一对应关系吧
-    class_uuid = engine.StringField(required=True, max_length=20, unique=True, verbose_name=u'课程名称',
-                                    help_text=u'不超过20个字符串，且唯一，建议按照一定格式填写，例如"课件名称-课程名称-1"')
+    class_uuid = engine.StringField(required=True, max_length=200, unique=True, verbose_name=u'课程uuid',
+                                    help_text=u'生成的唯一标识符')
     browse_count = engine.StringField(required=False, max_length=20, verbose_name=u'浏览量',
                                       help_text=u'浏览量')
     download_count = engine.StringField(required=False, max_length=20, verbose_name=u'下载量',

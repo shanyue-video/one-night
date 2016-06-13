@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import hashlib
 import time
+import uuid
 
 import os
 from utils.conf import UPLOAD_FOLDER
@@ -8,6 +9,7 @@ from flask import request, render_template, session
 import flask
 from handlers import view
 from mongoengine import DoesNotExist, NotUniqueError
+from utils.extmodels.ext_models import Course
 from utils.models import UserForm, User, UploadForm, Upload
 from utils.util import acquire_admin
 
@@ -78,6 +80,8 @@ def upload_validate():
     except NotUniqueError as e:
         print e.message
         return flask.abort(501)
+
+    Course(base_info=upload_obj, class_uuid=str(uuid.uuid1())).save()
 
     if not form.validate_on_submit():
         return flask.abort(403)

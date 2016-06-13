@@ -2,6 +2,7 @@
 from flask import jsonify
 from handlers import api
 from handlers.others import get_carousel, search_course, classification_course, feed_back
+from handlers.supports import collection
 from handlers.users import user_info, save_user_info
 from test_res import task1, task2, task3, task4, task5, task6, task7, task8, task9, task10, task11, task12, task13, \
     task14, task15, task16, task17, task18, task19, task20, task21, task22, task23
@@ -33,6 +34,7 @@ def course_list():
 
 
 @api.route('/api/collection', methods=['POST'])
+@use_api(collection)
 def collection():
     return jsonify(task5)
 

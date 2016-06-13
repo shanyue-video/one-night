@@ -44,8 +44,8 @@ class Upload(engine.Document):
     is_over = engine.BooleanField(default=False, verbose_name=u'是否完结')
     user = engine.ReferenceField(User)
 
-    def __unicode__(self):
-        return self.class_name
+    # def __unicode__(self):
+    #     return self.class_name
 
 
 UserForm = model_form(User, exclude=('role',))
