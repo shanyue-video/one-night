@@ -3,8 +3,8 @@ from flask import request, jsonify
 from handlers import support
 from mongoengine import DoesNotExist
 from s3.get_url import get_url_qiniu
-from test_res import task5, task6, task7, task8
-from utils.extmodels.ext_models import Course, OauthUser, Collection, Comment
+from test_res import task5, task6, task7, task8, task9
+from utils.extmodels.ext_models import Course, OauthUser, Collection, Comment, Post
 from utils.obj2dict import obj2dict
 from utils.util import test_api, handle_request_post_arguments
 
@@ -105,5 +105,25 @@ def comment():
 
     if ret_dict['status'] == 1:
         Comment(course=o_course, user=o_user, comment=args['comment_content']).save()
+
+    return jsonify(ret_dict)
+
+
+@support.route('/list_question', methods=['POST', 'GET'])
+def list_question():
+    test_api(request)
+
+    # args_list = []
+    # args = handle_request_post_arguments(request, args_list)
+    ret_dict = task9
+
+    p_obs = Post.objects
+    course_list = []
+    for o in p_obs:
+        obj_dict = obj2dict(o, include=('course', 'user', 'post', 'post_id', 'post_img',
+                                        'like_count', 'browse_count', 'comment_count',
+                                        'c_time'))
+        course_list.append(obj_dict)
+    ret_dict['data'] = course_list
 
     return jsonify(ret_dict)
