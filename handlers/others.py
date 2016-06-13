@@ -99,11 +99,13 @@ def classification_course():
 
     ret_dict = task3
 
-    obs = Upload.objects
+    cobs = Course.objects
     course_list = []
-    for o in obs:
-        obj_dict = obj2dict(o, include=('picture', 'video', 'course_name', 'class_name',
-                                        'teacher_name', 'class_summary', 'class_time', 'is_over'))
+    for o in cobs:
+        uo = o['base_info']
+        obj_dict = obj2dict(o, uo, include=('picture', 'video', 'course_name', 'class_name', 'class_uuid',
+                                            'browse_count', 'download_count', 'course_type',
+                                            'teacher_name', 'class_summary', 'class_time', 'is_over'))
         img_key = 'img-' + obj_dict['class_name'] + '.' + obj_dict['picture'][:-14].split('.')[-1]
         video_key = 'video-' + obj_dict['class_name'] + '.' + obj_dict['video'][:-14].split('.')[-1]
         obj_dict['picture_url'] = get_url_qiniu(img_key)
