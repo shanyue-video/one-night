@@ -4,7 +4,7 @@ from handlers import other
 from mongoengine import ValidationError, DoesNotExist
 from mongoengine.queryset import Q
 from s3.get_url import get_url_qiniu
-from test_res import task22, task1, task2, task3, task18, task19, task20
+from test_res import task22, task1, task2, task3, task18, task19, task20, task21
 from utils.extmodels.ext_models import Feedback, OauthUser, Course, Post
 from utils.models import Upload
 from utils.obj2dict import obj2dict
@@ -160,5 +160,29 @@ def my_question():
                                        'post_img', 'post_voice', 'like_count', 'browse_count'))
             re_list.append(t_o)
         ret_dict['data'] = re_list
+
+    return jsonify(ret_dict)
+
+
+@other.route('/del_post', methods=['POST', 'GET'])
+def del_post():
+    test_api(request)
+
+    args_list = ['userId', 'postId']
+    args = handle_request_post_arguments(request, args_list)
+    ret_dict = task21
+
+    try:
+        o_user = OauthUser.objects.get(user_id=args['userId'])
+        o_post = Post.objects.get(user=o_user, post_id=args['postId'])
+    except DoesNotExist as e:
+        ret_dict['status'] = 0
+        ret_dict['info'] = 'argument is DoesNotExist ' + e.message
+
+    if ret_dict['status'] == 1:
+        p_o = obj2dict(o_post, include=('course', 'user', 'post', 'post_id', 'comment_count', 'c_time',
+                                        'post_img', 'post_voice', 'like_count', 'browse_count'))
+        ret_dict['data'] = [p_o]
+        o_post.delete()
 
     return jsonify(ret_dict)

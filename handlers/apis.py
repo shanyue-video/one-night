@@ -2,7 +2,7 @@
 from flask import jsonify
 from handlers import api
 from handlers.others import get_carousel, search_course, classification_course, feed_back, get_ranking, get_per_detail, \
-    my_question
+    my_question, del_post
 from handlers.supports import collection, chapter, download, comment, list_question, post_new, search_question, \
     add_look_num, add_like, question_detail
 from handlers.users import user_info, save_user_info
@@ -133,6 +133,7 @@ def my_question():
 
 
 @api.route('/api/delPost', methods=['POST'])
+@use_api(del_post)
 def del_post():
     return jsonify(task21)
 

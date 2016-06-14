@@ -398,7 +398,7 @@ task21 = {
     "info": u"正常",  # 状态说明
     "data": [
         {
-            "  postId": "",  # 帖子id
+            "postId": "",  # 帖子id
             "userId": "",  # 发帖人id
             "postName": "",  # 帖子name
             "userName": "",  # 发帖人姓名
