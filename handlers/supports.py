@@ -5,7 +5,7 @@ from handlers import support
 from mongoengine import DoesNotExist
 from mongoengine.queryset import Q
 from s3.get_url import get_url_qiniu
-from test_res import task5, task6, task7, task8, task9, task10, task11, task12
+from test_res import task5, task6, task7, task8, task9, task10, task11, task12, task13
 from utils.extmodels.ext_models import Course, OauthUser, Collection, Comment, Post, PostLikeLog
 from utils.obj2dict import obj2dict
 from utils.util import test_api, handle_request_post_arguments
@@ -208,7 +208,7 @@ def add_like():
 
     args_list = ['postId', 'userId', 'cancel']
     args = handle_request_post_arguments(request, args_list)
-    ret_dict = task12
+    ret_dict = task13
 
     try:
         cancel = str(int(args.get('cancel', '0')))
