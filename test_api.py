@@ -69,7 +69,7 @@ task23 = {
         {
             'api': 'http://api.oforever.net:%s/api/addLike' % port,
             '13type': 'POST',
-            'args': 'postId, userId, cancel'
+            'args': 'postId, userId, cancel #cancel为0时表示赞,为1时表示取消赞'
         },
         {
             'api': 'http://api.oforever.net:%s/api/QuestionDetail' % port,

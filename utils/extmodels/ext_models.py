@@ -64,6 +64,13 @@ class Post(engine.Document):  # 对应question
         return self.post
 
 
+class PostLikeLog(engine.Document):
+    post = engine.ReferenceField(Post)
+    user = engine.ReferenceField(OauthUser)
+    cancel = engine.StringField(required=False, max_length=20, verbose_name=u'点赞状态', help_text=u'是否取消点赞')
+    c_time = engine.DateTimeField(default=datetime.now, verbose_name=u'创建时间')
+
+
 class Comment(engine.Document):
     course = engine.ReferenceField(Course)  # 应该是1v多
     user = engine.ReferenceField(OauthUser)
