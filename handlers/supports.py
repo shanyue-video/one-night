@@ -3,8 +3,9 @@ import uuid
 from flask import request, jsonify
 from handlers import support
 from mongoengine import DoesNotExist
+from mongoengine.queryset import Q
 from s3.get_url import get_url_qiniu
-from test_res import task5, task6, task7, task8, task9, task10
+from test_res import task5, task6, task7, task8, task9, task10, task11
 from utils.extmodels.ext_models import Course, OauthUser, Collection, Comment, Post
 from utils.obj2dict import obj2dict
 from utils.util import test_api, handle_request_post_arguments
@@ -147,5 +148,29 @@ def post_new():
     if ret_dict['status'] == 1:
         Post(user=o_user, post=args['content'], post_id=str(uuid.uuid1()), post_img=args['postImgs'],
              post_voice=args['postVoice']).save()
+
+    return jsonify(ret_dict)
+
+
+@support.route('/search_question', methods=['POST', 'GET'])
+def search_question():
+    test_api(request)
+
+    args_list = ['keyword']
+    args = handle_request_post_arguments(request, args_list)
+    ret_dict = task11
+
+    q = args.get('keyword', '')
+    if not q == '':
+        obs = Post.objects(Q(post__icontains=q) | Q(post_id__icontains=q))
+    else:
+        obs = Post.objects()
+    ret_dicts = []
+
+    for o in obs:
+        ret_dic = obj2dict(o, include=('course', 'user', 'post', 'post_id', 'comment_count', 'c_time',
+                                       'post_img', 'post_voice', 'like_count', 'browse_count'))
+        ret_dicts.append(ret_dic)
+    ret_dict['data'] = ret_dicts
 
     return jsonify(ret_dict)
