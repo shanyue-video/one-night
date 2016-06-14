@@ -2,7 +2,8 @@
 from flask import jsonify
 from handlers import api
 from handlers.others import get_carousel, search_course, classification_course, feed_back
-from handlers.supports import collection, chapter, download, comment, list_question, post_new, search_question
+from handlers.supports import collection, chapter, download, comment, list_question, post_new, search_question, \
+    add_look_num
 from handlers.users import user_info, save_user_info
 from test_api import task23
 from test_res import task1, task2, task3, task4, task5, task6, task7, task8, task9, task10, task11, task12, task13, \
@@ -77,6 +78,7 @@ def search_question():
 
 
 @api.route('/api/addlookNum', methods=['POST'])
+@use_api(add_look_num)
 def add_look_num():
     return jsonify(task12)
 

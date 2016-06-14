@@ -64,7 +64,7 @@ task23 = {
         {
             'api': 'http://api.oforever.net:%s/api/addlookNum' % port,
             '12type': 'POST',
-            'args': 'postId, userId'
+            'args': 'postId, # 暂时逻辑上不加userId'
         },
         {
             'api': 'http://api.oforever.net:%s/api/addLike' % port,

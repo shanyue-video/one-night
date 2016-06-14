@@ -5,7 +5,7 @@ from handlers import support
 from mongoengine import DoesNotExist
 from mongoengine.queryset import Q
 from s3.get_url import get_url_qiniu
-from test_res import task5, task6, task7, task8, task9, task10, task11
+from test_res import task5, task6, task7, task8, task9, task10, task11, task12
 from utils.extmodels.ext_models import Course, OauthUser, Collection, Comment, Post
 from utils.obj2dict import obj2dict
 from utils.util import test_api, handle_request_post_arguments
@@ -172,5 +172,31 @@ def search_question():
                                        'post_img', 'post_voice', 'like_count', 'browse_count'))
         ret_dicts.append(ret_dic)
     ret_dict['data'] = ret_dicts
+
+    return jsonify(ret_dict)
+
+
+@support.route('/add_look_num', methods=['POST', 'GET'])
+def add_look_num():
+    test_api(request)
+
+    # args_list = ['postId', 'userId']
+    args_list = ['postId']
+    args = handle_request_post_arguments(request, args_list)
+    ret_dict = task12
+
+    try:
+        o_post = Post.objects.get(post_id=args['postId'])
+    except DoesNotExist as e:
+        ret_dict['status'] = 0
+        ret_dict['info'] = 'argument is DoesNotExist ' + e.message
+
+    if ret_dict['status'] == 1:
+        if not o_post.browse_count:
+            o_post.browse_count = '1'
+            o_post.save()
+        else:
+            o_post.browse_count = str(int(o_post.browse_count) + 1)
+            o_post.save()
 
     return jsonify(ret_dict)
