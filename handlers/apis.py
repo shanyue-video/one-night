@@ -96,6 +96,7 @@ def question_detail():
 
 
 @api.route('/api/Addcomment', methods=['POST'])
+@use_api(comment)
 def add_comment():
     return jsonify(task15)
 
