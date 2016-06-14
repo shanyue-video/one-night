@@ -95,22 +95,22 @@ task23 = {
         {
             'api': 'http://api.oforever.net:%s/api/Getranking' % port,
             '18type': 'POST',
-            'args': 'userid   # 上传时长的接口还未设计'
+            'args': 'userId   # 上传时长的接口还未设计'
         },
         {
             'api': 'http://api.oforever.net:%s/api/GetPerDetail' % port,
             '19type': 'POST',
-            'args': 'userid   # 上传时长的接口还未设计'
+            'args': 'userId   # 上传时长的接口还未设计'
         },
         {
             'api': 'http://api.oforever.net:%s/api/myQuestion' % port,
             '20type': 'POST',
-            'args': 'userid'
+            'args': 'userId'
         },
         {
             'api': 'http://api.oforever.net:%s/api/delPost' % port,
             '21type': 'POST',
-            'args': 'userid, postId'
+            'args': 'userId, postId'
         },
         {
             'api': 'http://api.oforever.net:%s/api/Feedback' % port,

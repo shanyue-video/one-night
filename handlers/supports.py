@@ -249,7 +249,7 @@ def question_detail():
     ret_dict = task14
 
     try:
-        o_post = Post.objects.get(post_id=args['postId'])
+        o_post = Post.objects(post_id=args['postId'])
     except DoesNotExist as e:
         ret_dict['status'] = 0
         ret_dict['info'] = 'argument is DoesNotExist ' + e.message
