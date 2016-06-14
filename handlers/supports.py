@@ -5,7 +5,7 @@ from handlers import support
 from mongoengine import DoesNotExist
 from mongoengine.queryset import Q
 from s3.get_url import get_url_qiniu
-from test_res import task5, task6, task7, task8, task9, task10, task11, task12, task13
+from test_res import task5, task6, task7, task8, task9, task10, task11, task12, task13, task14
 from utils.extmodels.ext_models import Course, OauthUser, Collection, Comment, Post, PostLikeLog
 from utils.obj2dict import obj2dict
 from utils.util import test_api, handle_request_post_arguments
@@ -56,7 +56,7 @@ def chapter():
         video_key = 'video-' + ret_dic['class_name'] + '.' + ret_dic['video'][:-14].split('.')[-1]
         ret_dic['picture_url'] = get_url_qiniu(img_key)
         ret_dic['video_url'] = get_url_qiniu(video_key)
-        ret_dict['data'] = ret_dic
+        ret_dict['data'] = [ret_dic]
 
     return jsonify(ret_dict)
 
@@ -85,7 +85,7 @@ def download():
         video_key = 'video-' + ret_dic['class_name'] + '.' + ret_dic['video'][:-14].split('.')[-1]
         ret_dic['picture_url'] = get_url_qiniu(img_key)
         ret_dic['video_url'] = get_url_qiniu(video_key)
-        ret_dict['data'] = ret_dic
+        ret_dict['data'] = [ret_dic]
 
     return jsonify(ret_dict)
 
@@ -236,5 +236,27 @@ def add_like():
             if o_post.like_count:
                 o_post.like_count = str(int(o_post.like_count) - 1)
                 o_post.save()
+
+    return jsonify(ret_dict)
+
+
+@support.route('/question_detail', methods=['POST', 'GET'])
+def question_detail():
+    test_api(request)
+
+    args_list = ['postId']
+    args = handle_request_post_arguments(request, args_list)
+    ret_dict = task14
+
+    try:
+        o_post = Post.objects.get(post_id=args['postId'])
+    except DoesNotExist as e:
+        ret_dict['status'] = 0
+        ret_dict['info'] = 'argument is DoesNotExist ' + e.message
+
+    if ret_dict['status'] == 1:
+        ret_dic = obj2dict(o_post, include=('course', 'user', 'post', 'post_id', 'comment_count', 'c_time',
+                                            'post_img', 'post_voice', 'like_count', 'browse_count'))
+        ret_dict['data'] = [ret_dic]
 
     return jsonify(ret_dict)

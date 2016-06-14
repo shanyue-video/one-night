@@ -23,8 +23,8 @@ def user_info():
         ret_dict['info'] = 'argument is DoesNotExist ' + e.message
 
     if ret_dict['status'] == 1:
-        ret_dict['data'] = obj2dict(o_user, include=('user_id', 'user_name', 'platform_name',
-                                                     'nick_name', 'icon_url', 'access_token', 'role'))
+        ret_dict['data'] = [obj2dict(o_user, include=('user_id', 'user_name', 'platform_name',
+                                                      'nick_name', 'icon_url', 'access_token', 'role'))]
 
     return jsonify(ret_dict)
 
