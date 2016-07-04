@@ -153,20 +153,24 @@ def post_new():
     post_id = str(uuid.uuid1())
 
     # 内置bug 文件名 不能路径含有 '/'
-    images = '/'.join([i.filename for i in _images])
-    voices = '/'.join([i.filename for i in _voices])
-    args['postImgs'] = 'image-' + images + '-' + post_id
-    args['postVoice'] = 'voice-' + voices + '-' + post_id
+    # images = '/'.join([i.filename for i in _images])
+    # voices = '/'.join([i.filename for i in _voices])
+    # args['postImgs'] = 'image-' + images + '-' + post_id if images else ''
+    images = []
+    # args['postVoice'] = 'voice-' + voices + '-' + post_id if voices else ''
+    voices = []
 
     for i in _images:
-        i.save(os.path.join(UPLOAD_FOLDER, i.filename + '-' + post_id + '_tmp'))
+        i.save(os.path.join(UPLOAD_FOLDER, i.filename + '_' + post_id + '_tmp'))
+        images.append(get_url_qiniu(i.filename + '_' + post_id))
 
     for i in _voices:
-        i.save(os.path.join(UPLOAD_FOLDER, i.filename + '-' + post_id + '_tmp'))
+        i.save(os.path.join(UPLOAD_FOLDER, i.filename + '_' + post_id + '_tmp'))
+        voices.append(get_url_qiniu(i.filename + '_' + post_id))
 
     if ret_dict['status'] == 1:
-        Post(user=o_user, post=args['content'], post_id=post_id, post_img=args['postImgs'],
-             post_voice=args['postVoice']).save()
+        Post(user=o_user, post=args['content'], post_id=post_id, post_img=images,
+             post_voice=voices).save()
 
     return jsonify(ret_dict)
 
