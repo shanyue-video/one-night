@@ -145,6 +145,9 @@ def post_new():
         ret_dict['status'] = 0
         ret_dict['info'] = 'argument is DoesNotExist ' + e.message
 
+    args['postImgs'] = 'test'
+    args['postVoice'] = 'test'
+
     if ret_dict['status'] == 1:
         Post(user=o_user, post=args['content'], post_id=str(uuid.uuid1()), post_img=args['postImgs'],
              post_voice=args['postVoice']).save()
