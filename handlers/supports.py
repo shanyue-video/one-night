@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 import uuid
 from flask import request, jsonify
 from handlers import support
@@ -6,6 +7,7 @@ from mongoengine import DoesNotExist
 from mongoengine.queryset import Q
 from s3.get_url import get_url_qiniu
 from test_res import task5, task6, task7, task8, task9, task10, task11, task12, task13, task14
+from utils.conf import UPLOAD_FOLDER
 from utils.extmodels.ext_models import Course, OauthUser, Collection, Comment, Post, PostLikeLog
 from utils.obj2dict import obj2dict
 from utils.util import test_api, handle_request_post_arguments
@@ -135,7 +137,10 @@ def list_question():
 def post_new():
     test_api(request)
 
-    args_list = ['userId', 'content', 'label', 'postImgs', 'postVoice']
+    _images = request.files.getlist('image')
+    _voices = request.files.getlist('voice')
+
+    args_list = ['userId', 'content', 'label']
     args = handle_request_post_arguments(request, args_list)
     ret_dict = task10
 
@@ -145,11 +150,22 @@ def post_new():
         ret_dict['status'] = 0
         ret_dict['info'] = 'argument is DoesNotExist ' + e.message
 
-    args['postImgs'] = 'test'
-    args['postVoice'] = 'test'
+    post_id = str(uuid.uuid1())
+
+    # 内置bug 文件名 不能路径含有 '/'
+    images = '/'.join([i.filename for i in _images])
+    voices = '/'.join([i.filename for i in _voices])
+    args['postImgs'] = 'image-' + images + '-' + post_id
+    args['postVoice'] = 'voice-' + voices + '-' + post_id
+
+    for i in _images:
+        i.save(os.path.join(UPLOAD_FOLDER, i.filename + '-' + post_id + '_tmp'))
+
+    for i in _voices:
+        i.save(os.path.join(UPLOAD_FOLDER, i.filename + '-' + post_id + '_tmp'))
 
     if ret_dict['status'] == 1:
-        Post(user=o_user, post=args['content'], post_id=str(uuid.uuid1()), post_img=args['postImgs'],
+        Post(user=o_user, post=args['content'], post_id=post_id, post_img=args['postImgs'],
              post_voice=args['postVoice']).save()
 
     return jsonify(ret_dict)
