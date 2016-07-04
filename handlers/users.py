@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import request, jsonify
 from handlers import user
-from mongoengine import ValidationError, DoesNotExist
+from mongoengine import ValidationError, DoesNotExist, NotUniqueError
 from test_res import task17, task16
 from utils.extmodels.ext_models import OauthUser
 from utils.obj2dict import obj2dict
@@ -42,9 +42,12 @@ def save_user_info():
         setattr(o_user, k, args[k])
     try:
         o_user.save()
-        ret_dict['id'] = o_user.id
+        ret_dict['id'] = o_user['user_id']
     except ValidationError as e:
         ret_dict['status'] = 0
         ret_dict['info'] = 'argument is ValidationError ' + e.message
+    except NotUniqueError as e:
+        ret_dict['status'] = 0
+        ret_dict['info'] = 'the userid must be unique ' + e.message
 
     return jsonify(ret_dict)
