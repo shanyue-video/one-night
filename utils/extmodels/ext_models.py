@@ -4,7 +4,7 @@ from utils.models import engine, Upload
 
 
 class OauthUser(engine.Document):
-    user_id = engine.StringField(required=True, max_length=20, unique=True, verbose_name=u'第三方id',
+    user_id = engine.StringField(required=True, max_length=200, unique=True, verbose_name=u'第三方id',
                                  help_text=u'第三方用户id, 必须的')
     user_name = engine.StringField(required=True, max_length=20, unique=False, verbose_name=u'课程名称',
                                    help_text=u'第三方用户名,必填')
