@@ -54,7 +54,7 @@ task23 = {
         {
             'api': 'http://api.oforever.net:%s/api/PostNew' % port,
             '10type': 'POST',
-            'args': 'userId, content, post_title, label, postImgs, postVoice   #多图片参数 需要再对'
+            'args': 'userId, content, post_title, label, image, voice'  # (image, voice 都是文件名)
         },
         {
             'api': 'http://api.oforever.net:%s/api/searchQuestion' % port,
