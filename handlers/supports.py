@@ -140,7 +140,7 @@ def post_new():
     _images = request.files.getlist('image')
     _voices = request.files.getlist('voice')
 
-    args_list = ['userId', 'content', 'label']
+    args_list = ['userId', 'content', 'label', 'post_title']
     args = handle_request_post_arguments(request, args_list)
     ret_dict = task10
 
@@ -166,8 +166,8 @@ def post_new():
         voices.append(get_url_qiniu(file_id))
 
     if ret_dict['status'] == 1:
-        Post(user=o_user, post=args['content'], post_id=post_id, post_img=images,
-             post_voice=voices).save()
+        Post(user=o_user, post=args['content'], label=args['label'], post_title=args['post_title'],
+             post_id=post_id, post_img=images, post_voice=voices).save()
 
     return jsonify(ret_dict)
 
