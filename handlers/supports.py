@@ -124,9 +124,10 @@ def list_question():
     p_obs = Post.objects
     course_list = []
     for o in p_obs:
-        obj_dict = obj2dict(o, include=('course', 'user', 'post', 'post_id', 'post_img',
+        obj_dict = obj2dict(o, include=('course', 'post_title', 'label', 'user', 'post', 'post_id', 'post_img',
                                         'like_count', 'browse_count', 'comment_count',
                                         'c_time'))
+        obj_dict.update(post=obj_dict.pop('post'))
         course_list.append(obj_dict)
     ret_dict['data'] = course_list
 
