@@ -54,6 +54,7 @@ class Post(engine.Document):  # 对应question
     post_title = engine.StringField(required=False, max_length=2000, verbose_name=u'帖子标题', help_text=u'帖子标题')
     post = engine.StringField(required=False, max_length=2000, verbose_name=u'帖子内容', help_text=u'帖子内容')
     post_id = engine.StringField(required=False, max_length=200, verbose_name=u'帖子id', help_text=u'帖子id')
+    label = engine.StringField(required=False, max_length=200, verbose_name=u'帖子标签', help_text=u'帖子标签')
     like_count = engine.StringField(required=False, max_length=20, verbose_name=u'帖子点赞数', help_text=u'帖子点赞数')
     browse_count = engine.StringField(required=False, max_length=20, verbose_name=u'帖子浏览量', help_text=u'帖子浏览量')
     comment_count = engine.StringField(required=False, max_length=20, verbose_name=u'帖子评论量', help_text=u'帖子评论量')
