@@ -90,7 +90,7 @@ task23 = {
         {
             'api': 'http://api.oforever.net:%s/api/Saveuserinfo' % port,
             '17type': 'POST',
-            'args': 'user_id, user_name, platform_name, nick_name, icon_url, access_token'
+            'args': 'user_id, user_name, platform_name, nick_name, icon_url, access_token'  # code 返回2 时 表示已存在
         },
         {
             'api': 'http://api.oforever.net:%s/api/Getranking' % port,

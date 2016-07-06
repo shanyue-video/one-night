@@ -47,7 +47,7 @@ def save_user_info():
         ret_dict['status'] = 0
         ret_dict['info'] = 'argument is ValidationError ' + e.message
     except NotUniqueError as e:
-        ret_dict['status'] = 0
+        ret_dict['status'] = 2
         ret_dict['info'] = 'the userid must be unique ' + e.message
 
     return jsonify(ret_dict)
