@@ -10,5 +10,5 @@ proc_name = 'gunicorn.pid'
 path = os.path.abspath(os.path.join(__file__, os.path.pardir))
 pidfile = '%s/logs/gunicorn.log' % path
 loglevel = 'debug'
-errorlog = '%s/logs/%s_error.log' % (path, __file__)
-accesslog = '%s/logs/%s_access.log' % (path, __file__)
+errorlog = '%s/logs/%s_error.log' % (path, 'one')
+accesslog = '%s/logs/%s_access.log' % (path, 'one')
