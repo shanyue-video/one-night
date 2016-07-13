@@ -86,3 +86,8 @@ def upload_validate():
     if not form.validate_on_submit():
         return flask.abort(403)
     return flask.redirect(flask.url_for('view.upload_success'))
+
+
+@view.route('/editor')
+def editor():
+    return render_template('editor.html')
