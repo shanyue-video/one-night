@@ -10,6 +10,7 @@
 <div class="container">
     <div id="target"></div>
 </div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
@@ -47,7 +48,19 @@
           this.toggleInlineStyle = (style) => this._toggleInlineStyle(style);
 
           this.logState2 = () => console.log(JSON.stringify(this.state.editorState.getCurrentContent().toJS()).toString());
-          this.logState = () => console.log(JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent())).toString());
+          this.logState = () => {
+              //const myContentState = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent())).toString();
+              const myContentState = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
+              console.log(myContentState);
+              console.log('over');
+              $.post(
+                  '/react_ajax',
+                  myContentState,
+                  function(result){
+                    console.log('hello');
+                  }
+              );
+          };
         }
 
         _handleKeyCommand(command) {
@@ -118,8 +131,8 @@
                 style={styleMap.button}
                 type="button"
                 value="Log State"
-              />
-            </div>
+            />
+          </div>
           );
         }
       }

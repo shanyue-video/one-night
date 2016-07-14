@@ -7,6 +7,7 @@ import os
 from utils.conf import UPLOAD_FOLDER
 from flask import request, render_template, session
 import flask
+from flask import jsonify
 from handlers import view
 from mongoengine import DoesNotExist, NotUniqueError
 from utils.extmodels.ext_models import Course
@@ -91,3 +92,10 @@ def upload_validate():
 @view.route('/editor')
 def editor():
     return render_template('editor.html')
+
+
+@view.route('/react_ajax', methods=['POST'])
+def react_ajax():
+    r = request
+    print '!!!', r.form.to_dict()
+    return jsonify({'a': 1})
