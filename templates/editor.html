@@ -25,6 +25,7 @@
         Editor,
         EditorState,
         RichUtils,
+        convertToRaw,
         DefaultDraftBlockRenderMap,
       } = Draft;
 
@@ -44,6 +45,9 @@
           this.handleKeyCommand = (command) => this._handleKeyCommand(command);
           this.toggleBlockType = (type) => this._toggleBlockType(type);
           this.toggleInlineStyle = (style) => this._toggleInlineStyle(style);
+
+          this.logState2 = () => console.log(JSON.stringify(this.state.editorState.getCurrentContent().toJS()).toString());
+          this.logState = () => console.log(JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent())).toString());
         }
 
         _handleKeyCommand(command) {
@@ -86,6 +90,7 @@
           }
 
           return (
+          <div>
             <div className="RichEditor-root">
               <BlockStyleControls
                 editorState={editorState}
@@ -102,11 +107,18 @@
                   editorState={editorState}
                   handleKeyCommand={this.handleKeyCommand}
                   onChange={this.onChange}
-                  placeholder="Tell a story..."
+                  placeholder="填写内容..."
                   ref="editor"
                   spellCheck={true}
                 />
               </div>
+            </div>
+            <input
+                onClick={this.logState}
+                style={styleMap.button}
+                type="button"
+                value="Log State"
+              />
             </div>
           );
         }
@@ -118,6 +130,10 @@
           fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
           fontSize: 16,
           padding: 2,
+        },
+        button: {
+          marginTop: 10,
+          textAlign: 'center',
         },
       };
 
@@ -188,10 +204,10 @@
       };
 
       var INLINE_STYLES = [
-        {label: 'Bold', style: 'BOLD'},
-        {label: 'Italic', style: 'ITALIC'},
-        {label: 'Underline', style: 'UNDERLINE'},
-        {label: 'Monospace', style: 'CODE'},
+        {label: '加粗', style: 'BOLD'},
+        {label: '斜体', style: 'ITALIC'},
+        {label: '下划线', style: 'UNDERLINE'},
+        {label: '代码加亮', style: 'CODE'},
       ];
 
       const InlineStyleControls = (props) => {
