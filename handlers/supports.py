@@ -271,6 +271,7 @@ def question_detail():
 
     try:
         o_post = Post.objects(post_id=args['postId'])[0]
+        o_comments = Comment.objects(post=o_post)
     except DoesNotExist as e:
         ret_dict['status'] = 0
         ret_dict['info'] = 'argument is DoesNotExist ' + e.message
@@ -278,6 +279,10 @@ def question_detail():
     if ret_dict['status'] == 1:
         ret_dic = obj2dict(o_post, include=('course', 'user', 'post', 'post_id', 'comment_count', 'c_time',
                                             'post_img', 'post_voice', 'like_count', 'browse_count'))
+        comment_list = []
+        for c in o_comments:
+            comment_list.append(c)
         ret_dict['data'] = [ret_dic]
+        ret_dict['data'][0]['commentList'] = comment_list
 
     return jsonify(ret_dict)
