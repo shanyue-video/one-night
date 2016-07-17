@@ -147,14 +147,12 @@
           marginTop: 10,
           textAlign: 'center',
         },
-        CENTER: {
-          textAlign: 'center',
-        },
       };
 
       function getBlockStyle(block) {
         switch (block.getType()) {
           case 'blockquote': return 'RichEditor-blockquote';
+          case 'atomic': return 'RichEditor-center';
           default: return null;
         }
       }
@@ -190,6 +188,7 @@
         {label: 'H5', style: 'header-five'},
         {label: 'H6', style: 'header-six'},
         {label: 'Blockquote', style: 'blockquote'},
+        {label: '居中', style: 'atomic'},
         {label: 'UL', style: 'unordered-list-item'},
         {label: 'OL', style: 'ordered-list-item'},
         {label: 'Code Block', style: 'code-block'},
@@ -223,7 +222,6 @@
         {label: '斜体', style: 'ITALIC'},
         {label: '下划线', style: 'UNDERLINE'},
         {label: '代码加亮', style: 'CODE'},
-        {label: '居中', style: 'CENTER'},
       ];
 
       const InlineStyleControls = (props) => {
