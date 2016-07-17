@@ -133,7 +133,7 @@ def get_per_detail():
 
     ret_dict = task19
 
-    ret_dict['data'] = ['时长的接口还未设计']
+    # ret_dict['data'] = ['时长的接口还未设计']
 
     return jsonify(ret_dict)
 
