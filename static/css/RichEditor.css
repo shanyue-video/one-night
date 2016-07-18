@@ -38,6 +38,8 @@
 
 .RichEditor-editor .RichEditor-center .public-DraftStyleDefault-ltr {
   text-align: center;
+  font-size: 2em;
+  font-weight: bold;
 }
 
 .RichEditor-editor .public-DraftStyleDefault-pre {
