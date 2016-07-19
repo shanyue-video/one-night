@@ -147,6 +147,12 @@
           marginTop: 10,
           textAlign: 'center',
         },
+        CENTER: {
+          textAlign: 'center',
+        },
+        BIG: {
+          fontSize: 32,
+        },
       };
 
       function getBlockStyle(block) {
@@ -222,6 +228,8 @@
         {label: '斜体', style: 'ITALIC'},
         {label: '下划线', style: 'UNDERLINE'},
         {label: '代码加亮', style: 'CODE'},
+        {label: '行级居中', style: 'CENTER'},
+        {label: '字体变大', style: 'BIG'},
       ];
 
       const InlineStyleControls = (props) => {
