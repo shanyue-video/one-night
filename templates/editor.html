@@ -56,7 +56,13 @@
                   '/react_ajax',
                   myContentState,
                   function(result){
-                    console.log(result);
+                    //const r = JSON.parse(result);
+                    //console.log(result.success);
+                    if(result.success == 1) {
+                        window.location.href = '/after_editor';
+                    } else {
+                        alert('保存错误');
+                    }
                   }
               );
           };

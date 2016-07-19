@@ -100,3 +100,8 @@ def react_ajax():
     print '!!!', r.form.to_dict()
     AppInfo(content=str(r.form.to_dict())).save()
     return jsonify({'success': 1})
+
+
+@view.route('/after_editor')
+def editor():
+    return render_template('after_editor.html')
