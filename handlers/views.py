@@ -10,7 +10,7 @@ import flask
 from flask import jsonify
 from handlers import view
 from mongoengine import DoesNotExist, NotUniqueError
-from utils.extmodels.ext_models import Course
+from utils.extmodels.ext_models import Course, AppInfo
 from utils.models import UserForm, User, UploadForm, Upload
 from utils.util import acquire_admin
 
@@ -98,4 +98,5 @@ def editor():
 def react_ajax():
     r = request
     print '!!!', r.form.to_dict()
-    return jsonify({'a': 1})
+    AppInfo(content=r.form.to_dict()).save()
+    return jsonify({'success': 1})

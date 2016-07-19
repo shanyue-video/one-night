@@ -105,3 +105,10 @@ class LearningHistory(engine.Document):
     def __unicode__(self):
         return self.content
 
+
+class AppInfo(engine.Document):
+    content = engine.StringField(required=True, max_length=2000, verbose_name=u'APP信息', help_text=u'APP信息')
+    c_time = engine.DateTimeField(default=datetime.now, verbose_name=u'创建时间')
+
+    def __unicode__(self):
+        return self.c_time
