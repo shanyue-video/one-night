@@ -98,5 +98,5 @@ def editor():
 def react_ajax():
     r = request
     print '!!!', r.form.to_dict()
-    AppInfo(content=r.form.to_dict()).save()
+    AppInfo(content=str(r.form.to_dict())).save()
     return jsonify({'success': 1})
