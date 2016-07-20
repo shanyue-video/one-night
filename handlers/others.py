@@ -4,11 +4,12 @@ from handlers import other
 from mongoengine import ValidationError, DoesNotExist
 from mongoengine.queryset import Q
 from s3.get_url import get_url_qiniu
-from test_res import task22, task1, task2, task3, task18, task19, task20, task21
-from utils.extmodels.ext_models import Feedback, OauthUser, Course, Post
+from test_res import task22, task1, task2, task3, task18, task19, task20, task21, task23
+from utils.extmodels.ext_models import Feedback, OauthUser, Course, Post, LearningHistory
 from utils.models import Upload
 from utils.obj2dict import obj2dict
 from utils.util import test_api, handle_request_post_arguments
+from datetime import datetime
 
 
 @other.route('/feed_back', methods=['POST', 'GET'])
@@ -184,5 +185,32 @@ def del_post():
                                         'post_img', 'post_voice', 'like_count', 'browse_count'))
         ret_dict['data'] = [p_o]
         o_post.delete()
+
+    return jsonify(ret_dict)
+
+
+@other.route('/post_time', methods=['POST', 'GET'])
+def post_time():
+    test_api(request)
+
+    args_list = ['userId', 'datetime', 'studyTime']
+    args = handle_request_post_arguments(request, args_list)
+    ret_dict = task23
+
+    try:
+        c_time = datetime.strptime(args['datetime'], '%Y-%m-%d')
+    except ValueError as e:
+        ret_dict['status'] = 0
+        ret_dict['info'] = 'argument of datetime isn`t correct format ' + e.message
+
+    try:
+        user = OauthUser.objects.get(user_id=args['userId'])
+        LearningHistory(user=user, study_time=args['studyTime'], c_time=c_time)
+    except DoesNotExist as e:
+        ret_dict['status'] = 0
+        ret_dict['info'] = 'argument is DoesNotExist ' + e.message
+
+    if ret_dict['status'] == 1:
+        pass
 
     return jsonify(ret_dict)
