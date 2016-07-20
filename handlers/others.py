@@ -205,7 +205,7 @@ def post_time():
 
     try:
         user = OauthUser.objects.get(user_id=args['userId'])
-        LearningHistory(user=user, study_time=args['studyTime'], c_time=c_time)
+        LearningHistory(user=user, study_time=args['studyTime'], c_time=c_time).save()
     except DoesNotExist as e:
         ret_dict['status'] = 0
         ret_dict['info'] = 'argument is DoesNotExist ' + e.message

@@ -103,7 +103,7 @@ class LearningHistory(engine.Document):
     c_time = engine.DateTimeField(default=datetime.now, verbose_name=u'创建时间')
 
     def __unicode__(self):
-        return self.content
+        return 'learning_history'
 
 
 class AppInfo(engine.Document):
