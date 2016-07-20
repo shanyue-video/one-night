@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import hashlib
+import json
 import time
 import uuid
 
@@ -97,11 +98,19 @@ def editor():
 @view.route('/react_ajax', methods=['POST'])
 def react_ajax():
     r = request
-    print '!!!', r.form.to_dict()
-    AppInfo(content=str(r.form.to_dict())).save()
+    d = r.form.to_dict()
+    print type(d)
+    AppInfo(content=json.dumps(d)).save()
     return jsonify({'success': 1})
 
 
 @view.route('/after_editor')
-def editor():
-    return render_template('after_editor.html')
+def after_editor():
+    data = AppInfo.objects.order_by('-c_time')[0]
+    s = json.dumps(data.content)
+    d = json.loads(s)
+    print d
+    content = {
+        'data': d,
+    }
+    return render_template('after_editor.html', **content)
