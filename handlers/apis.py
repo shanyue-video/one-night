@@ -2,13 +2,13 @@
 from flask import jsonify
 from handlers import api
 from handlers.others import get_carousel, search_course, classification_course, feed_back, get_ranking, get_per_detail, \
-    my_question, del_post
+    my_question, del_post, post_time
 from handlers.supports import collection, chapter, download, comment, list_question, post_new, search_question, \
     add_look_num, add_like, question_detail
 from handlers.users import user_info, save_user_info
 from test_api import task23
 from test_res import task1, task2, task3, task4, task5, task6, task7, task8, task9, task10, task11, task12, task13, \
-    task14, task15, task16, task17, task18, task19, task20, task21, task22
+    task14, task15, task16, task17, task18, task19, task20, task21, task22, task24
 from utils.util import use_api
 
 
@@ -142,6 +142,12 @@ def del_post():
 @use_api(feed_back)
 def feed_back():
     return jsonify(task22)
+
+
+@api.route('/api/postTime', methods=['POST'])
+@use_api(post_time)
+def post_time():
+    return jsonify(task24)
 
 
 @api.route('/api/index', methods=['GET'])

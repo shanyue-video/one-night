@@ -4,7 +4,7 @@ from handlers import other
 from mongoengine import ValidationError, DoesNotExist
 from mongoengine.queryset import Q
 from s3.get_url import get_url_qiniu
-from test_res import task22, task1, task2, task3, task18, task19, task20, task21, task23
+from test_res import task22, task1, task2, task3, task18, task19, task20, task21, task24
 from utils.extmodels.ext_models import Feedback, OauthUser, Course, Post, LearningHistory
 from utils.models import Upload
 from utils.obj2dict import obj2dict
@@ -195,7 +195,7 @@ def post_time():
 
     args_list = ['userId', 'datetime', 'studyTime']
     args = handle_request_post_arguments(request, args_list)
-    ret_dict = task23
+    ret_dict = task24
 
     try:
         c_time = datetime.strptime(args['datetime'], '%Y-%m-%d')

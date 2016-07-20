@@ -119,7 +119,7 @@ task23 = {
         },
         {
             'api': 'http://api.oforever.net:%s/api/postTime' % port,
-            '23type': 'POST',
+            '24type': 'POST',
             'args': 'userId, datetime, studyTime'
         },
     ]
