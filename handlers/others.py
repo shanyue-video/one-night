@@ -121,9 +121,24 @@ def classification_course():
 def get_ranking():
     test_api(request)
 
+    args_list = ['userId']
+    args = handle_request_post_arguments(request, args_list)
     ret_dict = task18
 
-    ret_dict['data'] = ['时长的接口还未设计']
+    try:
+        user = OauthUser.objects.get(user_id=args['userId'])
+        histories = LearningHistory.objects(user=user)
+    except DoesNotExist as e:
+        ret_dict['status'] = 0
+        ret_dict['info'] = 'argument is DoesNotExist ' + e.message
+
+    data = []
+    for history in histories:
+        d_o = obj2dict(history, include=('study_time', 'user', 'c_time'))
+        data.append(d_o)
+
+    if ret_dict['status'] == 1:
+        ret_dict['data'] = data
 
     return jsonify(ret_dict)
 
@@ -132,9 +147,24 @@ def get_ranking():
 def get_per_detail():
     test_api(request)
 
+    args_list = ['userId']
+    args = handle_request_post_arguments(request, args_list)
     ret_dict = task19
 
-    # ret_dict['data'] = ['时长的接口还未设计']
+    try:
+        user = OauthUser.objects.get(user_id=args['userId'])
+        histories = LearningHistory.objects(user=user)
+    except DoesNotExist as e:
+        ret_dict['status'] = 0
+        ret_dict['info'] = 'argument is DoesNotExist ' + e.message
+
+    data = []
+    for history in histories:
+        d_o = obj2dict(history, include=('study_time', 'user', 'c_time'))
+        data.append(d_o)
+
+    if ret_dict['status'] == 1:
+        ret_dict['data'] = data
 
     return jsonify(ret_dict)
 
