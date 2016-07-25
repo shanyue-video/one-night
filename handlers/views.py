@@ -5,6 +5,7 @@ import time
 import uuid
 
 import os
+from utils.celery_tasks import app
 from utils.conf import UPLOAD_FOLDER
 from flask import request, render_template, session
 import flask
@@ -114,3 +115,15 @@ def after_editor():
         'data': d,
     }
     return render_template('after_editor.html', **content)
+
+
+@view.route('/my_cnd', methods=['POST', 'GET'])
+def my_cdn():
+    print 'wo qu'
+    task.apply_async()
+    task.delay()
+
+
+@app.task(time_limit=180, soft_time_limit=120, acks_late=True)
+def task():
+    print 'test'

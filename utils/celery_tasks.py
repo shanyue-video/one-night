@@ -12,4 +12,5 @@ app.conf.update(
         'database': 'one_night_test',
         'taskmeta_collection': 'one_night_test',
     },
+    CELERY_IMPORTS=("handlers.views", ),
 )
