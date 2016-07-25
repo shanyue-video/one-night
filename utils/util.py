@@ -53,6 +53,14 @@ def handle_request_post_arguments(request, args_list):
             if base_dict.get(arg):
                 ret[arg] = base_dict[arg]
         return ret
+    if request.method == 'GET':
+        base_form = request.values
+        base_dict = base_form.to_dict()
+        ret = {}
+        for arg in args_list:
+            if base_dict.get(arg):
+                ret[arg] = base_dict[arg]
+        return ret
 
 
 if __name__ == '__main__':

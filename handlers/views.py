@@ -14,7 +14,7 @@ from handlers import view
 from mongoengine import DoesNotExist, NotUniqueError
 from utils.extmodels.ext_models import Course, AppInfo
 from utils.models import UserForm, User, UploadForm, Upload
-from utils.util import acquire_admin
+from utils.util import acquire_admin, handle_request_post_arguments
 
 
 @view.route('/login', methods=['POST', 'GET'])
@@ -119,11 +119,16 @@ def after_editor():
 
 @view.route('/my_cnd', methods=['POST', 'GET'])
 def my_cdn():
-    print 'wo qu'
-    task.apply_async()
-    task.delay()
+    args_list = ['url']
+    ags = handle_request_post_arguments(request, args_list)
+    url = ags['url']
+
+    print '...处理...', url
+    result = task.delay(url)
+    return jsonify({'success': 1, 'result': str(result)})
 
 
 @app.task(time_limit=180, soft_time_limit=120, acks_late=True)
-def task():
-    print 'test'
+def task(url):
+    print 'ddd...', url
+    return 'over...'
