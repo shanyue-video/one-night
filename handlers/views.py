@@ -129,4 +129,3 @@ def my_cdn():
     task.delay(url, _uuid)
     after_url = get_url_qiniu(new_url)
     return jsonify({'over': after_url})
-
