@@ -8,7 +8,7 @@ import shutil
 
 @app.task(acks_late=False)
 def task(url, _id):
-    print 'ddd...', url.split('/')[-1], '---', _id
+    print 'celery start...', url.split('/')[-1], '---', _id
     filename_tmp = os.path.join(UPLOAD_FOLDER, _id + url.split('/')[-1] + '_tmp1')
     filename = os.path.join(UPLOAD_FOLDER, _id + url.split('/')[-1] + '_tmp')
     urllib.urlretrieve(url, filename_tmp)
