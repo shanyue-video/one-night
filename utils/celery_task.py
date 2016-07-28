@@ -6,7 +6,7 @@ from utils.conf import UPLOAD_FOLDER
 import shutil
 
 
-@app.task(acks_late=True)
+@app.task(acks_late=False)
 def task(url, _id):
     print 'ddd...', url.split('/')[-1], '---', _id
     filename_tmp = os.path.join(UPLOAD_FOLDER, _id + url.split('/')[-1] + '_tmp1')
