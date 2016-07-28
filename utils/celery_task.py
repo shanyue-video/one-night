@@ -14,4 +14,4 @@ def task(url, _id):
     urllib.urlretrieve(url, filename_tmp)
     print 'over download %s' % filename_tmp
     shutil.move(filename_tmp, filename)
-    return 'over...'
+    print 'over shift...'

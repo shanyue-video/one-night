@@ -123,10 +123,10 @@ def my_cdn():
     args_list = ['url']
     ags = handle_request_post_arguments(request, args_list)
     url = ags['url']
-
     print '...处理...', url
     _uuid = str(uuid.uuid1())
+    new_url = _uuid + url.split('/')[-1]
     task.delay(url, _uuid)
-    after_url = get_url_qiniu(_uuid)
+    after_url = get_url_qiniu(new_url)
     return jsonify({'over': after_url})
 
