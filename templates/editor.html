@@ -58,12 +58,16 @@
 
           this.logState2 = () => console.log(JSON.stringify(this.state.editorState.getCurrentContent().toJS()).toString());
           this.logState = () => {
-              const myContentState = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
-              console.log(myContentState);
+              //const myContentState = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
+              const tmp = convertToRaw(this.state.editorState.getCurrentContent());
+              const myContentState = JSON.stringify(tmp);
+              console.log(tmp);
+              const data = {'data': myContentState}
               console.log('over');
+              ///*
               $.post(
                   '/react_ajax',
-                  myContentState,
+                  data,
                   function(result){
                     //const r = JSON.parse(result);
                     //console.log(result.success);
@@ -74,6 +78,7 @@
                     }
                   }
               );
+              //*/
           };
         }
 

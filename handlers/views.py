@@ -100,9 +100,9 @@ def editor():
 @view.route('/react_ajax', methods=['POST'])
 def react_ajax():
     r = request
-    d = r.form.to_dict()
+    d = r.form['data']
     print type(d)
-    AppInfo(content=json.dumps(d)).save()
+    AppInfo(content=d).save()
     return jsonify({'success': 1})
 
 
