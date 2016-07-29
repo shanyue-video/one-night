@@ -57,45 +57,14 @@
           this.handleKeyCommand = (command) => this._handleKeyCommand(command);
           this.toggleBlockType = (type) => this._toggleBlockType(type);
           this.toggleInlineStyle = (style) => this._toggleInlineStyle(style);
-
-          this.logState2 = () => console.log(JSON.stringify(this.state.editorState.getCurrentContent().toJS()).toString());
-          /*
-          this.logState = () => {
-              const myContentState = {{data | escape}};
-              const tmp = JSON.stringify(myContentState);
-              console.log(tmp);
-              const jsObject2 = JSON.parse(tmp);
-              console.log(jsObject2);
-              const jsObject = '{\"entityMap\":{},\"blocks\":[{\"key\":\"feirn\",\"text\":\"fvdvx\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[]}]}'
-              const jsObject3 = JSON.parse(jsObject)
-              //const contentState = new ContentState(jsObject3);
-              const contentState = convertFromRaw(jsObject3);
-              console.log(contentState);
-              console.log('---!!---');
-              const es = EditorState.createWithContent(contentState);
-              console.log(es);
-              this.state.editorState=EditorState.createWithContent(contentState);
-          };
-          */
         }
 
         _initEditorState() {
             const myContentState = {{data | safe}};
             const tmp = JSON.stringify(myContentState);
-            console.log('---!!0---' + tmp);
-            const jsObject9 = JSON.parse(tmp);
-            console.log('---!!0---');
-            console.log(jsObject9);
-            const js = '{\"entityMap\":{},\"blocks\":[{\"key\":\"feirn\",\"text\":\"fvdvx\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[]}]}'
-            console.log('---!!1---' + js);
-            const jsObject = JSON.parse(js)
-            console.log('---!!1---');
-            console.log(jsObject);
-            const contentState = convertFromRaw(jsObject9);
-            console.log(contentState);
-            console.log('---!!---');
+            const jsObject = JSON.parse(tmp);
+            const contentState = convertFromRaw(jsObject);
             const es = EditorState.createWithContent(contentState);
-            console.log(es);
             return EditorState.createWithContent(contentState);
         }
 

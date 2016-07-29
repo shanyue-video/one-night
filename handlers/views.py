@@ -101,7 +101,6 @@ def editor():
 def react_ajax():
     r = request
     d = r.form['data']
-    print type(d)
     AppInfo(content=d).save()
     return jsonify({'success': 1})
 
@@ -123,7 +122,6 @@ def my_cdn():
     args_list = ['url']
     ags = handle_request_post_arguments(request, args_list)
     url = ags['url']
-    print '...处理...', url
     _uuid = str(uuid.uuid1())
     new_url = _uuid + url.split('/')[-1]
     task.delay(url, _uuid)
