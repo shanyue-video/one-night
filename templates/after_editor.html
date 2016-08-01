@@ -65,6 +65,7 @@
           const {editorState} = this.state;
 
           let className = 'RichEditor-editor';
+          const style = {borderTop: 0};
           var contentState = editorState.getCurrentContent();
           if (!contentState.hasText()) {
             if (contentState.getBlockMap().first().getType() !== 'unstyled') {
@@ -73,8 +74,8 @@
           }
 
           return (
-            <div className="RichEditor-root">
-              <div className={className} onClick={this.focus}>
+            <div className="RichEditorShow-root">
+              <div className={className} style={style} onClick={this.focus}>
                 <Editor
                   readOnly={true}
                   onChange={this.onChange}

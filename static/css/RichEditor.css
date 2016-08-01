@@ -6,8 +6,23 @@
   padding: 15px;
 }
 
+.RichEditorShow-root {
+  background: #fff;
+  border: 0px solid #ddd;
+  font-family: 'Georgia', serif;
+  font-size: 14px;
+  padding: 15px;
+}
+
 .RichEditor-editor {
-  border-top: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    cursor: text;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.RichEditorShow-editor {
+  border-top: 0px solid #ddd;
   cursor: text;
   font-size: 16px;
   margin-top: 10px;
