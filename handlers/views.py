@@ -3,6 +3,7 @@ import hashlib
 import json
 import time
 import uuid
+from pymongo.errors import AutoReconnect
 
 from utils.celery_task import task
 import os
@@ -107,10 +108,12 @@ def react_ajax():
 
 @view.route('/after_editor')
 def after_editor():
-    data = AppInfo.objects.order_by('-c_time')[0]
+    try:
+        data = AppInfo.objects.order_by('-c_time')[0]
+    except AutoReconnect:
+        return flask.redirect(flask.url_for('view.after_editor'))
     s = json.dumps(data.content)
     d = json.loads(s)
-    print d
     content = {
         'data': d,
     }
