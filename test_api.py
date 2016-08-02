@@ -79,7 +79,7 @@ task23 = {
         {
             'api': 'http://api.oforever.net:%s/api/Addcomment' % port,
             '15type': 'POST',
-            'args': 'postId, userid, commentContent   # 这个暂时'
+            'args': 'courseId, userId, comment_content   # 这个暂时'
                     '和comment接口一样, commentImg, commentVoice, commentVideo'
         },
         {
