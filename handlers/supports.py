@@ -6,7 +6,7 @@ from handlers import support
 from mongoengine import DoesNotExist
 from mongoengine.queryset import Q
 from s3.get_url import get_url_qiniu
-from test_res import task5, task6, task7, task8, task9, task10, task11, task12, task13, task14
+from test_res import task5, task6, task7, task8, task9, task10, task11, task12, task13, task14, task15
 from utils.conf import UPLOAD_FOLDER
 from utils.extmodels.ext_models import Course, OauthUser, Collection, Comment, Post, PostLikeLog
 from utils.obj2dict import obj2dict
@@ -109,6 +109,28 @@ def comment():
 
     if ret_dict['status'] == 1:
         Comment(course=o_course, user=o_user, comment=args['comment_content']).save()
+
+    return jsonify(ret_dict)
+
+
+@support.route('/add_comment', methods=['POST', 'GET'])
+def add_comment():
+    test_api(request)
+
+    args_list = ['postId', 'userId', 'comment_content']
+    args = handle_request_post_arguments(request, args_list)
+    ret_dict = task15
+
+    try:
+        default_course = Course.objects.get(class_uuid="1234")
+        o_post = Post.objects.get(post_id=args['postId'])
+        o_user = OauthUser.objects.get(user_id=args['userId'])
+    except DoesNotExist as e:
+        ret_dict['status'] = 0
+        ret_dict['info'] = 'argument is DoesNotExist ' + e.message
+
+    if ret_dict['status'] == 1:
+        Comment(course=default_course, post=o_post, user=o_user, comment=args['comment_content']).save()
 
     return jsonify(ret_dict)
 

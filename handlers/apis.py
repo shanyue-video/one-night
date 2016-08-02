@@ -4,7 +4,7 @@ from handlers import api
 from handlers.others import get_carousel, search_course, classification_course, feed_back, get_ranking, get_per_detail, \
     my_question, del_post, post_time
 from handlers.supports import collection, chapter, download, comment, list_question, post_new, search_question, \
-    add_look_num, add_like, question_detail
+    add_look_num, add_like, question_detail, add_comment
 from handlers.users import user_info, save_user_info
 from test_api import task23
 from test_res import task1, task2, task3, task4, task5, task6, task7, task8, task9, task10, task11, task12, task13, \
@@ -97,7 +97,7 @@ def question_detail():
 
 
 @api.route('/api/Addcomment', methods=['POST'])
-@use_api(comment)
+@use_api(add_comment)
 def add_comment():
     return jsonify(task15)
 
