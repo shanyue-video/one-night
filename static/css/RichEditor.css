@@ -57,6 +57,12 @@
   font-weight: bold;
 }
 
+.RichEditor-editor .RichEditor-at-center .public-DraftStyleDefault-ltr {
+    text-align: center;
+    font-size: 1em;
+    font-weight: inherit;
+}
+
 .RichEditor-editor .public-DraftStyleDefault-pre {
   background-color: rgba(0, 0, 0, 0.05);
   font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;
