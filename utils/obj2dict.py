@@ -3,6 +3,13 @@ import datetime
 
 
 def obj2dict(obj, obj2=None, include=None):
+    """
+    加个注释，已经不记得什么意思了
+    :param obj:
+    :param obj2:
+    :param include:
+    :return: 把给定的几个对象中的字段 按需输出
+    """
     if not isinstance(obj, object):
         return {'code': 'not object'}
     if not isinstance(include, tuple):

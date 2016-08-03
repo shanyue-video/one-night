@@ -303,7 +303,8 @@ def question_detail():
                                             'post_img', 'post_voice', 'like_count', 'browse_count'))
         comment_list = []
         for c in o_comments:
-            comment_list.append(c)
+            dic_c = obj2dict(c, include=('course', 'user', 'post', 'comment', 'c_time'))
+            comment_list.append(dic_c)
         ret_dict['data'] = [ret_dic]
         ret_dict['data'][0]['commentList'] = comment_list
 
