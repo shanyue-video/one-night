@@ -47,7 +47,7 @@ def get_carousel():
 
     ret_dict = task1
 
-    cobs = Course.objects
+    cobs = Course.objects(base_info__exists=True)
     course_list = []
     for o in cobs:
         uo = o['base_info']
