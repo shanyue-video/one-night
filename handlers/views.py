@@ -69,16 +69,14 @@ def upload_validate():
     form = UploadForm(request.form, obj=upload_obj)
     form.populate_obj(upload_obj)
 
-    upload_obj.video = _file['video'].filename + '-' + str(time.time())
-    upload_obj.picture = _file['img'].filename + '-' + str(time.time())
+    upload_obj.video = _file['video'].filename + '_' + str(uuid.uuid1())
+    upload_obj.picture = _file['img'].filename + '_' + str(uuid.uuid1())
 
     upload_obj.user = user
     upload_obj.class_summary = request.form['summary'].encode('utf-8')
 
-    _file['video'].save(os.path.join(UPLOAD_FOLDER, 'video-' + upload_obj.class_name + '.' +
-                        _file['video'].filename.encode('utf-8').split('.')[-1]) + '_tmp')
-    _file['img'].save(os.path.join(UPLOAD_FOLDER, 'img-' + upload_obj.class_name) + '.' +
-                      _file['img'].filename.encode('utf-8').split('.')[-1] + '_tmp')
+    _file['video'].save(os.path.join(UPLOAD_FOLDER, upload_obj.video.split('_')[-1]) + '_tmp')
+    _file['img'].save(os.path.join(UPLOAD_FOLDER, upload_obj.img.split('_')[-1]) + '_tmp')
 
     try:
         upload_obj.save()
