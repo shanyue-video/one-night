@@ -76,7 +76,7 @@ def upload_validate():
     upload_obj.class_summary = request.form['summary'].encode('utf-8')
 
     _file['video'].save(os.path.join(UPLOAD_FOLDER, upload_obj.video.split('_')[-1]) + '_tmp')
-    _file['img'].save(os.path.join(UPLOAD_FOLDER, upload_obj.img.split('_')[-1]) + '_tmp')
+    _file['img'].save(os.path.join(UPLOAD_FOLDER, upload_obj.picture.split('_')[-1]) + '_tmp')
 
     try:
         upload_obj.save()
