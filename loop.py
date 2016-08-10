@@ -47,7 +47,11 @@ def loop_qiniu():
                 token = q.upload_token(Bucket, key, 3600)
                 local_file = f_path
                 ret, _ = put_file(token, key, local_file)
-                assert ret['key'] == key
+                try:
+                    assert ret['key'] == key
+                except TypeError:
+                    print 'ret has error'
+                    continue
                 os.rename(f_path, f_path_new)
                 print 'end handle %s' % key
                 print time.strftime("%Y/%y/%d %H:%M:%S", time.localtime(time.time()))
