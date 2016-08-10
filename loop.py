@@ -36,7 +36,8 @@ def loop_qiniu():
     while True:
         for f in os.listdir(UPLOAD_FOLDER):
             if not 'tmp' == f.split('_')[-1]:
-                os.remove(os.path.join(UPLOAD_FOLDER, f))
+                # os.remove(os.path.join(UPLOAD_FOLDER, f))
+                pass
             else:
                 print 'start handle %s' % f
                 f_path = os.path.join(UPLOAD_FOLDER, f)
