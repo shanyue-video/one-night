@@ -6,8 +6,8 @@ from flask import Flask
 from flask.ext.bootstrap import Bootstrap
 from utils.models import engine
 
-# tmp_dir = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../templates'))
-tmp_dir = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../media'))
+tmp_dir = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../templates'))
+# tmp_dir = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../media'))
 
 app = Flask(__name__, template_folder=tmp_dir, static_folder='../static')
 app.config.update(FLASK_MONGO_ENGINE_CONF)
