@@ -75,9 +75,9 @@ def upload_validate():
     upload_obj.class_summary = request.form['summary'].encode('utf-8')
 
     _file['video'].save(u_path(os.path.join(UPLOAD_FOLDER,
-                                            upload_obj.video.split('_')[-1]) + '_tmp0'))
+                                            str(upload_obj.video.split('_')[-1])) + '_tmp0'))
     _file['img'].save(u_path(os.path.join(UPLOAD_FOLDER,
-                                          upload_obj.picture.split('_')[-1]) + '_tmp0'))
+                                          str(upload_obj.picture.split('_')[-1])) + '_tmp0'))
 
     try:
         upload_obj.save()
@@ -89,10 +89,10 @@ def upload_validate():
 
     if not form.validate_on_submit():
         return flask.abort(403)
-    os.rename(u_path(os.path.join(UPLOAD_FOLDER, upload_obj.video.split('_')[-1]) + '_tmp0'),
-              u_path(os.path.join(UPLOAD_FOLDER, upload_obj.video.split('_')[-1]) + '_tmp'))
-    os.rename(u_path(os.path.join(UPLOAD_FOLDER, upload_obj.picture.split('_')[-1]) + '_tmp0'),
-              u_path(os.path.join(UPLOAD_FOLDER, upload_obj.picture.split('_')[-1]) + '_tmp'))
+    os.rename(u_path(os.path.join(UPLOAD_FOLDER, str(upload_obj.video.split('_')[-1])) + '_tmp0'),
+              u_path(os.path.join(UPLOAD_FOLDER, str(upload_obj.video.split('_')[-1])) + '_tmp'))
+    os.rename(u_path(os.path.join(UPLOAD_FOLDER, str(upload_obj.picture.split('_')[-1])) + '_tmp0'),
+              u_path(os.path.join(UPLOAD_FOLDER, str(upload_obj.picture.split('_')[-1])) + '_tmp'))
     return flask.redirect(flask.url_for('view.upload_success'))
 
 
