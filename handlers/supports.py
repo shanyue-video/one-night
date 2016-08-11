@@ -10,7 +10,7 @@ from test_res import task5, task6, task7, task8, task9, task10, task11, task12, 
 from utils.conf import UPLOAD_FOLDER
 from utils.extmodels.ext_models import Course, OauthUser, Collection, Comment, Post, PostLikeLog
 from utils.obj2dict import obj2dict
-from utils.util import test_api, handle_request_post_arguments
+from utils.util import test_api, handle_request_post_arguments, u_path
 
 
 @support.route('/collection', methods=['POST', 'GET'])
@@ -180,12 +180,12 @@ def post_new():
 
     for i in _images:
         file_id = post_id + '_' + i.filename
-        i.save(os.path.join(UPLOAD_FOLDER, file_id + '_tmp'))
+        i.save(u_path(os.path.join(UPLOAD_FOLDER, file_id + '_tmp')))
         images.append(get_url_qiniu(file_id))
 
     for i in _voices:
         file_id = post_id + '_' + i.filename
-        i.save(os.path.join(UPLOAD_FOLDER, file_id + '_tmp'))
+        i.save(u_path(os.path.join(UPLOAD_FOLDER, file_id + '_tmp')))
         voices.append(get_url_qiniu(file_id))
 
     if ret_dict['status'] == 1:

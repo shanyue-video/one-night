@@ -4,6 +4,7 @@ import time
 from flask import session
 import flask
 from handlers import app
+import os
 from utils.models import TestEverything
 
 
@@ -61,6 +62,13 @@ def handle_request_post_arguments(request, args_list):
             if base_dict.get(arg):
                 ret[arg] = base_dict[arg]
         return ret
+
+
+def u_path(string):
+    if isinstance(string, str):
+        return os.path.abspath(string)
+    else:
+        raise AssertionError('u_path error')
 
 
 if __name__ == '__main__':

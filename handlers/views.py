@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import hashlib
 import json
-import time
 import uuid
 from pymongo.errors import AutoReconnect
 
@@ -16,7 +15,7 @@ from handlers import view
 from mongoengine import DoesNotExist, NotUniqueError
 from utils.extmodels.ext_models import Course, AppInfo
 from utils.models import UserForm, User, UploadForm, Upload
-from utils.util import acquire_admin, handle_request_post_arguments
+from utils.util import acquire_admin, handle_request_post_arguments, u_path
 
 
 @view.route('/login', methods=['POST', 'GET'])
@@ -75,8 +74,10 @@ def upload_validate():
     upload_obj.user = user
     upload_obj.class_summary = request.form['summary'].encode('utf-8')
 
-    _file['video'].save(os.path.join(UPLOAD_FOLDER, upload_obj.video.split('_')[-1]) + '_tmp0')
-    _file['img'].save(os.path.join(UPLOAD_FOLDER, upload_obj.picture.split('_')[-1]) + '_tmp0')
+    _file['video'].save(u_path(os.path.join(UPLOAD_FOLDER,
+                                            upload_obj.video.split('_')[-1]) + '_tmp0'))
+    _file['img'].save(u_path(os.path.join(UPLOAD_FOLDER,
+                                          upload_obj.picture.split('_')[-1]) + '_tmp0'))
 
     try:
         upload_obj.save()
@@ -88,10 +89,10 @@ def upload_validate():
 
     if not form.validate_on_submit():
         return flask.abort(403)
-    os.rename(os.path.join(UPLOAD_FOLDER, upload_obj.video.split('_')[-1]) + '_tmp0',
-              os.path.join(UPLOAD_FOLDER, upload_obj.video.split('_')[-1]) + '_tmp')
-    os.rename(os.path.join(UPLOAD_FOLDER, upload_obj.picture.split('_')[-1]) + '_tmp0',
-              os.path.join(UPLOAD_FOLDER, upload_obj.picture.split('_')[-1]) + '_tmp')
+    os.rename(u_path(os.path.join(UPLOAD_FOLDER, upload_obj.video.split('_')[-1]) + '_tmp0'),
+              u_path(os.path.join(UPLOAD_FOLDER, upload_obj.video.split('_')[-1]) + '_tmp'))
+    os.rename(u_path(os.path.join(UPLOAD_FOLDER, upload_obj.picture.split('_')[-1]) + '_tmp0'),
+              u_path(os.path.join(UPLOAD_FOLDER, upload_obj.picture.split('_')[-1]) + '_tmp'))
     return flask.redirect(flask.url_for('view.upload_success'))
 
 
