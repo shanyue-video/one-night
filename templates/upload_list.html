@@ -1,0 +1,44 @@
+{% extends "bootstrap/base.html"  %}
+{% block content %}
+{% import "bootstrap/wtf.html" as wtf %}
+<div class="container">
+    <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+        <fieldset>
+
+            <div id="legend" class="">
+                <legend>
+                    <a href="{{url_for('view.upload_list')}}">数据列表</a>
+                    >>
+                    <a href="{{url_for('view.upload')}}">添加新数据</a>
+                </legend>
+            </div>
+
+            <table class="table table-hover table-striped">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>课件名称</th>
+                    <th>课程名称</th>
+                    <th>上次修改时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for task in data %}
+                    <tr data-id="{{ task }}">
+                        <td></td>
+                        <td>{{task.course_name}}</td>
+                        <td>{{task.class_name}}</td>
+                        <td>{{task.c_time}}</td>
+                        <td>
+                            <a href="{{url_for('view.upload_update', id=task.id)}}">修改</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </fieldset>
+    </form>
+</div>
+{% endblock %}

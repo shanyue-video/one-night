@@ -56,10 +56,39 @@ def upload_success():
     return render_template('upload_success.html')
 
 
+@view.route('/upload/list')
+@acquire_admin
+def upload_list():
+    data = Upload.objects()
+    content = {
+        'data': data,
+    }
+    return render_template('upload_list.html', **content)
+
+
+@view.route('/upload/update')
+@acquire_admin
+def upload_update():
+    t_id = request.args.get('id')
+    data = Upload.objects().get(id=t_id)
+    form = UploadForm(request.form, obj=data)
+    content = {
+        'form': form,
+        'op_id': t_id
+    }
+    return render_template('upload.html', **content)
+
+
 @view.route('/upload/validate', methods=['POST'])
 def upload_validate():
     _file = request.files
-    upload_obj = Upload()
+
+    op_id = request.args.get('op_id')
+
+    if len(op_id) > 8:
+        upload_obj = Upload.objects.get(id=op_id)
+    else:
+        upload_obj = Upload()
 
     try:
         user = User.objects.get(username=session['user'])

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 from flask.ext.mongoengine import MongoEngine
 from flask.ext.mongoengine.wtf import model_form
 
@@ -34,7 +35,7 @@ class Upload(engine.Document):
     course_name = engine.StringField(required=True, max_length=20, unique=False, verbose_name=u'课件名称',
                                      help_text=u'不超过20个字符串')
     class_name = engine.StringField(required=True, max_length=20, unique=True, verbose_name=u'课程名称',
-                                    help_text=u'不超过20个字符串，且唯一，建议按照一定格式填写，例如"课件名称-课程名称-1"')
+                                    help_text=u'不超过20个字符串，且唯一，建议按照一定格式填写，例如"课件名称-章节名称-1"')
     teacher_name = engine.StringField(max_length=20, required=False, verbose_name=u'老师名称',
                                       help_text=u'不超过20个字符串')
     class_summary = engine.StringField(required=False, max_length=2000, verbose_name=u'课程简介',
@@ -43,13 +44,14 @@ class Upload(engine.Document):
                                     help_text=u'视频长度，非精确，单位为秒，如写做"3:20"')
     is_over = engine.BooleanField(default=False, verbose_name=u'是否完结')
     user = engine.ReferenceField(User)
+    c_time = engine.DateTimeField(default=datetime.now, verbose_name=u'创建时间')
 
     # def __unicode__(self):
     #     return self.class_name
 
 
 UserForm = model_form(User, exclude=('role',))
-UploadForm = model_form(Upload, exclude=('user', 'picture', 'video', 'class_summary'))
+UploadForm = model_form(Upload, exclude=('user', 'c_time', 'picture', 'video', 'class_summary'))
 
 
 if __name__ == '__main__':
