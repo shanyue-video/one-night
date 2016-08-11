@@ -4,7 +4,6 @@ import boto3
 import os
 from qiniu import Auth, put_file
 from utils.conf import UPLOAD_FOLDER
-from utils.util import u_path
 
 Bucket = 'one-night'
 
@@ -24,8 +23,8 @@ def loop():
                 continue
             else:
                 print 'start handle %s' % f
-                f_path = u_path(os.path.join(UPLOAD_FOLDER, f))
-                f_path_new = u_path(os.path.join(UPLOAD_FOLDER, f[:-4]))
+                f_path = os.path.join(UPLOAD_FOLDER, f)
+                f_path_new = os.path.join(UPLOAD_FOLDER, f[:-4])
                 s3_client = boto3.client('s3')
                 s3_client.upload_file(f_path_new, Bucket, f[:-4])
                 os.rename(f_path, f_path_new)
@@ -41,8 +40,8 @@ def loop_qiniu():
                 # print 'jump out and for one more time'
             else:
                 print 'start handle %s' % f
-                f_path = u_path(os.path.join(UPLOAD_FOLDER, f))
-                f_path_new = u_path(os.path.join(UPLOAD_FOLDER, f[:-4]))
+                f_path = os.path.join(UPLOAD_FOLDER, f)
+                f_path_new = os.path.join(UPLOAD_FOLDER, f[:-4])
                 key = f[:-4]
                 q = Auth(access_key, secret_key)
                 token = q.upload_token(Bucket, key, 3600)
