@@ -10,7 +10,7 @@ from s3.get_url import get_url_qiniu
 from utils.conf import UPLOAD_FOLDER
 from flask import request, render_template, session
 import flask
-from flask import jsonify
+from flask import jsonify, redirect, url_for
 from handlers import view
 from mongoengine import DoesNotExist, NotUniqueError
 from utils.extmodels.ext_models import Course, AppInfo
@@ -76,7 +76,7 @@ def upload_update():
         c = Course.objects.get(base_info=data)
         c.delete()
         data.delete()
-        return render_template('upload_list.html')
+        return redirect(url_for('view.upload_list'))
     form = UploadForm(request.form, obj=data)
     content = {
         'form': form,
@@ -107,15 +107,13 @@ def upload_validate():
     upload_obj.class_summary = request.form['summary'].encode('utf-8')
 
     if len(_file['video'].filename) > 0:
-        upload_obj.video = _file['video'].filename + '_' + str(uuid.uuid1())
-        filename = u_path(os.path.join(UPLOAD_FOLDER,
-                          str(upload_obj.video.split('_')[-1])) + '_tmp0')
+        upload_obj.video = str(uuid.uuid1())
+        filename = u_path(os.path.join(UPLOAD_FOLDER, upload_obj.video) + '_tmp0')
         _file['video'].save(filename)
         upload_obj.video_size = str(os.path.getsize(filename))
     if len(_file['img'].filename) > 0:
-        upload_obj.picture = _file['img'].filename + '_' + str(uuid.uuid1())
-        filename = u_path(os.path.join(UPLOAD_FOLDER,
-                          str(upload_obj.picture.split('_')[-1])) + '_tmp0')
+        upload_obj.picture = str(uuid.uuid1())
+        filename = u_path(os.path.join(UPLOAD_FOLDER, upload_obj.picture) + '_tmp0')
         _file['img'].save(filename)
         upload_obj.picture_size = str(os.path.getsize(filename))
 
@@ -133,11 +131,11 @@ def upload_validate():
     if not form.validate_on_submit():
         return flask.abort(403)
     if len(_file['video'].filename) > 0:
-        os.rename(u_path(os.path.join(UPLOAD_FOLDER, str(upload_obj.video.split('_')[-1])) + '_tmp0'),
-                  u_path(os.path.join(UPLOAD_FOLDER, str(upload_obj.video.split('_')[-1])) + '_tmp'))
+        os.rename(u_path(os.path.join(UPLOAD_FOLDER, upload_obj.video) + '_tmp0'),
+                  u_path(os.path.join(UPLOAD_FOLDER, upload_obj.video) + '_tmp'))
     if len(_file['img'].filename) > 0:
-        os.rename(u_path(os.path.join(UPLOAD_FOLDER, str(upload_obj.picture.split('_')[-1])) + '_tmp0'),
-                  u_path(os.path.join(UPLOAD_FOLDER, str(upload_obj.picture.split('_')[-1])) + '_tmp'))
+        os.rename(u_path(os.path.join(UPLOAD_FOLDER, upload_obj.picture) + '_tmp0'),
+                  u_path(os.path.join(UPLOAD_FOLDER, upload_obj.picture) + '_tmp'))
     return flask.redirect(flask.url_for('view.upload_success'))
 
 
