@@ -5,7 +5,8 @@ import os
 from qiniu import Auth, put_file
 from utils.conf import UPLOAD_FOLDER
 
-Bucket = 'one-night'
+# Bucket = 'one-night'
+from s3.get_url import Bucket
 
 access_key = '4vtH5Qbea2P_qbji0mkxAqjEr4oulloHX4yDgnJP'
 secret_key = 'no0C1cbm0nv26_zvVr8PPgFo2HmNk0DPtr_aDDKJ'

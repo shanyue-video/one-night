@@ -2,7 +2,7 @@
 import boto3
 
 
-Bucket = 'one-night'
+Bucket = 'one-night-1'
 
 
 def get_url(key):
