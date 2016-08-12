@@ -3,6 +3,8 @@ import boto3
 
 
 Bucket = 'one-night-1'
+# base_url = 'http://o7z6eyjps.bkt.clouddn.com/'
+base_url = 'http://obsib7bzs.bkt.clouddn.com/'
 
 
 def get_url(key):
@@ -13,4 +15,7 @@ def get_url(key):
 
 
 def get_url_qiniu(key):
-    return 'http://o7z6eyjps.bkt.clouddn.com/' + key
+    if key:
+        return base_url + key
+    else:
+        return ''
