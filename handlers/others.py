@@ -54,8 +54,8 @@ def get_carousel():
         obj_dict = obj2dict(o, uo, include=('picture', 'video', 'course_name', 'class_name', 'class_uuid',
                                             'browse_count', 'download_count', 'course_type',
                                             'teacher_name', 'class_summary', 'class_time', 'is_over'))
-        img_key = obj_dict['picture'].split('_')[-1]
-        video_key = obj_dict['video'].split('_')[-1]
+        img_key = obj_dict['picture']
+        video_key = obj_dict['video']
         obj_dict['picture_url'] = get_url_qiniu(img_key)
         obj_dict['video_url'] = get_url_qiniu(video_key)
         course_list.append(obj_dict)
@@ -84,8 +84,8 @@ def search_course():
     for o in obs:
         ret_dic = obj2dict(o, include=('picture', 'video', 'course_name', 'class_name',
                                        'teacher_name', 'class_summary', 'class_time', 'is_over'))
-        img_key = ret_dic['picture'].split('_')[-1]
-        video_key = ret_dic['video'].split('_')[-1]
+        img_key = ret_dic['picture']
+        video_key = ret_dic['video']
         ret_dic['picture_url'] = get_url_qiniu(img_key)
         ret_dic['video_url'] = get_url_qiniu(video_key)
         ret_dicts.append(ret_dic)
@@ -107,8 +107,8 @@ def classification_course():
         obj_dict = obj2dict(o, uo, include=('picture', 'video', 'course_name', 'class_name', 'class_uuid',
                                             'browse_count', 'download_count', 'course_type',
                                             'teacher_name', 'class_summary', 'class_time', 'is_over'))
-        img_key = obj_dict['picture'].split('_')[-1]
-        video_key = obj_dict['video'].split('_')[-1]
+        img_key = obj_dict['picture']
+        video_key = obj_dict['video']
         obj_dict['picture_url'] = get_url_qiniu(img_key)
         obj_dict['video_url'] = get_url_qiniu(video_key)
         course_list.append(obj_dict)

@@ -54,8 +54,8 @@ def chapter():
                                                         'class_uuid', 'browse_count', 'download_count',
                                                         'course_type', 'teacher_name', 'class_summary',
                                                         'class_time', 'is_over'))
-        img_key = ret_dic['picture'].split('_')[-1]
-        video_key = ret_dic['video'].split('_')[-1]
+        img_key = ret_dic['picture']
+        video_key = ret_dic['video']
         ret_dic['picture_url'] = get_url_qiniu(img_key)
         ret_dic['video_url'] = get_url_qiniu(video_key)
         ret_dict['data'] = [ret_dic]
@@ -83,8 +83,8 @@ def download():
                                                         'class_uuid', 'browse_count', 'download_count',
                                                         'course_type', 'teacher_name', 'class_summary',
                                                         'class_time', 'is_over'))
-        img_key = ret_dic['picture'].split('_')[-1]
-        video_key = ret_dic['video'].split('_')[-1]
+        img_key = ret_dic['picture']
+        video_key = ret_dic['video']
         ret_dic['picture_url'] = get_url_qiniu(img_key)
         ret_dic['video_url'] = get_url_qiniu(video_key)
         ret_dict['data'] = [ret_dic]
