@@ -38,7 +38,9 @@ def loop_qiniu():
             if 'tmp' not in f.split('_')[-1]:
                 os.remove(os.path.join(UPLOAD_FOLDER, f))
                 # print 'jump out and for one more time'
-            else:
+            elif 'tmp0' == f.split('_')[-1]:
+                continue
+            elif 'tmp' == f.split('_')[-1]:
                 print 'start handle %s' % f
                 f_path = os.path.join(UPLOAD_FOLDER, f)
                 f_path_new = os.path.join(UPLOAD_FOLDER, f[:-4])
@@ -55,6 +57,11 @@ def loop_qiniu():
                 os.rename(f_path, f_path_new)
                 print 'end handle %s' % key
                 print time.strftime("%Y/%y/%d %H:%M:%S", time.localtime(time.time()))
+            else:
+                print '<----'
+                print u'为考虑到的情况'
+                print time.strftime("%Y/%y/%d %H:%M:%S", time.localtime(time.time()))
+                print '---->'
     print 'pass this time while error', time.strftime("%Y/%y/%d %H:%M:%S", time.localtime(time.time()))
 
 
