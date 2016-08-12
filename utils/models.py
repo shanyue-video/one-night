@@ -32,12 +32,12 @@ class User(engine.Document):
 class Upload(engine.Document):
     picture = engine.StringField(verbose_name=u'课程截图', help_text=u'视频截图，显示在当前课程首页的')
     video = engine.StringField(verbose_name=u'课程视频', help_text=u'视频文件')
-    course_name = engine.StringField(required=True, max_length=40, unique=False, verbose_name=u'课件名称',
-                                     help_text=u'不超过20个字符串')
-    class_name = engine.StringField(required=True, max_length=40, unique=True, verbose_name=u'课程名称',
-                                    help_text=u'不超过20个字符串，且唯一，建议按照一定格式填写，例如"课件名称-章节名称-1"')
-    teacher_name = engine.StringField(max_length=20, required=False, verbose_name=u'老师名称',
-                                      help_text=u'不超过20个字符串')
+    course_name = engine.StringField(required=True, max_length=40, unique=True, verbose_name=u'课件名称',
+                                     help_text=u'不超过40个字符串且唯一')
+    class_name = engine.StringField(required=True, max_length=40, unique=False, verbose_name=u'课程名称',
+                                    help_text=u'不超过40个字符串，建议按照一定格式填写，例如"章节名称-1"')
+    teacher_name = engine.StringField(max_length=40, required=False, verbose_name=u'老师名称',
+                                      help_text=u'不超过40个字符串')
     class_summary = engine.StringField(required=False, max_length=2000, verbose_name=u'课程简介',
                                        help_text=u'不超过2000个字符串')
     class_time = engine.StringField(required=False, max_length=20, verbose_name=u'课程时长',
