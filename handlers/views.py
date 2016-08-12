@@ -120,7 +120,10 @@ def upload_validate():
         print e.message
         return flask.abort(501)
 
-    Course(base_info=upload_obj, class_uuid=str(uuid.uuid1())).save()
+    if len(op_id) > 8:
+        pass
+    else:
+        Course(base_info=upload_obj, class_uuid=str(uuid.uuid1())).save()
 
     if not form.validate_on_submit():
         return flask.abort(403)
