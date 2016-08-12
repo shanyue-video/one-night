@@ -19,6 +19,8 @@
                     <th></th>
                     <th>课件名称</th>
                     <th>课程名称</th>
+                    <th>图片大小</th>
+                    <th>视频大小</th>
                     <th>上次修改时间</th>
                     <th>操作</th>
                 </tr>
@@ -29,6 +31,8 @@
                         <td></td>
                         <td>{{task.course_name}}</td>
                         <td>{{task.class_name}}</td>
+                        <td>{{task.picture_size}}</td>
+                        <td>{{task.video_size}}</td>
                         <td>{{task.c_time}}</td>
                         <td>
                             <a href="{{url_for('view.upload_update', id=task.id)}}">修改</a>

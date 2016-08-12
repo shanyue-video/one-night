@@ -103,16 +103,21 @@ def upload_validate():
     form = UploadForm(request.form, obj=upload_obj)
     form.populate_obj(upload_obj)
 
-    upload_obj.video = _file['video'].filename + '_' + str(uuid.uuid1())
-    upload_obj.picture = _file['img'].filename + '_' + str(uuid.uuid1())
-
     upload_obj.user = user
     upload_obj.class_summary = request.form['summary'].encode('utf-8')
 
-    _file['video'].save(u_path(os.path.join(UPLOAD_FOLDER,
-                                            str(upload_obj.video.split('_')[-1])) + '_tmp0'))
-    _file['img'].save(u_path(os.path.join(UPLOAD_FOLDER,
-                                          str(upload_obj.picture.split('_')[-1])) + '_tmp0'))
+    if len(_file['video'].filename) > 0:
+        upload_obj.video = _file['video'].filename + '_' + str(uuid.uuid1())
+        filename = u_path(os.path.join(UPLOAD_FOLDER,
+                          str(upload_obj.video.split('_')[-1])) + '_tmp0')
+        _file['video'].save(filename)
+        upload_obj.video_size = str(os.path.getsize(filename))
+    if len(_file['img'].filename) > 0:
+        upload_obj.picture = _file['img'].filename + '_' + str(uuid.uuid1())
+        filename = u_path(os.path.join(UPLOAD_FOLDER,
+                          str(upload_obj.picture.split('_')[-1])) + '_tmp0')
+        _file['img'].save(filename)
+        upload_obj.picture_size = str(os.path.getsize(filename))
 
     try:
         upload_obj.save()
@@ -127,10 +132,12 @@ def upload_validate():
 
     if not form.validate_on_submit():
         return flask.abort(403)
-    os.rename(u_path(os.path.join(UPLOAD_FOLDER, str(upload_obj.video.split('_')[-1])) + '_tmp0'),
-              u_path(os.path.join(UPLOAD_FOLDER, str(upload_obj.video.split('_')[-1])) + '_tmp'))
-    os.rename(u_path(os.path.join(UPLOAD_FOLDER, str(upload_obj.picture.split('_')[-1])) + '_tmp0'),
-              u_path(os.path.join(UPLOAD_FOLDER, str(upload_obj.picture.split('_')[-1])) + '_tmp'))
+    if len(_file['video'].filename) > 0:
+        os.rename(u_path(os.path.join(UPLOAD_FOLDER, str(upload_obj.video.split('_')[-1])) + '_tmp0'),
+                  u_path(os.path.join(UPLOAD_FOLDER, str(upload_obj.video.split('_')[-1])) + '_tmp'))
+    if len(_file['img'].filename) > 0:
+        os.rename(u_path(os.path.join(UPLOAD_FOLDER, str(upload_obj.picture.split('_')[-1])) + '_tmp0'),
+                  u_path(os.path.join(UPLOAD_FOLDER, str(upload_obj.picture.split('_')[-1])) + '_tmp'))
     return flask.redirect(flask.url_for('view.upload_success'))
 
 
