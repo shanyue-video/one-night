@@ -70,7 +70,13 @@ def upload_list():
 @acquire_admin
 def upload_update():
     t_id = request.args.get('id')
-    data = Upload.objects().get(id=t_id)
+    t_op = request.args.get('op')
+    data = Upload.objects.get(id=t_id)
+    if t_op == 'del':
+        c = Course.objects.get(base_info=data)
+        c.delete()
+        data.delete()
+        return render_template('upload_list.html')
     form = UploadForm(request.form, obj=data)
     content = {
         'form': form,
