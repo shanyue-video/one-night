@@ -180,12 +180,12 @@ def post_new():
 
     for i in _images:
         file_id = post_id + '_' + i.filename
-        i.save(u_path(os.path.join(UPLOAD_FOLDER, file_id + '_tmp')))
+        i.save(u_path(str(os.path.join(UPLOAD_FOLDER, file_id) + '_tmp')))
         images.append(get_url_qiniu(file_id))
 
     for i in _voices:
         file_id = post_id + '_' + i.filename
-        i.save(u_path(os.path.join(UPLOAD_FOLDER, file_id + '_tmp')))
+        i.save(u_path(str(os.path.join(UPLOAD_FOLDER, file_id) + '_tmp')))
         voices.append(get_url_qiniu(file_id))
 
     if ret_dict['status'] == 1:
