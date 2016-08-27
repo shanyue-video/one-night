@@ -49,7 +49,7 @@ task23 = {
         {
             'api': 'http://api.oforever.net:%s/api/ListQuestion' % port,
             '9type': 'POST',
-            'args': ''
+            'args': 'index, rowCount'
         },
         {
             'api': 'http://api.oforever.net:%s/api/PostNew' % port,

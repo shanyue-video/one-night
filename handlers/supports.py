@@ -139,12 +139,24 @@ def add_comment():
 def list_question():
     test_api(request)
 
-    # args_list = []
-    # args = handle_request_post_arguments(request, args_list)
+    args_list = ['index', 'rowCount']
+    args = handle_request_post_arguments(request, args_list)
     ret_dict = task9
 
     p_obs = Post.objects
     course_list = []
+    last_length = len(p_obs)
+    try:
+        index = int(args['index'])
+        rowCount = int(args['rowCount'])
+    except ValueError:
+        ret_dict['data'] = u'输出正确数子'
+        return jsonify(ret_dict)
+
+    if index * rowCount > last_length:
+        ret_dict['data'] = u'超出长度'
+        return jsonify(ret_dict)
+    p_obs = p_obs[(index-1) * rowCount: index * rowCount if index * rowCount < last_length else last_length]
     for o in p_obs:
         obj_dict = obj2dict(o, include=('course', 'post_title', 'label', 'user', 'post', 'post_id', 'post_img',
                                         'like_count', 'browse_count', 'comment_count',
