@@ -143,7 +143,7 @@ def list_question():
     args = handle_request_post_arguments(request, args_list)
     ret_dict = task9
 
-    p_obs = Post.objects.reverse()
+    p_obs = [o for o in Post.objects][::-1]
     course_list = []
     last_length = len(p_obs)
     try:
