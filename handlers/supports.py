@@ -143,7 +143,7 @@ def list_question():
     args = handle_request_post_arguments(request, args_list)
     ret_dict = task9
 
-    p_obs = Post.objects
+    p_obs = Post.objects.reverse()
     course_list = []
     last_length = len(p_obs)
     try:
@@ -151,6 +151,7 @@ def list_question():
         rowCount = int(args['rowCount'])
     except ValueError:
         ret_dict['data'] = u'输出正确数子'
+        ret_dict['status'] = 0
         return jsonify(ret_dict)
 
     if (index-1) * rowCount > last_length:
