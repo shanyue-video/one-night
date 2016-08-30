@@ -155,7 +155,8 @@ def list_question():
         return jsonify(ret_dict)
 
     if (index-1) * rowCount > last_length:
-        ret_dict['data'] = u'超出长度'
+        ret_dict['info'] = u'超出长度'
+        ret_dict['status'] = 0
         return jsonify(ret_dict)
     p_obs = p_obs[(index-1) * rowCount: index * rowCount if index * rowCount < last_length else last_length]
     for o in p_obs:
