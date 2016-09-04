@@ -154,11 +154,11 @@ def list_question():
         ret_dict['status'] = 0
         return jsonify(ret_dict)
 
-    if (index-1) * rowCount > last_length:
+    if (index - 1) * rowCount > last_length:
         ret_dict['info'] = u'超出长度'
         ret_dict['status'] = 0
         return jsonify(ret_dict)
-    p_obs = p_obs[(index-1) * rowCount: index * rowCount if index * rowCount < last_length else last_length]
+    p_obs = p_obs[(index - 1) * rowCount: index * rowCount if index * rowCount < last_length else last_length]
     for o in p_obs:
         obj_dict = obj2dict(o, include=('course', 'post_title', 'label', 'user', 'post', 'post_id', 'post_img',
                                         'like_count', 'browse_count', 'comment_count',
@@ -313,9 +313,11 @@ def question_detail():
         ret_dict['info'] = 'argument is DoesNotExist ' + e.message
 
     if ret_dict['status'] == 1:
-        ret_dic = obj2dict(o_post, include=('course', 'user', 'post', 'post_id', 'comment_count', 'c_time',
-                                            'post_img', 'post_voice', 'like_count', 'browse_count'))
+        ret_dic = obj2dict(o_post, include=('course', 'user', 'post_title', 'post', 'post_id', 'comment_count',
+                                            'c_time', 'post_img', 'post_voice', 'like_count', 'browse_count'))
         comment_list = []
+        ret_dic['post_content'] = ret_dic['post']
+        del ret_dic['post']
         for c in o_comments:
             dic_c = obj2dict(c, include=('course', 'user', 'post', 'comment', 'c_time'))
             comment_list.append(dic_c)
