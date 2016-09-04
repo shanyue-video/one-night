@@ -5,7 +5,7 @@ from mongoengine import ValidationError, DoesNotExist
 from mongoengine.queryset import Q
 from s3.get_url import get_url_qiniu
 from test_res import task22, task1, task2, task3, task18, task19, task20, task21, task24
-from utils.extmodels.ext_models import Feedback, OauthUser, Course, Post, LearningHistory
+from utils.extmodels.ext_models import Feedback, OauthUser, Course, Post, LearningHistory, Comment
 from utils.models import Upload
 from utils.obj2dict import obj2dict
 from utils.util import test_api, handle_request_post_arguments
@@ -82,12 +82,19 @@ def search_course():
     ret_dicts = []
 
     for o in obs:
-        ret_dic = obj2dict(o, include=('picture', 'video', 'course_name', 'class_name',
-                                       'teacher_name', 'class_summary', 'class_time', 'is_over'))
+        ret_course = Course.objects.get(base_info=o.id)
+        try:
+            ret_comment = Comment.objects.get(course=ret_course)
+            ret_dic = obj2dict(o, ret_comment, include=('picture', 'comment', 'video', 'course_name', 'class_name',
+                                                        'teacher_name', 'class_summary', 'class_time', 'is_over'))
+        except DoesNotExist:
+            ret_dic = obj2dict(o, include=('picture', 'video', 'course_name', 'class_name',
+                                           'teacher_name', 'class_summary', 'class_time', 'is_over'))
         img_key = ret_dic['picture']
         video_key = ret_dic['video']
         ret_dic['picture_url'] = get_url_qiniu(img_key)
         ret_dic['video_url'] = get_url_qiniu(video_key)
+        # ret_dic['course_id'] = str(ret_course.id)
         ret_dicts.append(ret_dic)
     ret_dict['data'] = ret_dicts
 
