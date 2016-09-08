@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import copy
 import os
 import uuid
 from flask import request, jsonify
@@ -141,7 +142,7 @@ def list_question():
 
     args_list = ['index', 'rowCount']
     args = handle_request_post_arguments(request, args_list)
-    ret_dict = task9
+    ret_dict = copy.deepcopy(task9)
 
     p_obs = [o for o in Post.objects][::-1]
     course_list = []
