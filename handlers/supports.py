@@ -41,13 +41,19 @@ def chapter():
 
     args_list = ['courseId']
     args = handle_request_post_arguments(request, args_list)
-    ret_dict = task6
+    ret_dict = copy.deepcopy(task6)
 
     try:
         o_course = Course.objects.get(class_uuid=args['courseId'])
     except DoesNotExist as e:
         ret_dict['status'] = 0
-        ret_dict['info'] = 'argument is DoesNotExist ' + e.message
+        ret_dict['info'] = 'Course argument is DoesNotExist ' + e.message
+
+    try:
+        o_comments = Comment.objects(course=o_course)
+    except DoesNotExist as e:
+        ret_dict['status'] = 0
+        ret_dict['info'] = 'Comment argument is DoesNotExist ' + e.message
 
     if ret_dict['status'] == 1:
         o_upload = o_course['base_info']
@@ -55,8 +61,13 @@ def chapter():
                                                         'class_uuid', 'browse_count', 'download_count',
                                                         'course_type', 'teacher_name', 'class_summary',
                                                         'class_time', 'is_over'))
+        ret_coms = []
+        for i in o_comments:
+            ret_com = obj2dict(i, include=('user', 'post', 'comment', 'c_time'))
+            ret_coms.append(ret_com)
         img_key = ret_dic['picture']
         video_key = ret_dic['video']
+        ret_dic['commentList'] = ret_coms
         ret_dic['picture_url'] = get_url_qiniu(img_key)
         ret_dic['video_url'] = get_url_qiniu(video_key)
         ret_dict['data'] = [ret_dic]
