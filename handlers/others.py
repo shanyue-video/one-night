@@ -84,9 +84,13 @@ def search_course():
     for o in obs:
         ret_course = Course.objects.get(base_info=o.id)
         try:
-            ret_comment = Comment.objects.get(course=ret_course)
-            ret_dic = obj2dict(o, ret_comment, include=('picture', 'comment', 'video', 'course_name', 'class_name',
-                                                        'teacher_name', 'class_summary', 'class_time', 'is_over'))
+            ret_comments = Comment.objects(course=ret_course)
+            ret_dic = obj2dict(o, include=('picture', 'comment', 'video', 'course_name', 'class_name',
+                                           'teacher_name', 'class_summary', 'class_time', 'is_over'))
+            commentLists = []
+            for ret_comment in ret_comments:
+                commentLists.append(obj2dict(ret_comment, include=('user', 'post', 'comment', 'c_time')))
+            ret_dic['commentList'] = commentLists
         except DoesNotExist:
             ret_dic = obj2dict(o, include=('picture', 'video', 'course_name', 'class_name',
                                            'teacher_name', 'class_summary', 'class_time', 'is_over'))
