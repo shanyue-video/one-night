@@ -59,7 +59,7 @@ task23 = {
         {
             'api': 'http://api.oforever.net:%s/api/searchQuestion' % port,
             '11type': 'POST',
-            'args': 'keyword'
+            'args': 'keyword, userId可选'
         },
         {
             'api': 'http://api.oforever.net:%s/api/addlookNum' % port,
