@@ -151,11 +151,22 @@ def add_comment():
 def list_question():
     test_api(request)
 
-    args_list = ['index', 'rowCount']
+    args_list = ['index', 'rowCount', 'userId']
     args = handle_request_post_arguments(request, args_list)
     ret_dict = copy.deepcopy(task9)
 
-    p_obs = [o for o in Post.objects][::-1]
+    try:
+        o_user = OauthUser.objects.get(user_id=args['userId'])
+    except DoesNotExist as e:
+        o_user = None
+    except KeyError as e:
+        o_user = None
+
+    if o_user:
+        p_obs = [o for o in Post.objects(user=o_user)][::-1]
+    else:
+        p_obs = [o for o in Post.objects][::-1]
+
     course_list = []
     last_length = len(p_obs)
     try:
