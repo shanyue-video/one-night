@@ -236,13 +236,23 @@ def post_new():
 def search_question():
     test_api(request)
 
-    args_list = ['keyword']
+    args_list = ['keyword', 'userId']
     args = handle_request_post_arguments(request, args_list)
     ret_dict = task11
 
     q = args.get('keyword', '')
-    if not q == '':
-        obs = Post.objects(Q(post__icontains=q) | Q(post_id__icontains=q))
+
+    try:
+        o_user = OauthUser.objects.get(user_id=args['userId'])
+    except DoesNotExist as e:
+        o_user = None
+    except KeyError as e:
+        o_user = None
+
+    if q != '' and o_user:
+        obs = Post.objects((Q(post__icontains=q) | Q(post_id__icontains=q)) & Q(user=o_user))
+    elif q != '' and not o_user:
+        obs = Post.objects((Q(post__icontains=q) | Q(post_id__icontains=q)))
     else:
         obs = Post.objects()
     ret_dicts = []
