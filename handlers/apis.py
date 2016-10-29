@@ -153,5 +153,5 @@ def post_time():
 
 @api.route('/api/index', methods=['GET'])
 def index():
-    root_logger.info(u'测试logger')
+    root_logger.info(u'just test logger')
     return jsonify(task23)

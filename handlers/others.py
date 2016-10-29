@@ -6,6 +6,7 @@ from mongoengine import ValidationError, DoesNotExist
 from mongoengine.queryset import Q
 from s3.get_url import get_url_qiniu
 from test_res import task22, task1, task2, task3, task18, task19, task20, task21, task24
+from utils.conf import root_logger
 from utils.extmodels.ext_models import Feedback, OauthUser, Course, Post, LearningHistory, Comment
 from utils.models import Upload
 from utils.obj2dict import obj2dict
@@ -28,6 +29,7 @@ def feed_back():
     except DoesNotExist as e:
         ret_dict['status'] = 0
         ret_dict['info'] = 'argument is DoesNotExist ' + e.message
+        root_logger.error(u'user cant find')
         return jsonify(ret_dict)
 
     o_feed_back = Feedback()
@@ -38,6 +40,7 @@ def feed_back():
     except ValidationError as e:
         ret_dict['status'] = 0
         ret_dict['info'] = 'argument ValidationError ' + e.message
+        root_logger.error(u'save feed_back save error')
 
     return jsonify(ret_dict)
 
@@ -99,7 +102,6 @@ def search_course():
         video_key = ret_dic['video']
         ret_dic['picture_url'] = get_url_qiniu(img_key)
         ret_dic['video_url'] = get_url_qiniu(video_key)
-        # ret_dic['course_id'] = str(ret_course.id)
         ret_dicts.append(ret_dic)
     ret_dict['data'] = ret_dicts
 
