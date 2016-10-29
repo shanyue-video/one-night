@@ -61,9 +61,19 @@ def upload_success():
 @view.route('/upload/list')
 @acquire_admin
 def upload_list():
-    data = Upload.objects()
-    data['picture_size'] = hurry_size(data['picture_size'])
-    data['video_size'] = hurry_size(data['video_size'])
+    base_data = Upload.objects()
+    data = []
+    for d in base_data:
+        try:
+            d.picture_size = hurry_size(int(d.picture_size))
+        except ValueError:
+            pass
+        try:
+            d.video_size = hurry_size(int(d.video_size))
+        except ValueError:
+            pass
+        data.append(d)
+
     content = {
         'data': data,
     }
