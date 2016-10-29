@@ -17,6 +17,8 @@ from utils.extmodels.ext_models import Course, AppInfo
 from utils.models import UserForm, User, UploadForm, Upload
 from utils.util import acquire_admin, handle_request_post_arguments, u_path
 
+from hurry.filesize import size as hurry_size
+
 
 @view.route('/login', methods=['POST', 'GET'])
 def login():
@@ -60,6 +62,8 @@ def upload_success():
 @acquire_admin
 def upload_list():
     data = Upload.objects()
+    data['picture_size'] = hurry_size(data['picture_size'])
+    data['video_size'] = hurry_size(data['video_size'])
     content = {
         'data': data,
     }
