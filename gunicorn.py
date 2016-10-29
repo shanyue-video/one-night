@@ -1,8 +1,10 @@
 # coding=utf-8
 import os
+from utils.conf import INNER_IP, port
 
 __author__ = 'dengjing'
-bind = '0.0.0.0:8888'  # 绑定的端口
+# bind = '0.0.0.0:8888'  # 绑定的端口
+bind = '%s:%s' % (INNER_IP, port)
 workers = 4  # worker数量
 backlog = 2048
 # debug = True
