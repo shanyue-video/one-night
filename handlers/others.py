@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import copy
 from flask import request, jsonify
 from handlers import other
 from mongoengine import ValidationError, DoesNotExist
@@ -18,7 +19,7 @@ def feed_back():
 
     args_list = ['user_id', 'content']
     args = handle_request_post_arguments(request, args_list)
-    ret_dict = task22
+    ret_dict = copy.deepcopy(task22)
 
     # update the last args
     user_id = args.pop('user_id')
