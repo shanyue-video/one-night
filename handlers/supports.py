@@ -20,7 +20,7 @@ def collection():
 
     args_list = ['courseId', 'userId']
     args = handle_request_post_arguments(request, args_list)
-    ret_dict = task5
+    ret_dict = copy.deepcopy(task5)
 
     try:
         o_course = Course.objects.get(class_uuid=args['courseId'])
@@ -81,7 +81,7 @@ def download():
 
     args_list = ['courseId']
     args = handle_request_post_arguments(request, args_list)
-    ret_dict = task7
+    ret_dict = copy.deepcopy(task7)
 
     try:
         o_course = Course.objects.get(class_uuid=args['courseId'])
@@ -110,7 +110,7 @@ def comment():
 
     args_list = ['courseId', 'userId', 'comment_content']
     args = handle_request_post_arguments(request, args_list)
-    ret_dict = task8
+    ret_dict = copy.deepcopy(task8)
 
     try:
         o_course = Course.objects.get(class_uuid=args['courseId'])
@@ -131,7 +131,7 @@ def add_comment():
 
     args_list = ['postId', 'userId', 'comment_content']
     args = handle_request_post_arguments(request, args_list)
-    ret_dict = task15
+    ret_dict = copy.deepcopy(task15)
 
     try:
         default_course = Course.objects.get(class_uuid="1234")
@@ -202,7 +202,7 @@ def post_new():
 
     args_list = ['userId', 'content', 'label', 'post_title']
     args = handle_request_post_arguments(request, args_list)
-    ret_dict = task10
+    ret_dict = copy.deepcopy(task10)
 
     try:
         o_user = OauthUser.objects.get(user_id=args['userId'])
@@ -238,7 +238,7 @@ def search_question():
 
     args_list = ['keyword', 'userId']
     args = handle_request_post_arguments(request, args_list)
-    ret_dict = task11
+    ret_dict = copy.deepcopy(task11)
 
     q = args.get('keyword', '')
 
@@ -273,7 +273,7 @@ def add_look_num():
     # args_list = ['postId', 'userId']
     args_list = ['postId']
     args = handle_request_post_arguments(request, args_list)
-    ret_dict = task12
+    ret_dict = copy.deepcopy(task12)
 
     try:
         o_post = Post.objects.get(post_id=args['postId'])
@@ -298,7 +298,7 @@ def add_like():
 
     args_list = ['postId', 'userId', 'cancel']
     args = handle_request_post_arguments(request, args_list)
-    ret_dict = task13
+    ret_dict = copy.deepcopy(task13)
 
     try:
         cancel = str(int(args.get('cancel', '0')))
@@ -336,7 +336,7 @@ def question_detail():
 
     args_list = ['postId']
     args = handle_request_post_arguments(request, args_list)
-    ret_dict = task14
+    ret_dict = copy.deepcopy(task14)
 
     try:
         o_post = Post.objects(post_id=args['postId'])[0]

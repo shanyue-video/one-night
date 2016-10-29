@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import copy
 from flask import request, jsonify
 from handlers import user
 from mongoengine import ValidationError, DoesNotExist, NotUniqueError
@@ -14,7 +15,7 @@ def user_info():
 
     args_list = ['user_id']
     args = handle_request_post_arguments(request, args_list)
-    ret_dict = task16
+    ret_dict = copy.deepcopy(task16)
 
     try:
         o_user = OauthUser.objects.get(user_id=args['user_id'])
@@ -35,7 +36,7 @@ def save_user_info():
 
     args_list = ['user_id', 'user_name', 'platform_name', 'nick_name', 'icon_url', 'access_token']
     args = handle_request_post_arguments(request, args_list)
-    ret_dict = task17
+    ret_dict = copy.deepcopy(task17)
 
     o_user = OauthUser()
     for k in args.keys():

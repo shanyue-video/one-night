@@ -46,7 +46,7 @@ def feed_back():
 def get_carousel():
     test_api(request)
 
-    ret_dict = task1
+    ret_dict = copy.deepcopy(task1)
 
     cobs = Course.objects(base_info__exists=True)
     course_list = []
@@ -71,7 +71,7 @@ def search_course():
 
     args_list = ['keyword']
     args = handle_request_post_arguments(request, args_list)
-    ret_dict = task2
+    ret_dict = copy.deepcopy(task2)
 
     q = args.get('keyword', '')
     if not q == '':
@@ -110,7 +110,7 @@ def search_course():
 def classification_course():
     test_api(request)
 
-    ret_dict = task3
+    ret_dict = copy.deepcopy(task3)
 
     cobs = Course.objects
     course_list = []
@@ -135,7 +135,7 @@ def get_ranking():
 
     args_list = ['userId']
     args = handle_request_post_arguments(request, args_list)
-    ret_dict = task18
+    ret_dict = copy.deepcopy(task18)
 
     try:
         user = OauthUser.objects.get(user_id=args['userId'])
@@ -161,7 +161,7 @@ def get_per_detail():
 
     args_list = ['userId']
     args = handle_request_post_arguments(request, args_list)
-    ret_dict = task19
+    ret_dict = copy.deepcopy(task19)
 
     try:
         user = OauthUser.objects.get(user_id=args['userId'])
@@ -187,7 +187,7 @@ def my_question():
 
     args_list = ['userId']
     args = handle_request_post_arguments(request, args_list)
-    ret_dict = task20
+    ret_dict = copy.deepcopy(task20)
 
     try:
         o_user = OauthUser.objects.get(user_id=args['userId'])
@@ -213,7 +213,7 @@ def del_post():
 
     args_list = ['userId', 'postId']
     args = handle_request_post_arguments(request, args_list)
-    ret_dict = task21
+    ret_dict = copy.deepcopy(task21)
 
     try:
         o_user = OauthUser.objects.get(user_id=args['userId'])
@@ -237,7 +237,7 @@ def post_time():
 
     args_list = ['userId', 'datetime', 'studyTime']
     args = handle_request_post_arguments(request, args_list)
-    ret_dict = task24
+    ret_dict = copy.deepcopy(task24)
 
     try:
         c_time = datetime.strptime(args['datetime'], '%Y-%m-%d')
