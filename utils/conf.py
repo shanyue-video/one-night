@@ -33,3 +33,13 @@ FLASK_MONGO_ENGINE_CONF = {
 if DEBUG:
     FLASK_MONGO_ENGINE_CONF.update({'MONGODB_SETTINGS': DBS['MONGODB_SETTINGS_TEST']})
     # print 'a'
+
+import logging
+LOGGING_FORMAT = '[%(levelname)1.1s %(asctime)s %(module)s:%(lineno)d] %(message)s'
+DATE_FORMAT = '%Y-%m-%d %H:%M:%S'
+logging.basicConfig(
+    level=logging.NOTSET,
+    format=LOGGING_FORMAT,
+    datefmt=DATE_FORMAT
+)
+root_logger = logging.getLogger()

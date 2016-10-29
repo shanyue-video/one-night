@@ -9,6 +9,7 @@ from handlers.users import user_info, save_user_info
 from test_api import task23
 from test_res import task1, task2, task3, task4, task5, task6, task7, task8, task9, task10, task11, task12, task13, \
     task14, task15, task16, task17, task18, task19, task20, task21, task22, task24
+from utils.conf import root_logger
 from utils.util import use_api
 
 
@@ -152,4 +153,5 @@ def post_time():
 
 @api.route('/api/index', methods=['GET'])
 def index():
+    root_logger.info(u'测试logger')
     return jsonify(task23)
