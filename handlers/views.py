@@ -61,7 +61,7 @@ def upload_success():
 @view.route('/upload/list')
 @acquire_admin
 def upload_list():
-    base_data = Upload.objects()
+    base_data = Upload.objects().order_by('-c_time')
     data = []
     for d in base_data:
         try:
