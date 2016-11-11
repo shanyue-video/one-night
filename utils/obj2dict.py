@@ -25,15 +25,15 @@ def obj2dict(obj, obj2=None, include=None):
         if i in include_tuple:
             if i in dir(obj):
                 tmp = getattr(obj, i)
-                if tmp == '':
-                    continue
+                # if tmp == '':
+                #     continue
                 if isinstance(tmp, datetime.datetime):
                     tmp = tmp.strftime('%Y-%m-%d %H:%M:%S')
                 ret_dict[i] = tmp
             if i in dir(obj2):
                 tmp = getattr(obj, i)
-                if tmp == '':
-                    continue
+                # if tmp == '':
+                #     continue
                 if isinstance(tmp, datetime.datetime):
                     tmp = tmp.strftime('%Y-%m-%d %H:%M:%S')
                 ret_dict[i] = tmp
