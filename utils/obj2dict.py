@@ -24,12 +24,18 @@ def obj2dict(obj, obj2=None, include=None):
     for i in base_dir:
         if i in include_tuple:
             if i in dir(obj):
-                # ret_dict[i] = getattr(obj, i)
                 tmp = getattr(obj, i)
+                if tmp == '':
+                    continue
                 if isinstance(tmp, datetime.datetime):
                     tmp = tmp.strftime('%Y-%m-%d %H:%M:%S')
                 ret_dict[i] = tmp
             if i in dir(obj2):
-                ret_dict[i] = getattr(obj2, i)
+                tmp = getattr(obj, i)
+                if tmp == '':
+                    continue
+                if isinstance(tmp, datetime.datetime):
+                    tmp = tmp.strftime('%Y-%m-%d %H:%M:%S')
+                ret_dict[i] = tmp
 
     return ret_dict
