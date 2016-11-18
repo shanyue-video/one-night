@@ -187,8 +187,14 @@ def list_question():
                                         'like_count', 'browse_count', 'comment_count',
                                         'c_time'))
         obj_dict.update(post_content=obj_dict.pop('post'))
-        obj_dict.update(browse_count=int(obj_dict.pop('browse_count')))
-        obj_dict.update(like_count=int(obj_dict.pop('like_count')))
+        try:
+            obj_dict.update(browse_count=int(obj_dict.pop('browse_count')))
+        except TypeError:
+            obj_dict.update(browse_count=None)
+        try:
+            obj_dict.update(like_count=int(obj_dict.pop('like_count')))
+        except TypeError:
+            obj_dict.update(like_count=None)
 
         o_post = Post.objects(post_id=obj_dict['post_id'])[0]
         o_comments = Comment.objects(post=o_post)
