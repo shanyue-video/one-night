@@ -187,6 +187,13 @@ def list_question():
                                         'like_count', 'browse_count', 'comment_count',
                                         'c_time'))
         obj_dict.update(post_content=obj_dict.pop('post'))
+
+        o_post = Post.objects(post_id=obj_dict['post_id'])[0]
+        o_comments = Comment.objects(post=o_post)
+        comment_count = 0
+        for p in o_comments:
+            comment_count += 1
+        obj_dict['comment_count'] = comment_count
         course_list.append(obj_dict)
     ret_dict['data'] = course_list
 
