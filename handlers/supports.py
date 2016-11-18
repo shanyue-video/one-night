@@ -356,7 +356,7 @@ def add_like():
             if o_post.like_count:
                 o_post.like_count = str(int(o_post.like_count) - 1)
                 o_post.save()
-        ret_dict['data'][0] = obj2dict(pll, include=('post', 'user', 'cancel', 'post', 'c_time'))
+        # ret_dict['data'][0] = obj2dict(pll, include=('post', 'user', 'cancel', 'post', 'c_time'))
 
     return jsonify(ret_dict)
 
