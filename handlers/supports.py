@@ -351,10 +351,13 @@ def question_detail():
         comment_list = []
         ret_dic['post_content'] = ret_dic['post']
         del ret_dic['post']
+        comment_count = 0
         for c in o_comments:
             dic_c = obj2dict(c, include=('course', 'user', 'post', 'comment', 'c_time'))
+            comment_count += 1
             comment_list.append(dic_c)
         ret_dict['data'] = [ret_dic]
         ret_dict['data'][0]['commentList'] = comment_list
+        ret_dict['data'][0]['comment_count'] = comment_count
 
     return jsonify(ret_dict)
