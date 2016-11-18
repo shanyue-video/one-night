@@ -203,9 +203,9 @@ def list_question():
         like_logs = {}
         for o_like in o_like_logs:
             if o_like.user.id in like_logs.keys():
-                like_logs[str(o_like.user.id)] += 1
+                like_logs[str(o_like.user.user_id)] += 1
             else:
-                like_logs[str(o_like.user.id)] = 1
+                like_logs[str(o_like.user.user_id)] = 1
         like_user = []
         for k in like_logs:
             if like_logs[k] % 2 == 1:
@@ -392,9 +392,9 @@ def question_detail():
         like_logs = {}
         for o_like in o_like_logs:
             if o_like.user.id in like_logs.keys():
-                like_logs[str(o_like.user.id)] += 1
+                like_logs[str(o_like.user.user_id)] += 1
             else:
-                like_logs[str(o_like.user.id)] = 1
+                like_logs[str(o_like.user.user_id)] = 1
         like_user = []
         for k in like_logs:
             if like_logs[k] % 2 == 1:
