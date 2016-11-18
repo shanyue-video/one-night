@@ -321,7 +321,8 @@ def add_like():
         ret_dict['info'] = 'argument is DoesNotExist ' + e.message
 
     if ret_dict['status'] == 1:
-        PostLikeLog(post=o_post, user=o_user, cancel=cancel).save()
+        pll = PostLikeLog(post=o_post, user=o_user, cancel=cancel)
+        pll.save()
         if cancel == '0':
             if not o_post.like_count:
                 o_post.like_count = '1'
@@ -333,6 +334,7 @@ def add_like():
             if o_post.like_count:
                 o_post.like_count = str(int(o_post.like_count) - 1)
                 o_post.save()
+        ret_dict['data'][0] = obj2dict(pll, include=('post', 'user', 'cancel', 'post', 'c_time'))
 
     return jsonify(ret_dict)
 
@@ -363,6 +365,13 @@ def question_detail():
             dic_c = obj2dict(c, include=('course', 'user', 'post', 'comment', 'c_time'))
             comment_count += 1
             comment_list.append(dic_c)
+
+        o_like_logs = PostLikeLog.objects(post=o_post)
+        like_logs = []
+        for o_like in o_like_logs:
+            t_o = obj2dict(o_like, include=('post', 'user', 'cancel', 'post', 'c_time'))
+            like_logs.append(t_o)
+        ret_dict['data'][0]['like_logs'] = like_logs
         ret_dict['data'] = [ret_dic]
         ret_dict['data'][0]['commentList'] = comment_list
         ret_dict['data'][0]['comment_count'] = comment_count
