@@ -187,13 +187,29 @@ def list_question():
                                         'like_count', 'browse_count', 'comment_count',
                                         'c_time'))
         obj_dict.update(post_content=obj_dict.pop('post'))
+        obj_dict.update(browse_count=int(obj_dict.pop('browse_count')))
+        obj_dict.update(like_count=int(obj_dict.pop('like_count')))
 
         o_post = Post.objects(post_id=obj_dict['post_id'])[0]
         o_comments = Comment.objects(post=o_post)
+
+        o_like_logs = PostLikeLog.objects(post=o_post)
+        like_logs = {}
+        for o_like in o_like_logs:
+            if o_like.user.id in like_logs.keys():
+                like_logs[str(o_like.user.id)] += 1
+            else:
+                like_logs[str(o_like.user.id)] = 1
+        like_user = []
+        for k in like_logs:
+            if like_logs[k] % 2 == 1:
+                like_user.append(k)
+
         comment_count = 0
         for p in o_comments:
             comment_count += 1
         obj_dict['comment_count'] = comment_count
+        obj_dict['like_user'] = like_user
         course_list.append(obj_dict)
     ret_dict['data'] = course_list
 
@@ -367,12 +383,18 @@ def question_detail():
             comment_list.append(dic_c)
 
         o_like_logs = PostLikeLog.objects(post=o_post)
-        like_logs = []
+        like_logs = {}
         for o_like in o_like_logs:
-            t_o = obj2dict(o_like, include=('post', 'user', 'cancel', 'post', 'c_time'))
-            like_logs.append(t_o)
-        ret_dict['data'][0]['like_logs'] = like_logs
+            if o_like.user.id in like_logs.keys():
+                like_logs[str(o_like.user.id)] += 1
+            else:
+                like_logs[str(o_like.user.id)] = 1
+        like_user = []
+        for k in like_logs:
+            if like_logs[k] % 2 == 1:
+                like_user.append(k)
         ret_dict['data'] = [ret_dic]
+        ret_dict['data'][0]['like_user'] = like_user
         ret_dict['data'][0]['commentList'] = comment_list
         ret_dict['data'][0]['comment_count'] = comment_count
 
