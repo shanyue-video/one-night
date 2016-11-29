@@ -289,6 +289,37 @@ def search_question():
     for o in obs:
         ret_dic = obj2dict(o, include=('course', 'user', 'post', 'post_id', 'comment_count', 'c_time',
                                        'post_img', 'post_voice', 'like_count', 'browse_count'))
+        ret_dic.update(post_content=ret_dic.pop('post'))
+        try:
+            ret_dic.update(browse_count=int(ret_dic.pop('browse_count')))
+        except TypeError:
+            ret_dic.update(browse_count=None)
+        try:
+            ret_dic.update(like_count=int(ret_dic.pop('like_count')))
+        except TypeError:
+            ret_dic.update(like_count=None)
+
+        o_post = Post.objects(post_id=ret_dic['post_id'])[0]
+        o_comments = Comment.objects(post=o_post)
+
+        o_like_logs = PostLikeLog.objects(post=o_post)
+        like_logs = {}
+        for o_like in o_like_logs:
+            if o_like.user.id in like_logs.keys():
+                like_logs[str(o_like.user.user_id)] += 1
+            else:
+                like_logs[str(o_like.user.user_id)] = 1
+        like_user = []
+        for k in like_logs:
+            if like_logs[k] % 2 == 1:
+                like_user.append(k)
+
+        comment_count = 0
+        for p in o_comments:
+            comment_count += 1
+        ret_dic['comment_count'] = comment_count
+        ret_dic['like_user'] = like_user
+
         ret_dicts.append(ret_dic)
     ret_dict['data'] = ret_dicts
 
