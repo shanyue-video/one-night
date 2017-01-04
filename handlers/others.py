@@ -63,7 +63,50 @@ def get_carousel():
         obj_dict['picture_url'] = get_url_qiniu(img_key)
         obj_dict['video_url'] = get_url_qiniu(video_key)
         course_list.append(obj_dict)
+    course_list = course_list[-5:]
     ret_dict['data'] = course_list
+
+    return jsonify(ret_dict)
+
+
+@other.route('/list_carousel', methods=['POST', 'GET'])
+def list_carousel():
+    test_api(request)
+
+    args_list = ['index', 'rowCount']
+    args = handle_request_post_arguments(request, args_list)
+    ret_dict = copy.deepcopy(task1)
+
+    cobs = Course.objects(base_info__exists=True)
+    course_list = []
+    keys_course_list = set([])
+    for o in cobs:
+        uo = o['base_info']
+        obj_dict = obj2dict(o, uo, include=('picture', 'video', 'course_name', 'class_name', 'class_uuid',
+                                            'browse_count', 'download_count', 'course_type',
+                                            'teacher_name', 'class_summary', 'class_time', 'is_over'))
+        img_key = obj_dict['picture']
+        video_key = obj_dict['video']
+        obj_dict['picture_url'] = get_url_qiniu(img_key)
+        obj_dict['video_url'] = get_url_qiniu(video_key)
+        if not obj_dict['class_name'] in keys_course_list:
+            course_list.append(obj_dict)
+            keys_course_list.add(obj_dict['class_name'])
+    # ret_dict['data'] = course_list
+
+    last_length = len(course_list)
+    try:
+        index = int(args['index'])
+        rowCount = int(args['rowCount'])
+        if (index - 1) * rowCount > last_length:
+            ret_dict['data'] = u'超出长度'
+            ret_dict['status'] = 0
+        else:
+            ret_dict['data'] = \
+                course_list[(index - 1) * rowCount: index * rowCount if index * rowCount < last_length else last_length]
+    except ValueError:
+        ret_dict['data'] = u'输出正确数子'
+        ret_dict['status'] = 0
 
     return jsonify(ret_dict)
 

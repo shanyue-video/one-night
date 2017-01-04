@@ -2,7 +2,7 @@
 from flask import jsonify
 from handlers import api
 from handlers.others import get_carousel, search_course, classification_course, feed_back, get_ranking, get_per_detail, \
-    my_question, del_post, post_time
+    my_question, del_post, post_time, list_carousel
 from handlers.supports import collection, chapter, download, comment, list_question, post_new, search_question, \
     add_look_num, add_like, question_detail, add_comment
 from handlers.users import user_info, save_user_info
@@ -31,8 +31,8 @@ def classification():
     return jsonify(task3)
 
 
-@api.route('/api/courseList', methods=['GET'])
-@use_api(get_carousel)
+@api.route('/api/courseList', methods=['POST'])
+@use_api(list_carousel)
 def course_list():
     return jsonify(task4)
 

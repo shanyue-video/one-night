@@ -23,8 +23,8 @@ task23 = {
         },
         {
             'api': 'http://api.oforever.net:%s/api/courseList' % port,
-            '4type': 'GET',
-            'args': 'keyword'
+            '4type': 'POST',
+            'args': 'index, rowCount'
         },
         {
             'api': 'http://api.oforever.net:%s/api/collection' % port,
