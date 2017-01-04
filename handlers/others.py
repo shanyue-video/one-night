@@ -53,6 +53,7 @@ def get_carousel():
 
     cobs = Course.objects(base_info__exists=True)
     course_list = []
+    keys_course_list = set([])
     for o in cobs:
         uo = o['base_info']
         obj_dict = obj2dict(o, uo, include=('picture', 'video', 'course_name', 'class_name', 'class_uuid',
@@ -62,7 +63,10 @@ def get_carousel():
         video_key = obj_dict['video']
         obj_dict['picture_url'] = get_url_qiniu(img_key)
         obj_dict['video_url'] = get_url_qiniu(video_key)
-        course_list.append(obj_dict)
+        # course_list.append(obj_dict)
+        if not obj_dict['class_name'] in keys_course_list:
+            course_list.append(obj_dict)
+            keys_course_list.add(obj_dict['class_name'])
     course_list = course_list[-5:]
     ret_dict['data'] = course_list
 
