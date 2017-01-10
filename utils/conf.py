@@ -17,10 +17,12 @@ UPLOAD_FOLDER = os.path.abspath(os.path.join(os.path.abspath(__file__), os.path.
 
 DBS = {
     'MONGODB_SETTINGS': {
-        'host': 'mongodb://one:123456@oforever.net:27017/one_night'
+        # 'host': 'mongodb://one:123456@oforever.net:27017/one_night'
+        'host': 'mongodb://localhost:27017/one_night'
     },
     'MONGODB_SETTINGS_TEST': {
-        'host': 'mongodb://one:123456@oforever.net:27017/one_night_test'
+        # 'host': 'mongodb://one:123456@oforever.net:27017/one_night_test'
+        'host': 'mongodb://localhost:27017/one_night_test'
         # 'host': 'mongodb://one:123456@oforever.net:27017/one_night'
     }
 }
