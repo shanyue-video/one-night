@@ -2,6 +2,7 @@
 import datetime
 import os
 from qiniu import Auth, put_file
+from s3.get_url import get_url_qiniu
 from utils.conf import UPLOAD_FOLDER
 from qiniu import BucketManager
 
@@ -47,9 +48,10 @@ def main():
     # print r_s
     count = 0
     for i in r_s:
-        print i
+        # print i
         # print datetime.datetime.fromtimestamp(i['putTime']/10000000)
         if 'video' in i['mimeType']:
+            print get_url_qiniu(i['key'])
             count += 1
     print count
 
