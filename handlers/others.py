@@ -98,6 +98,7 @@ def list_carousel():
             keys_course_list.add(obj_dict['class_name'])
     # ret_dict['data'] = course_list
 
+    course_list.reverse()
     last_length = len(course_list)
     try:
         index = int(args['index'])
